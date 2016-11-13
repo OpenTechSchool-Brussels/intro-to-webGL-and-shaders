@@ -5,6 +5,6 @@ markdown: redcarpet
 redcarpet:
    extensions: ["no_intra_emphasis", "fenced_code_blocks", "disable_indented_code_blocks", "strikethrough", "autolink"]
 
-pygments: true
+highlighter: rouge
 
 permalink: title.html
