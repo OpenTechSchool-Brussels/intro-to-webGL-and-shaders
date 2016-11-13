@@ -1,2 +1,6 @@
-# intro-to-webGL-and-shaders
-Online OTS course for (guess what) webGL and shaders
+Generative-Art-Processing
+=========================
+
+Material for the Generative Art Processing course.
+
+(@roman: self reminder to get back the updates from the french version)
