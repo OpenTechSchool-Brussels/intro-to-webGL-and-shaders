@@ -1,7 +1,6 @@
 title: Intro to WebGL and shaders
 baseurl: http://opentechschool-brussels.github.io/intro-to-webGL-and-shaders 
 
-markdown: redcarpet
 redcarpet:
    extensions: ["no_intra_emphasis", "fenced_code_blocks", "disable_indented_code_blocks", "strikethrough", "autolink"]
 
