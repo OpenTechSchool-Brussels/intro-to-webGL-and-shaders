@@ -5,7 +5,7 @@ num: 1
 
 ---
 
-# Pipeline Overview
+## Pipeline Overview
 
 * Vertex
   * What data are contained in a 3D mesh : introduce the concept of triangles and vertex
@@ -18,5 +18,5 @@ num: 1
 * (Z-Buffering)
 * (Blending)
 
-# First look at our render library
+## First look at our render library
 Map each step of the rendering pipeline to a function of the library
