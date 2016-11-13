@@ -11,18 +11,19 @@ Let’s get it started.
 
 ## b) Setting up
 
+* usage of JSbin
+
 ## c) Running your first program
 
+* High function (one) from our "library" that allows to draw something 
 
-One of the classic first programs one writes is called “hello world”, which basically outputs the text `“hello world”` on your screen. We could do that (`println(“hello world”);`) but the basic output of Processing is graphic not text. So let’s write:
-
-~~~ javascript
-alert("test");    
+~~~ HTML
+alert("test");
 ~~~
 
 ## c) CPU / GPU
 
-## d) 3D scene
+## d) Library - framework Vs your own code
 
 
 
