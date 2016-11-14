@@ -25,7 +25,9 @@ HTML, Javascript, Console, Output
   <head>
     <meta charset='utf-8'/>
     
-    <script type="text/javascript" src="https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/lib.js"></script>
+    <script type="text/javascript" src=
+    "https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/lib.js">
+    </script>
     <script type="text/javascript" src="script.js"></script>
   </head>
   <body style='margin:0px' onload='main()'>
