@@ -120,3 +120,13 @@
 
     window.requestAnimationFrame(func_4_animate);
   };
+
+  var func_doAll = function() {
+    // You set up everything
+    func_1_initialisation();
+    func_2_createShader();  
+    func_3_createTriangle();
+
+    // You play with and animate it
+    func_4_animate();
+  }
