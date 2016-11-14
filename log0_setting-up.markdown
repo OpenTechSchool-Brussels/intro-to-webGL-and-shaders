@@ -47,9 +47,15 @@ var main=function() {
 
 
 
-## c) CPU / GPU
+## d) CPU / GPU
 
-## d) Library - framework Vs your own code
+
+
+## e) Library - framework Vs your own code
+
+
+## f) the Web part of it
+* hosting your code. free static server available online.
 
 
 
