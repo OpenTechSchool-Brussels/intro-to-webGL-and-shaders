@@ -18,5 +18,22 @@ num: 2
 * rotation's mathematical aspect
 * operation on vertex buffer each time in animate (say it's "working but ugly" and we'll see better soon)
 
+## d) Controling this mess
+
+* Using the mouse position (x and y) as a control for other stuff
+
+Based on:
+
+~~~ HTML
+<div onmousemove="showCoords(event)"></div>
+<script>
+function showCoords(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    console.log("X coords: " + x + ", Y coords: " + y);
+}
+</script>
+~~~
+
 ## d) Let's do a cube!
 * triangles to cube. Simple. Nice. Good for your health
