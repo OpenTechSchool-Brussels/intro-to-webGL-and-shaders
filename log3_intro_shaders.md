@@ -6,8 +6,7 @@ num: 3
 ---
 
 
-## a) Explanation of both shaders (vertex, fragment)
-### basic concept 
+## a) basic concepts of shaders
 * glsl language : based on C language
 * variable types : float, vec2, vec3
 * qualifiers : uniforms, attributes and varyings
