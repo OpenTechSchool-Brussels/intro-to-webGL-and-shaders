@@ -20,3 +20,18 @@ num: 1
 
 ## First look at our render library
 Map each step of the rendering pipeline to a function of the library
+
+
+~~~ JavaScript
+var main=function() {
+    
+  // You set up everything
+  func_1_initialisation();
+  func_2_createShader();    
+  func_3_createTriangle();
+
+  // You play with and animate it
+  func_4_animate();
+  
+};
+~~~
