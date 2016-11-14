@@ -104,7 +104,7 @@
 
 
   /*========================= DRAWING ========================= */
-  var animate=function() {
+  var func_4_animate=function() {
     
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
     GL.clear(GL.COLOR_BUFFER_BIT);
@@ -118,5 +118,5 @@
     GL.drawElements(GL.TRIANGLES, 3, GL.UNSIGNED_SHORT, 0);
     GL.flush();
 
-    window.requestAnimationFrame(animate);
+    window.requestAnimationFrame(func_4_animate);
   };
