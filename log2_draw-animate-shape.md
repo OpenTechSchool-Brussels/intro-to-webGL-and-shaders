@@ -17,3 +17,6 @@ num: 2
 ## c) Animating your shape
 * rotation's mathematical aspect
 * operation on vertex buffer each time in animate (say it's "working but ugly" and we'll see better soon)
+
+## d) Let's do a cube!
+* triangles to cube. Simple. Nice. Good for your health
