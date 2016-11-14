@@ -7,7 +7,14 @@ num: 3
 
 
 ## a) Explanation of both shaders (vertex, fragment)
-* little modifications to test & understand
+### basic concept 
+* glsl language : based on C language
+* variable types : float, vec2, vec3
+* qualifiers : uniforms, attributes and varyings
+
+### little modifications to test & understand
+* change the position in the vertex shader
+* change the color in the fragment shader
 
 ## b) Compilation
 * the function we have already (change "alert" to "console.log" or something)
