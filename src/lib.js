@@ -70,47 +70,67 @@
   // 3) Triangle
   var func_3_createTriangle = function() {
 
-    //POINTS :
-    var triangle_vertex=[
-      -0.5, -0.5, 0, 
-      1,1,1,
-       0.5, -0.5, 0, 
-      1,1,1,
-       0.5,  0.5, 0, 
-      1,1,1
+    var triangle_vertex_position=[
+        //----- face 1
+        -0.5,-0.5,0, //first summit -> bottom left of the viewport
+        0.5,-0.5,0, //bottom right of the viewport
+        0.5,0.5,0,  //top right of the viewport
+        
+        -0.5,0.5,0,
+        0.5,0.5,0,
+        -0.5,-0.5,0,
+
+        //----- face 2
+
     ];
 
-    window.TRIANGLE_VERTEX= GL.createBuffer ();
-    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX);
+    var triangle_vertex_color=[
+
+        1,1,1, 
+        1,1,1, 
+        1,1,1, 
+        
+        0,0,1, 
+        1,0,0, 
+        0,1,0, 
+
+
+    ];
+
+    window.TRIANGLE_VERTEX_POSITION= GL.createBuffer ();
+    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_POSITION);
     GL.bufferData(GL.ARRAY_BUFFER,
-                  new Float32Array(triangle_vertex),
-                  GL.STATIC_DRAW);
+                new Float32Array(triangle_vertex_position),
+                GL.STATIC_DRAW);
 
-    //FACES :
-    var triangle_faces = [0,1,2];
-    window.TRIANGLE_FACES= GL.createBuffer();
-    GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TRIANGLE_FACES);
-    GL.bufferData(GL.ELEMENT_ARRAY_BUFFER,
-                  new Uint16Array(triangle_faces),
-                  GL.STATIC_DRAW);
-  }
-
+    window.TRIANGLE_VERTEX_COLOR= GL.createBuffer ();
+    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_COLOR);
+    GL.bufferData(GL.ARRAY_BUFFER,
+                new Float32Array(triangle_vertex_color),
+                GL.STATIC_DRAW);
+  };
 
   /*========================= DRAWING ========================= */
   var func_4_draw=function() {
-    
+
+    GL.useProgram(SHADER_PROGRAM);
+
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
     GL.clear(GL.COLOR_BUFFER_BIT);
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX);
-   
-    GL.useProgram(SHADER_PROGRAM);
-    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "position"), 3, GL.FLOAT, false,4*(3+3),0) ;
-    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "color"),    3, GL.FLOAT, false,4*(3+3),3*4) ;
+    var numberOfComponents = 3
 
-    GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TRIANGLE_FACES);
-    GL.drawElements(GL.TRIANGLES, 3, GL.UNSIGNED_SHORT, 0);
-    GL.flush();
+    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_POSITION);
+    var positionAttibuteLocation = GL.getAttribLocation(SHADER_PROGRAM, "position");
+    GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+    
+
+    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_COLOR);
+    var colorAttibuteLocation = GL.getAttribLocation(SHADER_PROGRAM, "color")
+    GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+
+    GL.drawArrays(GL.TRIANGLES, 0, 3);
+
 
     window.requestAnimationFrame(func_4_draw);
   };
