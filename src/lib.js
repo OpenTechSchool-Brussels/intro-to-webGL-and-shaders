@@ -55,21 +55,15 @@
     };
 
     var shader_vertex=get_shader(shader_vertex_source, GL.VERTEX_SHADER, "VERTEX");
-
     var shader_fragment=get_shader(shader_fragment_source, GL.FRAGMENT_SHADER, "FRAGMENT");
 
     var SHADER_PROGRAM=GL.createProgram();
     GL.attachShader(SHADER_PROGRAM, shader_vertex);
     GL.attachShader(SHADER_PROGRAM, shader_fragment);
-
     GL.linkProgram(SHADER_PROGRAM);
 
-    window._color = GL.getAttribLocation(SHADER_PROGRAM, "color");
-    window._position = GL.getAttribLocation(SHADER_PROGRAM, "position");
-
-    GL.enableVertexAttribArray(_color);
-    GL.enableVertexAttribArray(_position);
-
+    GL.enableVertexAttribArray(GL.getAttribLocation(SHADER_PROGRAM, "color"));
+    GL.enableVertexAttribArray(GL.getAttribLocation(SHADER_PROGRAM, "position"));
     GL.useProgram(SHADER_PROGRAM);
   }
   
@@ -111,8 +105,8 @@
 
     GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX);
 
-    GL.vertexAttribPointer(_position, 2, GL.FLOAT, false,4*(2+3),0) ;
-    GL.vertexAttribPointer(_color, 3, GL.FLOAT, false,4*(2+3),2*4) ;
+    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "position"), 2, GL.FLOAT, false,4*(2+3),0) ;
+    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "color"),    3, GL.FLOAT, false,4*(2+3),2*4) ;
 
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TRIANGLE_FACES);
     GL.drawElements(GL.TRIANGLES, 3, GL.UNSIGNED_SHORT, 0);
