@@ -79,12 +79,12 @@
 
     //POINTS :
     var triangle_vertex=[
-      -1,-1, //first summit -> bottom left of the viewport
-      0,0,1,
-      1,-1, //bottom right of the viewport
-      1,1,0,
-      1,1,  //top right of the viewport
-      1,0,0
+      -0.5, -0.5, 
+      1,1,1,
+       0.5, -0.5, 
+      1,1,1,
+       0.5,  0.5,  
+      1,1,1
     ];
 
     window.TRIANGLE_VERTEX= GL.createBuffer ();
