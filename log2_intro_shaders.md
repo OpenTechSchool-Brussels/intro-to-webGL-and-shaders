@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Introduction to Shaders"
-num: 3
+num: 2
 
 ---
 
