@@ -1,9 +1,9 @@
  
   // 1) Initialisation
-  var func_1_initialisation = function() {
+  var func_1_initialisation = function(canvasId) {
 
     // Canvas
-    window.CANVAS=document.getElementById("your_canvas");
+    window.CANVAS=document.getElementById(canvasId);
     CANVAS.width=window.innerWidth;
     CANVAS.height=window.innerHeight;
 
@@ -20,7 +20,7 @@
   
     
   // 2) Shaders  
-  var func_2_createShader = function() {
+  var func_2_createShaders = function() {
     var shader_vertex_source="\n\
     attribute vec2 position; //the position of the point\n\
     attribute vec3 color;  //the color of the point\n\
@@ -57,7 +57,7 @@
     var shader_vertex=get_shader(shader_vertex_source, GL.VERTEX_SHADER, "VERTEX");
     var shader_fragment=get_shader(shader_fragment_source, GL.FRAGMENT_SHADER, "FRAGMENT");
 
-    var SHADER_PROGRAM=GL.createProgram();
+    window.SHADER_PROGRAM=GL.createProgram();
     GL.attachShader(SHADER_PROGRAM, shader_vertex);
     GL.attachShader(SHADER_PROGRAM, shader_fragment);
     GL.linkProgram(SHADER_PROGRAM);
@@ -97,7 +97,7 @@
 
 
   /*========================= DRAWING ========================= */
-  var func_4_animate=function() {
+  var func_4_draw=function() {
     
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
     GL.clear(GL.COLOR_BUFFER_BIT);
@@ -105,14 +105,14 @@
     GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX);
    
     GL.useProgram(SHADER_PROGRAM);
-    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "position"), 2, GL.FLOAT, false,4*(2+3),0) ;
-    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "color"),    3, GL.FLOAT, false,4*(2+3),2*4) ;
+    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "position"), 3, GL.FLOAT, false,4*(3+3),0) ;
+    GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "color"),    3, GL.FLOAT, false,4*(3+3),3*4) ;
 
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TRIANGLE_FACES);
     GL.drawElements(GL.TRIANGLES, 3, GL.UNSIGNED_SHORT, 0);
     GL.flush();
 
-    window.requestAnimationFrame(func_4_animate);
+    window.requestAnimationFrame(func_4_draw);
   };
 
   var func_doAll = function() {
