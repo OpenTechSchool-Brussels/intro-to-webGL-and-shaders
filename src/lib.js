@@ -64,7 +64,6 @@
 
     GL.enableVertexAttribArray(GL.getAttribLocation(SHADER_PROGRAM, "color"));
     GL.enableVertexAttribArray(GL.getAttribLocation(SHADER_PROGRAM, "position"));
-    GL.useProgram(SHADER_PROGRAM);
   }
   
   
@@ -104,7 +103,8 @@
     GL.clear(GL.COLOR_BUFFER_BIT);
 
     GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX);
-
+   
+    GL.useProgram(SHADER_PROGRAM);
     GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "position"), 2, GL.FLOAT, false,4*(2+3),0) ;
     GL.vertexAttribPointer(GL.getAttribLocation(SHADER_PROGRAM, "color"),    3, GL.FLOAT, false,4*(2+3),2*4) ;
 
