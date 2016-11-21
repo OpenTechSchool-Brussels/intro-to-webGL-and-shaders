@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Draw & animate your first shape"
-num: 1
+num: 3
 
 ---
 
