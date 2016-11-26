@@ -121,6 +121,31 @@ Let's control the red color component with a uniform. In our fragment shader, we
 
 ~~~
 
+Setting the value of a uniform is almost straightforward (at least in OpenGL standard!)
+
+~~~ html
+// update uniforms
+var redColorLevel = 1.0;
+var redColorUniformLocation = GL.getUniformLocation(shaderProgramID, "u_redColor");
+GL.uniform1f(redColorUniformLocation,redColorLevel);
+~~~
+
+As usual, we get first the location of the variable in the shader with the function getUniformLocation. 
+We update it then with the function uniform1f. 
+
+You should obtain a beautiful pink square. 
+This color change can be automated. Let's use the current time to set the color periodically. 
+
+~~~ html
+var timeSecond = new Date().getTime() / 1000;
+
+var redColorLevel = (Math.sin(timeSecond)+1)*0.5; // -> change periodically with time
+var redColorUniformLocation = GL.getUniformLocation(shaderProgramID, "u_redColor");
+GL.uniform1f(redColorUniformLocation,redColorLevel);
+~~~
+
+The square now changes slowly its color from pink to blue periodically. 
+
 * rotation's mathematical aspect
 * operation on vertex buffer each time in animate (say it's "working but ugly" and we'll see better soon)
 
