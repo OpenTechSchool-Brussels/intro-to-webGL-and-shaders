@@ -32,7 +32,9 @@ void main(void) {
 ~~~
 
 ## b) Compilation
+
 ~~~ JavaScript
+
 function compileShader(source, type, typeString) 
 {
     //creates an empty shader object
@@ -55,6 +57,7 @@ function compileShader(source, type, typeString)
 ~~~
 
 ~~~ JavaScript
+
 var vshaderString = document.getElementById("firstVshader").text
 var shaderVertexID=compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
 
@@ -78,6 +81,7 @@ var positionAttributeLocation = GL.getAttribLocation(shaderProgramID, "position"
 // enable the attribute
 GL.enableVertexAttribArray(colorAttributeLocation);
 GL.enableVertexAttribArray(positionAttributeLocation);
+
 ~~~
 
 ## c) Little modifications
