@@ -7,9 +7,21 @@ num: 2
 
 
 ## a) basic concepts of shaders
-* glsl language : based on C language
-* variable types : float, vec2, vec3
-* qualifiers : uniforms, attributes and varyings
+
+Shaders are little piece of code executed in parallel by the GPU cores. The vertex shaders are executed once every vertex. The fragment shaders are executed once every pixel. On high end graphic card, the number of cores can goes up to 2560 (for the NVidia GTX 1080). The parellel execution on these cores make shaders incredebly efficient.
+
+OpenGL shaders are written in GLSL, a language based on the syntax of C programming language. Functions behave like C functions. The main() function is a special function that will be called on every vertex/pixel. 
+
+Native types are limited to
+* float : 32 floating point variables
+* vec2,vec3,vec4 : vectors of floating point. The component of a vector can be acessed with the suffixes
+** .x, .y, .z, .w for geometric variables
+** .r, .g, .b, .a for color variables
+
+The input of a vertex shader is called "attribute". That's a value attached to the vertex currently processed. It can be a position, a color, or anything else. 
+The output of the vertex shader is the variable gl_Position. It represents the position of the current vertex after beeing transformed by the shader. 
+
+Here is our first vertex shader : 
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -22,6 +34,10 @@ void main(void)
 </script>
 ~~~
 
+This shader get a position as input attribute. The output is simply this position completed by a 4th component. 
+
+Here is our first fragment shader : 
+
 ~~~
 <script id="fshader" type="x-shader/x-fragment">
 
@@ -30,6 +46,10 @@ void main(void) {
 }
 </script>
 ~~~
+
+Like in the vertex shader, the fragment shader has a special variable (gl_FragColor) used as output. gl_FragColor is a vec4 variable representing R,G,B,A color of the current pixel. 
+
+Here the output will be a white pixel (vec4(1.0) is a shortcut notation for vec4(1.0,1.0,1.0,1.0)). 
 
 ## b) Compilation
 
