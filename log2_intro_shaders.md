@@ -58,10 +58,10 @@ function compileShader(source, type, typeString)
 
 ~~~ JavaScript
 
-var vshaderString = document.getElementById("firstVshader").text
+var vshaderString = document.getElementById("vshader").text
 var shaderVertexID=compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
 
-var fshaderString = document.getElementById("firstFshader").text
+var fshaderString = document.getElementById("fshader").text
 var shaderFragmentID=compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
 
 //creates an empty program object
@@ -85,6 +85,37 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 ~~~
 
 ## c) Little modifications
+
+~~~ html
+<script id="firstVshader" type="x-shader/x-vertex">
+    attribute vec3 position; 
+
+    void main(void) 
+    { 
+        // modification of the position
+        vec3 modifiedPosition;
+        modifiedPosition.x = position.x+0.3;
+        modifiedPosition.y = position.y-0.2;
+        modifiedPosition.z = position.z;
+
+        gl_Position = vec4(modifiedPosition,1.0);
+    }
+</script>
+
+~~~
+
+~~~ html
+<script id="firstFshader" type="x-shader/x-fragment">
+    
+    void main(void) {
+        // output blur color
+        gl_FragColor = vec4(0.3,0.6,0.9,1.0);
+    }
+</script>
+
+~~~
+
+
 * change the position in the vertex shader
   * translation : use a uniform to add value to x coordinates
   * rotation : use a unifrom to rotate the vertices around (0,0,0). No matrix involved

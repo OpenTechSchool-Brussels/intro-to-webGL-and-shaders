@@ -15,6 +15,25 @@ num: 3
 * fonction animate (glDraw) avec variation du type de Draw (GL_TRIANGLES, GL_LINE_LOOP , etc)
 
 ## c) Animating your shape
+
+Now it would be interesting to change the position and the colors from our javascript code. 
+Uniforms are variables of which value is constant for every vertex or fragment. 
+Let's control the red color component with a uniform. In our fragment shader, we will have
+
+~~~ html
+<script id="firstFshader" type="x-shader/x-fragment">
+    
+    // here we declare our uniform
+    uniform float u_redColor;
+
+    void main(void) {
+        // output color controlled by a uniform
+        gl_FragColor = vec4(u_redColor,0.6,0.9,1.0);
+    }
+</script>
+
+~~~
+
 * rotation's mathematical aspect
 * operation on vertex buffer each time in animate (say it's "working but ugly" and we'll see better soon)
 
