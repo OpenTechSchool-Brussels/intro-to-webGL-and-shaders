@@ -128,6 +128,10 @@ Variables in shaders are accessed with indirect index numbers called "location".
 
 ## c) Little modifications
 
+Now that we use our own shaders, let's play with it !
+
+The purpose of the vertex shader is primary to modify the position of the vertices. So if you add constant to the position, you should see the triangle move to the top-right. 
+
 ~~~ html
 <script id="firstVshader" type="x-shader/x-vertex">
     attribute vec3 position; 
@@ -137,7 +141,7 @@ Variables in shaders are accessed with indirect index numbers called "location".
         // modification of the position
         vec3 modifiedPosition;
         modifiedPosition.x = position.x+0.3;
-        modifiedPosition.y = position.y-0.2;
+        modifiedPosition.y = position.y+0.2;
         modifiedPosition.z = position.z;
 
         gl_Position = vec4(modifiedPosition,1.0);
@@ -145,6 +149,8 @@ Variables in shaders are accessed with indirect index numbers called "location".
 </script>
 
 ~~~
+
+The purpose of the fragment shader is primary to modify the color of the current pixel. Let's display blue pixels : 
 
 ~~~ html
 <script id="firstFshader" type="x-shader/x-fragment">
