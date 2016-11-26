@@ -18,8 +18,9 @@ Native types are limited to
 ** .x, .y, .z, .w for geometric variables
 ** .r, .g, .b, .a for color variables
 
-The input of a vertex shader is called "attribute". That's a value attached to the vertex currently processed. It can be a position, a color, or anything else. 
-The output of the vertex shader is the variable gl_Position. It represents the position of the current vertex after beeing transformed by the shader. 
+The input of a vertex shader is called "attribute". That's a value attached to the vertex currently processed. It can be a position, a color, or anything else.
+
+Shaders are juste text and can be written anywhere. We use here an html tag "script" with a custom type "x-shader/x-vertex", but the code could have been directly written in a javascript string, or in a separate .txt file. 
 
 Here is our first vertex shader : 
 
@@ -34,9 +35,9 @@ void main(void)
 </script>
 ~~~
 
-This shader get a position as input attribute. The output is simply this position completed by a 4th component. 
+This shader get the vertex position as input attribute. The output of the vertex shader is the variable gl_Position. It represents the position of the current vertex after beeing transformed by the shader. Here the output is simply the position vector completed by a 4th component. 
 
-Here is our first fragment shader : 
+Now let's look at our fragment shader : 
 
 ~~~
 <script id="fshader" type="x-shader/x-fragment">
@@ -47,9 +48,9 @@ void main(void) {
 </script>
 ~~~
 
-Like in the vertex shader, the fragment shader has a special variable (gl_FragColor) used as output. gl_FragColor is a vec4 variable representing R,G,B,A color of the current pixel. 
+Like in the vertex shader, the fragment shader has a special variable, gl_FragColor, used as output. gl_FragColor is a vec4 variable representing R,G,B,A color of the current pixel. 
 
-Here the output will be a white pixel (vec4(1.0) is a shortcut notation for vec4(1.0,1.0,1.0,1.0)). 
+Here the output will just be a white pixel (vec4(1.0) is a shortcut notation for vec4(1.0,1.0,1.0,1.0)). 
 
 ## b) Compilation
 
