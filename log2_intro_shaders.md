@@ -17,17 +17,19 @@ attribute vec3 position;
 
 void main(void) 
 { 
-gl_Position=vec4(position,1.0);
+    gl_Position=vec4(position,1.0);
 }
 </script>
 ~~~
 
+~~~
 <script id="fshader" type="x-shader/x-fragment">
 
 void main(void) {
-gl_FragColor = vec4(1.0);
+    gl_FragColor = vec4(1.0);
 }
 </script>
+~~~
 
 ## b) Compilation
 * the function we have already (change "alert" to "console.log" or something)
