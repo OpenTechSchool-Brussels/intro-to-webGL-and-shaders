@@ -33,11 +33,17 @@ void main(void) {
 
 ## b) Compilation
 ~~~ JavaScript
-var compile_shader=function(source, type, typeString) 
+function compileShader(source, type, typeString) 
 {
+    //creates an empty shader object
     var shaderID = GL.createShader(type);
+
+    // sets the source code in shader
     GL.shaderSource(shaderID, source);
+
+    // compile the shader object
     GL.compileShader(shaderID);
+
     if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
     {
         console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
@@ -45,6 +51,33 @@ var compile_shader=function(source, type, typeString)
     }
     return shaderID;
 };
+
+~~~
+
+~~~ JavaScript
+var vshaderString = document.getElementById("firstVshader").text
+var shaderVertexID=compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
+
+var fshaderString = document.getElementById("firstFshader").text
+var shaderFragmentID=compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
+
+//creates an empty program object
+window.shaderProgramID=GL.createProgram();
+
+//attach shaders to the program
+GL.attachShader(shaderProgramID, shaderVertexID);
+GL.attachShader(shaderProgramID, shaderFragmentID);
+
+//link the program
+GL.linkProgram(shaderProgramID);
+
+//get position attribute location in the shader
+var colorAttributeLocation = GL.getAttribLocation(shaderProgramID, "color");
+var positionAttributeLocation = GL.getAttribLocation(shaderProgramID, "position");
+
+// enable the attribute
+GL.enableVertexAttribArray(colorAttributeLocation);
+GL.enableVertexAttribArray(positionAttributeLocation);
 ~~~
 
 ## c) Little modifications
