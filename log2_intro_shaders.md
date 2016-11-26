@@ -11,6 +11,24 @@ num: 2
 * variable types : float, vec2, vec3
 * qualifiers : uniforms, attributes and varyings
 
+~~~ html
+<script id="vshader" type="x-shader/x-vertex">
+attribute vec3 position; 
+
+void main(void) 
+{ 
+gl_Position=vec4(position,1.0);
+}
+</script>
+~~~
+
+<script id="fshader" type="x-shader/x-fragment">
+
+void main(void) {
+gl_FragColor = vec4(1.0);
+}
+</script>
+
 ## b) Compilation
 * the function we have already (change "alert" to "console.log" or something)
 
