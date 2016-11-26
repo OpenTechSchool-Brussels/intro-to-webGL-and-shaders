@@ -88,17 +88,16 @@
   // 3) Triangle
   var func_3_createTriangle = function() {
 
-    var triangle_vertex_position=[
+    // define vertices of our first quad
+    var vertexPositionArray=[
         //----- face 1
-        -0.5,-0.5,0, //first summit -> bottom left of the viewport
-        0.5,-0.5,0, //bottom right of the viewport
-        0.5,0.5,0,  //top right of the viewport
+        -0.5,-0.5,0, //bottom left 
+        0.5,-0.5,0, //bottom right 
+        0.5,0.5,0,  //top right
         
-        -0.5,0.5,0,
-        0.5,0.5,0,
-        -0.5,-0.5,0,
-
-        //----- face 2
+        -0.5,0.5,0, //top left
+        0.5,0.5,0, // top right
+        -0.5,-0.5,0, // bottom left
 
     ];
 
@@ -115,14 +114,19 @@
 
     ];
 
-    window.TRIANGLE_VERTEX_POSITION= GL.createBuffer ();
-    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_POSITION);
+    // create an empty buffer object
+    window.vertexBufferPositionID= GL.createBuffer ();
+
+    // bind to the new buffer object 
+    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID);
+
+    // send data to the new buffer object
     GL.bufferData(GL.ARRAY_BUFFER,
-                new Float32Array(triangle_vertex_position),
+                new Float32Array(vertexPositionArray),
                 GL.STATIC_DRAW);
 
-    window.TRIANGLE_VERTEX_COLOR= GL.createBuffer ();
-    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_COLOR);
+    window.vertexBufferColorID= GL.createBuffer ();
+    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
     GL.bufferData(GL.ARRAY_BUFFER,
                 new Float32Array(triangle_vertex_color),
                 GL.STATIC_DRAW);
@@ -138,15 +142,16 @@
 
     var numberOfComponents = 3
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_POSITION);
+    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID);
     var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "position");
     GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
     
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_COLOR);
+    /*
+    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
     var colorAttibuteLocation = GL.getAttribLocation(shaderProgramID, "color")
     GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
-
+    */
     GL.drawArrays(GL.TRIANGLES, 0, 3);
 
 

@@ -108,7 +108,7 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 <script id="firstFshader" type="x-shader/x-fragment">
     
     void main(void) {
-        // output blur color
+        // output blue color
         gl_FragColor = vec4(0.3,0.6,0.9,1.0);
     }
 </script>

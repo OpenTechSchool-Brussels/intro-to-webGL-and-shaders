@@ -7,6 +7,38 @@ num: 3
 
 ## a) Create your own shape
 * Vertex Buffer Object
+
+We will now replace this function call
+
+~~~ JavaScript
+func_3_createTriangle();
+~~~
+
+by custom code.
+
+~~~ JavaScript
+
+// define vertices of our first triangle
+var vertexPositionArray=[
+    //----- face 1
+    -0.5,-0.5,0, //bottom 
+    0.5,-0.5,0, //bottom right 
+    0.5,0.5,0,  //top right
+];
+
+
+// create an empty buffer object
+window.vertexBufferPositionID = GL.createBuffer ();
+
+// bind to the new buffer object 
+GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID);
+
+// send data to the new buffer object
+GL.bufferData(GL.ARRAY_BUFFER,
+            new Float32Array(vertexPositionArray),
+            GL.STATIC_DRAW);
+~~	
+
 * re Draw your first Triangle
 * Change your triangle to another shape(s)
 
