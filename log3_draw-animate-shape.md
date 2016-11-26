@@ -64,7 +64,42 @@ window.numberOfVertices = 6;
 
 ## b) Render your shape
 * Animate function and its inner working
+
 * fonction animate (glDraw) avec variation du type de Draw (GL_TRIANGLES, GL_LINE_LOOP , etc)
+
+~~~ Javascript
+
+function draw() 
+{
+    // use the shader we defined earlier
+    GL.useProgram(shaderProgramID);
+
+    // define the size of the view
+    GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
+
+    // clear the color buffer
+    GL.clear(GL.COLOR_BUFFER_BIT);
+
+    var numberOfComponents = 3
+
+    // link our vertex buffer to the shader attribute position
+    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID); // -> next draw will use that buffer
+    var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "position");
+    GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+    
+    GL.drawArrays(GL.TRIANGLES, 0, window.numberOfVertices);
+
+    window.requestAnimationFrame(draw);
+};
+~~~
+
+Don't forget to call this function and comment the old one
+~~~ Javascript
+
+//func_4_draw();
+draw();
+
+~~~
 
 ## c) Animating your shape
 

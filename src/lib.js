@@ -138,14 +138,19 @@
   /*========================= DRAWING ========================= */
   var func_4_draw=function() {
 
+    // use the shader we defined earlier
     GL.useProgram(shaderProgramID);
 
+    // define the size of the view
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
+
+    // clear the color buffer
     GL.clear(GL.COLOR_BUFFER_BIT);
 
     var numberOfComponents = 3
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID);
+    // link our vertex buffer to the shader attribute position
+    GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID); // -> next draw will use that buffer
     var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "position");
     GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
     
