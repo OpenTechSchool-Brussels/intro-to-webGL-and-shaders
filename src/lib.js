@@ -43,27 +43,29 @@
     }";
 
 
-    var get_shader=function(source, type, typeString) {
-      var shader = GL.createShader(type);
-      GL.shaderSource(shader, source);
-      GL.compileShader(shader);
-      if (!GL.getShaderParameter(shader, GL.COMPILE_STATUS)) {
-        console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shader));
-        return false;
-      }
-      return shader;
+    var compileShader=function(source, type, typeString) 
+    {
+        var shaderID = GL.createShader(type);
+        GL.shaderSource(shaderID, source);
+        GL.compileShader(shaderID);
+        if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
+        {
+            console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
+            return false;
+        }
+        return shaderID;
     };
 
-    var shader_vertex=get_shader(shader_vertex_source, GL.VERTEX_SHADER, "VERTEX");
-    var shader_fragment=get_shader(shader_fragment_source, GL.FRAGMENT_SHADER, "FRAGMENT");
+    var shaderVertexID=compileShader(shader_vertex_source, GL.VERTEX_SHADER, "VERTEX");
+    var shaderFragmentID=compileShader(shader_fragment_source, GL.FRAGMENT_SHADER, "FRAGMENT");
 
-    window.SHADER_PROGRAM=GL.createProgram();
-    GL.attachShader(SHADER_PROGRAM, shader_vertex);
-    GL.attachShader(SHADER_PROGRAM, shader_fragment);
-    GL.linkProgram(SHADER_PROGRAM);
+    window.shaderProgramID=GL.createProgram();
+    GL.attachShader(shaderProgramID, shaderVertexID);
+    GL.attachShader(shaderProgramID, shaderFragmentID);
+    GL.linkProgram(shaderProgramID);
 
-    GL.enableVertexAttribArray(GL.getAttribLocation(SHADER_PROGRAM, "color"));
-    GL.enableVertexAttribArray(GL.getAttribLocation(SHADER_PROGRAM, "position"));
+    GL.enableVertexAttribArray(GL.getAttribLocation(shaderProgramID, "color"));
+    GL.enableVertexAttribArray(GL.getAttribLocation(shaderProgramID, "position"));
   }
   
   
@@ -113,7 +115,7 @@
   /*========================= DRAWING ========================= */
   var func_4_draw=function() {
 
-    GL.useProgram(SHADER_PROGRAM);
+    GL.useProgram(shaderProgramID);
 
     GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
     GL.clear(GL.COLOR_BUFFER_BIT);
@@ -121,12 +123,12 @@
     var numberOfComponents = 3
 
     GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_POSITION);
-    var positionAttibuteLocation = GL.getAttribLocation(SHADER_PROGRAM, "position");
+    var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "position");
     GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
     
 
     GL.bindBuffer(GL.ARRAY_BUFFER, TRIANGLE_VERTEX_COLOR);
-    var colorAttibuteLocation = GL.getAttribLocation(SHADER_PROGRAM, "color")
+    var colorAttibuteLocation = GL.getAttribLocation(shaderProgramID, "color")
     GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
 
     GL.drawArrays(GL.TRIANGLES, 0, 3);

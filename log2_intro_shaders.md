@@ -32,7 +32,20 @@ void main(void) {
 ~~~
 
 ## b) Compilation
-* the function we have already (change "alert" to "console.log" or something)
+~~~ JavaScript
+var compile_shader=function(source, type, typeString) 
+{
+    var shaderID = GL.createShader(type);
+    GL.shaderSource(shaderID, source);
+    GL.compileShader(shaderID);
+    if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
+    {
+        console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
+        return false;
+    }
+    return shaderID;
+};
+~~~
 
 ## c) Little modifications
 * change the position in the vertex shader
