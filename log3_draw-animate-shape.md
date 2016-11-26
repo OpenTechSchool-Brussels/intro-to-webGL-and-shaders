@@ -37,10 +37,28 @@ GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID);
 GL.bufferData(GL.ARRAY_BUFFER,
             new Float32Array(vertexPositionArray),
             GL.STATIC_DRAW);
-~~~	
+~~	
 
 * re Draw your first Triangle
 * Change your triangle to another shape(s)
+
+~~~ JavaScript
+// define vertices of a quad
+var vertexPositionArray=[
+    //----- face 1
+    -0.5,-0.5,0, //bottom 
+    0.5,-0.5,0, //bottom right 
+    0.5,0.5,0,  //top right
+
+    -0.5,0.5,0, //top left
+    0.5,0.5,0, // top right
+    -0.5,-0.5,0, // bottom left
+];
+
+// this variable will be used later, during the draw call
+window.numberOfVertices = 6;
+~~~
+
 
 ## b) Render your shape
 * Animate function and its inner working

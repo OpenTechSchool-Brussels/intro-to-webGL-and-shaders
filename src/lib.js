@@ -114,6 +114,9 @@
 
     ];
 
+    // this variable will be used later, during the draw call
+    window.numberOfVertices = 3;
+    
     // create an empty buffer object
     window.vertexBufferPositionID= GL.createBuffer ();
 
@@ -152,7 +155,7 @@
     var colorAttibuteLocation = GL.getAttribLocation(shaderProgramID, "color")
     GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
     */
-    GL.drawArrays(GL.TRIANGLES, 0, 3);
+    GL.drawArrays(GL.TRIANGLES, 0, window.numberOfVertices);
 
 
     window.requestAnimationFrame(func_4_draw);
