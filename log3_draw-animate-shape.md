@@ -37,7 +37,7 @@ GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferPositionID);
 GL.bufferData(GL.ARRAY_BUFFER,
             new Float32Array(vertexPositionArray),
             GL.STATIC_DRAW);
-~~	
+~~~	
 
 * re Draw your first Triangle
 * Change your triangle to another shape(s)
