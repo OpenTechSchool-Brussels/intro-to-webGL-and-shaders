@@ -94,7 +94,8 @@ function draw()
 ~~~
 
 Don't forget to call this function and comment the old one
-~~~ Javascript
+
+~~~ JavaScript
 
 //func_4_draw();
 draw();
@@ -146,8 +147,35 @@ GL.uniform1f(redColorUniformLocation,redColorLevel);
 
 The square now changes slowly its color from pink to blue periodically. 
 
-* rotation's mathematical aspect
-* operation on vertex buffer each time in animate (say it's "working but ugly" and we'll see better soon)
+A colored square is cool. But you know what's even cooler ? A rotating color square !
+We will modify the square position using a matrix uniform in the vertex shader. 
+
+~~~ html
+<script id="firstVshader" type="x-shader/x-vertex">
+
+    attribute vec3 position; 
+    uniform mat4 u_transformMatrix;
+
+    void main(void) 
+    { 
+        gl_Position = u_transformMatrix * vec4(position,1.0);
+    }
+</script>
+~~~
+
+The position (x,y,z,w) is now multiplied by a 4x4 matrix. This allow almost any kind of scale and rotation operations on the positions. What does this matrix contain? 
+Let define it in our javascript code :
+
+~~~ JavaScript
+var angle = timeSecond*10;
+var transformMatrix = new J3DIMatrix4()
+transformMatrix.rotate(angle,angle*0.3+30,0);
+var transformMatrixLocation = GL.getUniformLocation(shaderProgramID, "u_transformMatrix");
+GL.uniformMatrix4fv(transformMatrixLocation,false,transformMatrix.getAsFloat32Array());
+~~~
+
+We use the library J3DIMath here to get a matrix containing rotation around 3 axes (x,y,z). 
+The uniform is then updated using the OpenGL function uniformMatrix4fv.
 
 ## d) Controling this mess
 
