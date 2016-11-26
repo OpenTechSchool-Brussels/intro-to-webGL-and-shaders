@@ -54,6 +54,10 @@ Here the output will just be a white pixel (vec4(1.0) is a shortcut notation for
 
 ## b) Compilation
 
+Shaders must be compiled and linked in a shader program, which is executable binary code stored on the GPU memory. The GLSL compiler is built in the OpenGL library and can be called in webGL/javascript code. 
+
+We will first write a generic function that we will use to compile our vertex shader and our fragment shader separetely. Add that function after the javascript main() function. 
+
 ~~~ JavaScript
 
 function compileShader(source, type, typeString) 
@@ -77,6 +81,10 @@ function compileShader(source, type, typeString)
 
 ~~~
 
+This function returns an OpenGL id to a shader object if the compilation succeeds. Otherwise an error message will be printed in the console. 
+
+Now we can get the text of the shaders written previsousely, with the function getElementById() and send them our new compileShader function. 
+
 ~~~ JavaScript
 
 var vshaderString = document.getElementById("vshader").text
@@ -84,6 +92,12 @@ var shaderVertexID=compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
 
 var fshaderString = document.getElementById("fshader").text
 var shaderFragmentID=compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
+
+~~~
+
+We get two shader objects that we must combine in a program object : 
+
+~~~ JavaScript
 
 //creates an empty program object
 window.shaderProgramID=GL.createProgram();
@@ -95,15 +109,22 @@ GL.attachShader(shaderProgramID, shaderFragmentID);
 //link the program
 GL.linkProgram(shaderProgramID);
 
+~~~
+
+The GL.createProgram function create an empty program object that we fill with our two shader objects. 
+
+The last thing we need to do is to enable the input attribute : 
+
+~~~ JavaScript
 //get position attribute location in the shader
-var colorAttributeLocation = GL.getAttribLocation(shaderProgramID, "color");
 var positionAttributeLocation = GL.getAttribLocation(shaderProgramID, "position");
 
 // enable the attribute
-GL.enableVertexAttribArray(colorAttributeLocation);
 GL.enableVertexAttribArray(positionAttributeLocation);
 
 ~~~
+
+Variables in shaders are accessed with indirect index numbers called "location". To enable a attribute, we first get its location and then call enableVertexAttribArray on it. 
 
 ## c) Little modifications
 
