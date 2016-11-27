@@ -13,8 +13,8 @@ Shaders are little piece of code executed in parallel by the GPU cores. The vert
 OpenGL shaders are written in GLSL, a language based on the syntax of C programming language. Functions behave like C functions. The main() function is a special function that will be called on every vertex/pixel. 
 
 Native types are limited to
-* float : 32 floating point variables
-* vec2,vec3,vec4 : vectors of floating point. The component of a vector can be acessed with the suffixes
+*float : 32 floating point variables
+*vec2,vec3,vec4 : vectors of floating point. The component of a vector can be acessed with the suffixes
 ** .x, .y, .z, .w for geometric variables
 ** .r, .g, .b, .a for color variables
 
