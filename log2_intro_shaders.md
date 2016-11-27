@@ -8,7 +8,7 @@ num: 2
 
 ## a) basic concepts of shaders
 
-Shaders are little piece of code executed in parallel by the GPU cores. The vertex shaders are executed once every vertex. The fragment shaders are executed once every pixel. On high end graphic card, the number of cores can goes up to 2560 (for the NVidia GTX 1080). The parellel execution on these cores make shaders incredebly efficient.
+Shaders are little piece of code executed in parallel by the GPU cores. The vertex shaders are executed once every vertex. The fragment shaders are executed once every pixel. As graphic cards can contain thousands of cores (the NVidia GTX 1080 contains 2560 cores for example), the parellel execution of the shaders is incredebly efficient.
 
 OpenGL shaders are written in GLSL, a language based on the syntax of C programming language. Functions behave like C functions. The main() function is a special function that will be called on every vertex/pixel. 
 
@@ -18,11 +18,11 @@ Native types are limited to
 ** .x, .y, .z, .w for geometric variables
 ** .r, .g, .b, .a for color variables
 
-The input of a vertex shader is called "attribute". That's a value attached to the vertex currently processed. It can be a position, a color, or anything else.
+The input of the vertex shader is called "attribute". The value of the attribute is attached to the vertex currently processed. It can be a position, a color, or anything else, as we will see.
 
 Shaders are juste text and can be written anywhere. We use here an html tag "script" with a custom type "x-shader/x-vertex", but the code could have been directly written in a javascript string, or in a separate .txt file. 
 
-Here is our first vertex shader : 
+Here is our first vertex shader. Insert it on top of the main javascript script tag. 
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -48,15 +48,18 @@ void main(void) {
 </script>
 ~~~
 
-Like in the vertex shader, the fragment shader has a special variable, gl_FragColor, used as output. gl_FragColor is a vec4 variable representing R,G,B,A color of the current pixel. 
+Like the vertex shader, the fragment shader has a special variable, gl_FragColor, used as output. gl_FragColor is a vec4 variable representing R,G,B,A color of the current pixel. 
 
-Here the output will just be a white pixel (vec4(1.0) is a shortcut notation for vec4(1.0,1.0,1.0,1.0)). 
+In this case, the output will be a white pixel (vec4(1.0) is a shortcut notation for vec4(1.0,1.0,1.0,1.0)). 
+
+As a reminder, this code is executed for every pixels. Be careful when you write complex function in the fragment shader. The rendering performance quickly decrease when heavy operation are calculated thousands times per frame. 
+
 
 ## b) Compilation
 
-Shaders must be compiled and linked in a shader program, which is executable binary code stored on the GPU memory. The GLSL compiler is built in the OpenGL library and can be called in webGL/javascript code. 
+Shaders must be compiled and linked in a shader program, an executable binary code stored on the GPU memory. The GLSL compiler is built in the OpenGL library and can be called in webGL/javascript code. 
 
-We will first write a generic function that we will use to compile our vertex shader and our fragment shader separetely. Add that function after the javascript main() function. 
+We first write a generic function that we will use to compile our vertex shader and our fragment shader separetely. Add that function below the javascript main() function. 
 
 ~~~ JavaScript
 
@@ -83,15 +86,15 @@ function compileShader(source, type, typeString)
 
 This function returns an OpenGL id to a shader object if the compilation succeeds. Otherwise an error message will be printed in the console. 
 
-Now we can get the text of the shaders written previsousely, with the function getElementById() and send them our new compileShader function. 
+Now we can get the text of the shaders written previsousely, with the function getElementById() and send them our new compileShader function. Replace the call to function func_2_createShaders() by this :
 
 ~~~ JavaScript
 
 var vshaderString = document.getElementById("vshader").text
-var shaderVertexID=compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
+var shaderVertexID = compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
 
 var fshaderString = document.getElementById("fshader").text
-var shaderFragmentID=compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
+var shaderFragmentID = compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
 
 ~~~
 
@@ -124,13 +127,13 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 
 ~~~
 
-Variables in shaders are accessed with indirect index numbers called "location". To enable a attribute, we first get its location and then call enableVertexAttribArray on it. 
+Variables in shaders are accessed with indirect index numbers called "location". To enable an attribute, we first get its location and then call enableVertexAttribArray on it. 
+
+The application now use your shader program instead of the library one. So let's play with it !
 
 ## c) Little modifications
 
-Now that we use our own shaders, let's play with it !
-
-The purpose of the vertex shader is primary to modify the position of the vertices. So if you add constant to the position, you should see the triangle move to the top-right. 
+The main purpose of the vertex shader is to modify the position of the vertices. So if you add constant to the position, you should see the triangle move to the top-right of the screen. 
 
 ~~~ html
 <script id="firstVshader" type="x-shader/x-vertex">
@@ -150,7 +153,7 @@ The purpose of the vertex shader is primary to modify the position of the vertic
 
 ~~~
 
-The purpose of the fragment shader is primary to modify the color of the current pixel. Let's display blue pixels : 
+The fragment shader can modify the colors of the current pixel. Let's display a light blue pixels : 
 
 ~~~ html
 <script id="firstFshader" type="x-shader/x-fragment">
@@ -163,12 +166,6 @@ The purpose of the fragment shader is primary to modify the color of the current
 
 ~~~
 
-
-* change the position in the vertex shader
-  * translation : use a uniform to add value to x coordinates
-  * rotation : use a unifrom to rotate the vertices around (0,0,0). No matrix involved
-* change the color in the fragment shader : multiply the rgb color by a uniform
-* use of varying : set a uniform representing a color in the vertex shader, pass it through a varying to the fragment shader. Show the interpolation of the color.
 
 ## d) Not so related: WebGL Init
 * Deal with the last piece of the library, and ditch the import in the header! Yay, you're free!
