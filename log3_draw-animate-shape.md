@@ -6,28 +6,28 @@ num: 3
 ---
 
 ## a) Create your own shape
-* Vertex Buffer Object
 
-We will now replace this function call
+Now that we have defined our shaders, let's send them our own data. Comment this line :
 
 ~~~ JavaScript
 func_3_createTriangle();
 ~~~
 
-by custom code.
-
-* re Draw your first Triangle
+The first thing to do is to define the vertex positions we want to send to the vertex shader. Before loading crazy models containing thousands of vertex, let start by writing manually the position of one single triangle :
 
 ~~~ JavaScript
 
 // define vertices of our first triangle
 var vertexPositionArray=[
-    //----- face 1
     -0.5,-0.5,0, //bottom 
     0.5,-0.5,0, //bottom right 
     0.5,0.5,0,  //top right
 ];
+~~~
 
+
+
+~~~ JavaScript
 
 // create an empty buffer object
 window.vertexBufferPositionID = GL.createBuffer ();
@@ -131,11 +131,11 @@ var redColorUniformLocation = GL.getUniformLocation(shaderProgramID, "u_redColor
 GL.uniform1f(redColorUniformLocation,redColorLevel);
 ~~~
 
-As usual, we get first the location of the variable in the shader with the function getUniformLocation. 
+As usual, we first get the location of the variable in the shader with the function getUniformLocation. 
 We update it then with the function uniform1f. 
 
 You should obtain a beautiful pink square. 
-This color change can be automated. Let's use the current time to set the color periodically. 
+This color change can be automated. Let's use the current time to change the color periodically. 
 
 ~~~ html
 var timeSecond = new Date().getTime() / 1000;
@@ -168,9 +168,12 @@ Let define it in our javascript code :
 
 ~~~ JavaScript
 var angle = timeSecond*10;
+// create a new identity matrix
 var transformMatrix = new J3DIMatrix4()
+// add rotation around x,y,z 
 transformMatrix.rotate(angle,angle*0.3+30,0);
 var transformMatrixLocation = GL.getUniformLocation(shaderProgramID, "u_transformMatrix");
+// send the matrix to the vertex shader uniform 
 GL.uniformMatrix4fv(transformMatrixLocation,false,transformMatrix.getAsFloat32Array());
 ~~~
 
