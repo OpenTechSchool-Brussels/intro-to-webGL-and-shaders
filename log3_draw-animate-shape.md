@@ -7,13 +7,13 @@ num: 3
 
 ## a) Create your own shape
 
-Now that we have defined our shaders, let's send them our own data. Comment this line :
+Now that we have defined our shaders, let's send to them our own data. Comment this line :
 
 ~~~ JavaScript
-func_3_createTriangle();
+//func_3_createTriangle();
 ~~~
 
-The first thing to do is to define the vertex positions we want to send to the vertex shader. Before loading crazy models containing thousands of vertex, let start by writing manually the position of one single triangle :
+The first thing to do is to define the vertex positions we want to send to the vertex shader. Before loading crazy models containing thousands of vertices, let's start by writing manually the position of one single triangle :
 
 ~~~ JavaScript
 
