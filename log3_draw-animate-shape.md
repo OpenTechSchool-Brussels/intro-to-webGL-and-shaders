@@ -201,7 +201,107 @@ The uniform is then updated using the OpenGL function uniformMatrix4fv.
 
 For the moment, the color of the triangle is hardcoded and is the same for every pixels. What if we want one color per vertex ? Let's create another VBO that will contain the colors. 
 
+Replace your vertex shader with this code : 
+
+
+~~~ html
+<script id="vshader" type="x-shader/x-vertex">
+
+    attribute vec3 position; 
+    attribute vec3 color;
+
+    uniform mat4 u_transformMatrix;
+
+    varying vec3 v_Color;
+
+    void main(void) 
+    { 
+        // forward the color to the fragment shader
+        v_Color = color;
+        gl_Position = u_transformMatrix * vec4(position,1.0);
+    }
+
+</script>
+~~~
+
+We added an input attribute called color, and added an additional v_Color variable that will be passed to the fragment shader. Those outputs are called varying because they are interpolated between the vertices. 
+
+Here is the fragment shader : 
+~~~ html
+<script id="fshader" type="x-shader/x-vertex">
+
+    attribute vec3 position; 
+    attribute vec3 color;
+
+    uniform mat4 u_transformMatrix;
+
+    varying vec3 v_Color;
+
+    void main(void) 
+    { 
+        // forward the color to the fragment shader
+        v_Color = color;
+        gl_Position = u_transformMatrix * vec4(position,1.0);
+    }
+
+</script>
+~~~
+
+The varying v_Color must be declared here as well. The final output will be the v_Color augmented with av alpha value. 
+The new attribute must be activated, like the position attribute. Add thos two lines  in your javascript code : 
+
+~~~ JavaScript
+// get attribute location
+var colorAttributeLocation = GL.getAttribLocation(shaderProgramID, "color");
+// enable the attribute
+GL.enableVertexAttribArray(colorAttributeLocation);
+~~~ 
+
+Now let's feed that new input attribute. In the javascript code, just below the vertex position loading, add a vertex color loading. 
+
+~~~ JavaScript
+
+var vertexColorArray=[
+    1,0,1, //bottom left
+    1,1,1, //bottom right
+    1,1,0, //top right
+    
+    0,0,1, //top left
+    1,0,0, // top right
+    0,1,0, // bottom left
+];
+
+// create an empty buffer object
+window.vertexBufferColorID= GL.createBuffer ();
+
+// bind to the new buffer object
+GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
+
+// send data to the new buffer object
+GL.bufferData(GL.ARRAY_BUFFER,
+            new Float32Array(vertexColorArray),
+            GL.STATIC_DRAW);
+~~~
+
+This works exactly like the vertex position buffer : 
+* We manually define a data array with our colors (R,G,B)
+* We create an empty VBO
+* We fill it with our color array
+
+We still need to link our attribute "color" to this new VBO. Let's do this in the draw function. Add this code before the GL.drawArrays call : 
+
+~~~ JavaScript
+GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
+var colorAttibuteLocation = GL.getAttribLocation(shaderProgramID, "color")
+GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+~~~ 
+
+And now you should obtain a beautiful multicolor quad. Why ? We defined color only four our 6 vertices. And these colors has been interpolated for each pixel drawn in the  triangles defined by these vertices, thanks to the magic "varying" variable. 
+
 <img src="./assets/fragmentInterpolation.jpg" alt="Fragment Interpolation">
+
+That's a fondamuntal concept to understand. The main task of GPU's are fast texture reading and interpolation. 
+
 
 ## e) Controling this mess
 
