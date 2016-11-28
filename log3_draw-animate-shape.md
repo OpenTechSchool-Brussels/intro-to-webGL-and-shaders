@@ -230,22 +230,19 @@ Here is the fragment shader :
 
 ~~~ html
 
-<script id="fshader" type="x-shader/x-vertex">
+<script id="fshader" type="x-shader/x-fragment">
 
-    attribute vec3 position; 
-    attribute vec3 color;
+    precision mediump float;
 
-    uniform mat4 u_transformMatrix;
-
+    // here we declare our uniform
+    uniform lowp float u_redColor;
     varying vec3 v_Color;
 
     void main(void) 
-    { 
-        // forward the color to the fragment shader
-        v_Color = color;
-        gl_Position = u_transformMatrix * vec4(position,1.0);
+    {
+        // the final output is the color received with the varying v_Color
+        gl_FragColor = vec4(v_Color,1.0);
     }
-
 </script>
 
 ~~~
