@@ -227,7 +227,9 @@ Replace your vertex shader with this code :
 We added an input attribute called color, and added an additional v_Color variable that will be passed to the fragment shader. Those outputs are called varying because they are interpolated between the vertices. 
 
 Here is the fragment shader : 
+
 ~~~ html
+
 <script id="fshader" type="x-shader/x-vertex">
 
     attribute vec3 position; 
@@ -245,6 +247,7 @@ Here is the fragment shader :
     }
 
 </script>
+
 ~~~
 
 The varying v_Color must be declared here as well. The final output will be the v_Color augmented with av alpha value. 
