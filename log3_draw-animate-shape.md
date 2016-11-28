@@ -230,7 +230,7 @@ Here is the fragment shader :
 
 ~~~ html
 
-<script id="fshader" type="x-shader/x-fragment">
+<script id="shader" type="x-shader/x-fragment">
 
     precision mediump float;
 
@@ -248,7 +248,7 @@ Here is the fragment shader :
 ~~~
 
 The varying v_Color must be declared here as well. The final output will be the v_Color augmented with av alpha value. 
-The new attribute must be activated, like the position attribute. Add thos two lines  in your javascript code : 
+The new attribute must be activated, like the position attribute. Add those two lines  in your javascript code : 
 
 ~~~ JavaScript
 // get attribute location
@@ -296,11 +296,11 @@ var colorAttibuteLocation = GL.getAttribLocation(shaderProgramID, "color")
 GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
 ~~~ 
 
-And now you should obtain a beautiful multicolor quad. Why ? We defined color only four our 6 vertices. And these colors has been interpolated for each pixel drawn in the  triangles defined by these vertices, thanks to the magic "varying" variable. 
+And now you should obtain a beautiful multicolor quad. Why ? We only defined color for our 6 vertices. And these colors have been interpolated for each pixel drawn in the  triangles defined by these vertices, thanks to the magic "varying" variable. 
 
 <img src="./assets/fragmentInterpolation.jpg" alt="Fragment Interpolation">
 
-That's a fondamuntal concept to understand. The main task of GPU's are fast texture reading and interpolation. 
+That's a fundamental concept to understand. The fragment shader takes data produced by the vertex shader and interpolate them for each fragment.
 
 
 ## e) Controling this mess
