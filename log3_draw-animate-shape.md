@@ -7,7 +7,7 @@ num: 3
 
 ## a) Create your own shape
 
-Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early OpenGL workekd. But was not very efficient as it cost a lot of data transfer between the CPU memory and the GPU memory. That's why the Vertex Buffer Object (VBO) has been added in mordern OpenGL versions. VBO is a buffer containing vertex informations residing in the GPU memory. That means that you need to upload the vertiex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
+Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early OpenGL workekd. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the Vertex Buffer Object (VBO) has been added in mordern OpenGL versions. VBO is a buffer containing vertex informations residing in the GPU memory. That means that you need to upload the vertiex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
 
 During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
 
@@ -197,7 +197,13 @@ GL.uniformMatrix4fv(transformMatrixLocation,false,transformMatrix.getAsFloat32Ar
 We use the library J3DIMath here to get a matrix containing rotation around 3 axes (x,y,z). 
 The uniform is then updated using the OpenGL function uniformMatrix4fv.
 
-## d) Controling this mess
+## d) Send additional vertex informations : colors
+
+For the moment, the color of the triangle is hardcoded and is the same for every pixels. What if we want one color per vertex ? Let's create another VBO that will contain the colors. 
+
+<img src="./assets/fragmentInterpolation.jpg" alt="Fragment Interpolation">
+
+## e) Controling this mess
 
 * Using the mouse position (x and y) as a control for other stuff
 

@@ -101,17 +101,14 @@
 
     ];
 
-    var triangle_vertex_color=[
-
-        1,1,1, 
-        1,1,1, 
-        1,1,1, 
+    var vertexColorArray=[
+        1,1,1, //bottom left
+        1,1,1, //bottom right
+        1,1,1, //top right
         
-        0,0,1, 
-        1,0,0, 
-        0,1,0, 
-
-
+        0,0,1, //top left
+        1,0,0, // top right
+        0,1,0, // bottom left
     ];
 
     // this variable will be used later, during the draw call
@@ -131,7 +128,7 @@
     window.vertexBufferColorID= GL.createBuffer ();
     GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
     GL.bufferData(GL.ARRAY_BUFFER,
-                new Float32Array(triangle_vertex_color),
+                new Float32Array(vertexColorArray),
                 GL.STATIC_DRAW);
   };
 
