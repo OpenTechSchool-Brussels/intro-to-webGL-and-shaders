@@ -29,6 +29,10 @@ Let's talk about the GRAPHIC PIPELINE.
 
 Every frame of an OpenGL application is rendered following these steps : 
 
+<img src="/assets/images/webGLPipeline.jpg" alt="Mountain View">
+
+![gras](https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/assets/images/webGLPipeline.jpg)
+
 ![gras](https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/assets/images/webGLPipeline.jpg)
 
 Vertices are contained in a buffer on the GPU. At this stage it's only a set of information per 3D point (position, color etc ...). 
