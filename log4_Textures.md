@@ -6,7 +6,11 @@ num: 4
 ---
 
 
-## a) Create a texture and upload it on the GPU
+## a) How texture works
+
+Ok it's time to drop our solid color quad and replace it by something potentially more exiting : textures. 
+
+A texture is are memory buffer on the GPU allocated to store an image.  
 
 * Texture generation
 * Parameters of the texture : interpolation , wrapping

@@ -46,6 +46,10 @@ The final step is to discard fragments that don't pass visibility tests. One of 
 
 ## OpenGL state machine
 
+* state machine
+* openGL contexte
+* expliquer principe du bind
+
 ## First look at our render library
 Map each step of the rendering pipeline to a function of the library
 
