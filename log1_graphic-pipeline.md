@@ -11,17 +11,17 @@ In modern 3D computer graphics, every object appearing on screen is usually base
 
 Even a complex scene like this one : 
 
-//image full rendering
+<img src="./assets/ACVatican_Render01.jpg" alt="Full Rendering">
 
 ... is in fact based on a set of triangles augmented with shading and post processing effects : 
 
-// image mesh
+<img src="./assets/VaticanWire01.jpg" alt="Wire Rendering">
 
 Why triangles ? Because they are easy to process by the GPU, because they are flexible enough and can approximate a wide range of 3D surfaces. A triangle is a simple universal surface element. 
 
 The points composing a triangle are called "vertices" (plural form of "vertex"). The set of vertices, edges, and faces that compose a 3D object is called a 3D mesh. 
 
-// image dolphin mesh
+<img src="./assets/Dolphin_triangle_mesh.png" alt="A 3D mesh">
 
 So how to move from a barbone 3D mesh to a beatiful texturerd post-processed scene ? 
 
