@@ -29,7 +29,7 @@ Let's talk about the GRAPHIC PIPELINE.
 
 Every frame of an OpenGL application is rendered following these steps : 
 
-// VERTICES (P) -> VERTEX SHADER (P) -> SHAPE ASSEMBLY -> RASTERIZATION -> FRAGMENT SHADER (P) -> TEST AND BLENDING
+![gras](assets/images/webGLPipeline.jpg)
 
 Vertices are contained in a buffer on the GPU. At this stage it's only a set of information per 3D point (position, color etc ...). 
 
@@ -39,10 +39,12 @@ After these vertex transformations, the renderer will form triangles out of the 
 
 At this point we just have abstract triangles defined in an abstract coordinate system. It's time to convert that into real pixels! Or more precisely into fragment, a temporary pixel that still has to pass several test to earn the right to be displayed. The job of the rasterizer is to determine which frament is contained in the triangle. 
 
-The programmable fragment shader will run for every fragments defined in the rasterization process, allowing to chose what will be the final color of the fragment. It will depend on textures, fragment position, external parameters etc ...
+The programmable fragment shader will run for every fragments defined in the rasterization process, allowing to choose what will be the final color of the fragment. It will depend on textures, fragment position, external parameters etc ...
 
 The final step is to discard fragments that don't pass visibility tests. One of these test is the (optional) depht test : if one triangle is obscured by another triangle, the fragment of the closer triangle should end up on the screen. The survivors of these tests are finally called pixels. We finally got them !
 
+
+## OpenGL state machine
 
 ## First look at our render library
 Map each step of the rendering pipeline to a function of the library
