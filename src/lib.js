@@ -84,6 +84,56 @@
     GL.enableVertexAttribArray(positionAttributeLocation);
   }
   
+  // 2bis) Shaders but from HTML
+  
+  var func_2bis_createShadersFromHTML = function() {
+
+    var compileShader=function(source, type, typeString) 
+    {
+        //creates an empty shader object
+        var shaderID = GL.createShader(type);
+
+        // sets the source code in shader
+        GL.shaderSource(shaderID, source);
+
+        // compile the shader object
+        GL.compileShader(shaderID);
+
+        if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
+        {
+            console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
+            return false;
+        }
+        return shaderID;
+    };
+
+    var vshaderString = document.getElementById("vshader").text
+    var shaderVertexID=compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
+ 
+    var fshaderString = document.getElementById("fshader").text
+    var shaderFragmentID=compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
+
+    //creates an empty program object
+    window.shaderProgramID=GL.createProgram();
+
+    //attach shaders to the program
+    GL.attachShader(shaderProgramID, shaderVertexID);
+    GL.attachShader(shaderProgramID, shaderFragmentID);
+
+    //link the program
+    GL.linkProgram(shaderProgramID);
+
+    //get position attribute location in the shader
+    var colorAttributeLocation = GL.getAttribLocation(shaderProgramID, "color");
+    var positionAttributeLocation = GL.getAttribLocation(shaderProgramID, "position");
+
+    // enable the attribute
+    //GL.enableVertexAttribArray(colorAttributeLocation);
+    GL.enableVertexAttribArray(positionAttributeLocation);
+  }
+  
+
+  
   
   // 3) Triangle
   var func_3_createTriangle = function() {
