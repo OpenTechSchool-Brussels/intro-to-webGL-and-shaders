@@ -7,7 +7,9 @@ num: 0
 
 You know us, we know you: let’s get this party started.
 
-## a) What is OpenGL/WebGL?I'd answer "WebGL is what we'll use in this workshop" but I'm unsure how happy you'll be with the answer. Joke aside, OpenGL is an API (application programming interface) which connect two things. The first is your code, which is executed on your main processor; the second is your graphic card. In short, openGL let you render graphics on your screen by accessing directly the graphic card (hardware accelerated graphics) as opposed to draw from your main processor, thus maximizing the performances.
+## a) What is OpenGL/WebGL?
+
+I'd answer "WebGL is what we'll use in this workshop" but I'm unsure how happy you'll be with the answer. Joke aside, OpenGL is an API (application programming interface) which connect two things. The first is your code, which is executed on your main processor; the second is your graphic card. In short, openGL let you render graphics on your screen by accessing directly the graphic card (hardware accelerated graphics) as opposed to draw from your main processor, thus maximizing the performances.
 
 WebGL as a few might have already guessed is the twin of OpenGL, but on the web. It's a very similar API, specifically for the programming language used on the web: JavaScript. While both are not completely equivalent, let's say that if you know one, you know the other.
 
