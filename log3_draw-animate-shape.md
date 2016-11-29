@@ -7,19 +7,19 @@ num: 3
 
 ## a) Create your own shape
 
-Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early OpenGL workekd. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the Vertex Buffer Object (VBO) has been added in mordern OpenGL versions. VBO is a buffer containing vertex informations residing in the GPU memory. That means that you need to upload the vertiex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
+Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early versions of OpenGL workekd. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the Vertex Buffer Object (VBO) has been added in mordern OpenGL versions. VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
 
 During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
 
 <img src="./assets/webGLVBODiagram.jpg" alt="VBO diagram">
 
-Let'see how to connect these different pieces together. Comment the function that we will replace :
+Let'see how to connect these different pieces together. Comment the function that we will replace with our own code:
 
 ~~~ JavaScript
 //func_3_createTriangle();
 ~~~
 
-The first thing to do is to define the vertex positions (the data) we want to send to the vertex shader. Before loading crazy models containing thousands of vertices, let's start by writing manually the position of one single triangle :
+The first thing to do is to define the vertex positions (the data) we want to send to the vertex shader. Before loading crazy models containing thousands of vertices, let's start by writing manually the position of one humble triangle :
 
 ~~~ JavaScript
 
@@ -36,7 +36,7 @@ window.numberOfVertices = 3;
 
 As a reminder, coordinates go from -1 to 1. window.numberOfVertices is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
 
-We now create a VBO on the GPU with the function createBuffer, and send our triangle positions to it:
+We now create a VBO on the GPU with the function createBuffer, and send our position array to it:
 
 ~~~ JavaScript
 
@@ -56,7 +56,7 @@ The parameter GL.STATIC_DRAW is a hint to OpenGL to indicate that we won't chang
 
 The vertices of the triangle are now loaded in the VBO and used by the vertex shader every time the scene is rendered. 
 
-You can modify the data you send in the VBO. Add as many triangle you want. Here is a quad formed by 2 triangles :
+As a test, you can modify the data you send in the VBO. Add as many triangle you want. Here is a quad formed by 2 triangles :
 
 ~~~ JavaScript
 // define vertices of a quad

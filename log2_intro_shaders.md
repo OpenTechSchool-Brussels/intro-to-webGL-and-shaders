@@ -98,7 +98,7 @@ var shaderFragmentID = compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMEN
 
 ~~~
 
-We get two shader objects that we must combine in a program object : 
+We get two shader objects (represented by shaderVertexID and shaderFragmentID) that we must combine in a program object : 
 
 ~~~ JavaScript
 
@@ -114,7 +114,7 @@ GL.linkProgram(shaderProgramID);
 
 ~~~
 
-The GL.createProgram function create an empty program object that we fill with our two shader objects. 
+The GL.createProgram function creates an empty program object that we fill with our two shader objects. 
 
 The last thing we need to do is to enable the input attribute : 
 
@@ -133,7 +133,7 @@ The application now use your shader program instead of the library one. So let's
 
 ## c) Little modifications
 
-The main purpose of the vertex shader is to modify the position of the vertices. So if you add constant to the position, you should see the triangle move to the top-right of the screen. 
+The main purpose of the vertex shader is to modify the position of the vertices. So if you add constant to the position input, you should see the triangle move to the top-right of the screen. 
 
 ~~~ html
 <script id="firstVshader" type="x-shader/x-vertex">
