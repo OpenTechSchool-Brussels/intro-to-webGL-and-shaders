@@ -231,4 +231,6 @@ img.ctr {
     margin-right: auto;
     margin-top: 50px;
     margin-bottom: 50px;
+  
+    max-width: 100%;
 }
