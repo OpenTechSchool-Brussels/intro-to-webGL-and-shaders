@@ -42,6 +42,26 @@ A texture is are memory buffer on the GPU allocated to store an image.
 
 ~~~
 
+~~~ html
+<script id="textureFshader" type="x-shader/x-fragment">
+    
+    precision mediump float;
+
+    // our texture unit
+    uniform sampler2D u_texture;
+
+    // the texture coordinates received from the vertex shader
+    varying vec2 v_textureCoordinates;
+    varying vec3 v_Color;
+
+    void main(void) {
+        // sample the texture unit u_texture at coordinate v_textureCoordinates
+        gl_FragColor = texture2D(u_texture,v_textureCoordinates);
+    }
+</script>
+
+~~~
+
 (enable the attribute we added in the vertex shader)
 
 ~~~ JavaScript
@@ -118,11 +138,11 @@ GL.bufferData(GL.ARRAY_BUFFER,
 (in the draw loop : glue between the vbo texture coord, and the attribute texture coord in the shader)
 
 ~~~ JavaScript
-            numberOfComponents = 2;
-            // link our vertex buffer to the shader attribute texture coordinate
-            GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferTexCoordID); // -> next draw will use that buffer
-            var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "texureCoordinates");
-            GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+numberOfComponents = 2;
+// link our vertex buffer to the shader attribute texture coordinate
+GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferTexCoordID); // -> next draw will use that buffer
+var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "texureCoordinates");
+GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
 ~~~
 
 (in the draw loop : tell the GPU to link our texture to TEXTURE_0)
@@ -132,22 +152,6 @@ GL.bufferData(GL.ARRAY_BUFFER,
 GL.activeTexture(GL.TEXTURE0);
 GL.bindTexture(GL.TEXTURE_2D, textureID);
 ~~~
-
-
-
-
-* Texture generation
-* Parameters of the texture : interpolation , wrapping
-* load the image in the texture with glTexImage2D
-
-## b) Use the texture in the shaders
-
-* send texture coordinates as attributes
-* modify glVertexAttribPointer accodingly
-* get the texture coordinates in the vertex shader and pass it to the fragment shader with a varying
-* sample the texture and display the right color in the fragment shader
-
-## c) Mapping textures
 
 
 
