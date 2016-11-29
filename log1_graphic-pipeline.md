@@ -9,13 +9,9 @@ num: 1
 
 In modern 3D computer graphics, each object appearing on screen is usually based on triangle geometry. 
 
-Even a complex scene like this one : 
+Even a complex scene like the one below is in fact based on a set of triangles augmented with shading and post processing effects.
 
-<img src="./assets/ACVatican_Render01.jpg" alt="Full Rendering">
-
-... is in fact based on a set of triangles augmented with shading and post processing effects : 
-
-<img src="./assets/VaticanWire01.jpg" alt="Wire Rendering">
+<img src="./assets/log1_scene.jpg" alt="Full Rendering">
 
 Why triangles ? Because they are easy to process by the GPU, because they are flexible enough and can approximate a wide range of 3D surfaces. A triangle is a simple universal surface element. 
 
