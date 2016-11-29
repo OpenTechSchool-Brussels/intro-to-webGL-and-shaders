@@ -26,6 +26,7 @@ Many different ways to do so. Our weapon of choice will be JSbin. It is an onlin
 <img src="./assets/log0_jsbin.jpg" alt="Full Rendering">
 
 A few helping points to get you started (each are linked with a red marker of the corresponding number)
+
 1. The big header is a bit of a bother. Click on that cross to make it smaller;
 2. Line numbering is easier for communicating about code. Double click on HTML and make them appear;
 3. You see three frames, HTML, Javascript, and Output. The little buttons at the right of the red 3 allows you to juggle between those and other frames. While CSS will be useless for us, Console might help you understanding what went wrong in your code;
