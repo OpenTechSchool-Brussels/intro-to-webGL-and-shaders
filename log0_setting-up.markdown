@@ -20,7 +20,7 @@ While OpenGL/WebGL is a whoooole world to discover, with bumps and heavy rides, 
 
 So, in case you haven't followed, we'll be drawing stuff on the web, hence using a web browser, JavaScript and WebGL. The linguist will have found out by themselves that JavaScript is a scripting language. It means it doesn't need to be compiled and translated in machine code. This allows for many thing, and among other: hot reloading. This means that you can write your code, and see in (pseudo) real time the modification. A blessing for students and teachers alike.
 
-Many different ways to do so. Our weapon of choice will be JSbin. It is an online editor (HTML, JavaScript, CSS. All we need!) with this hot reloading feature. When you will start writing some code, you will see a specific URL popping up in your address bar, such as : [https://jsbin.com/kadovifuha/edit?html,css,output] be sure to write down the weird name just after jsbin.com, it will be a unique identifier to get back later to your code.
+Many different ways to do so. Our weapon of choice will be JSbin. It is an online editor (HTML, JavaScript, CSS. All we need!) with this hot reloading feature. When you will start writing some code, you will see a specific URL popping up in your address bar, such as : `https://jsbin.com/kadovifuha/edit?html,css,output` be sure to write down the weird name just after jsbin.com, it will be a unique identifier to get back later to your code.
 
 
 <img src="./assets/log0_jsbin.jpg" alt="Full Rendering">
@@ -80,7 +80,7 @@ CPU stands for Central Processing Unit, the default stuff that thinks when you g
 You never code alone. You stand on the shoulders of giant, and reuse their code, would you know it or not. Sometimes, it's more obvious than others, like when you use a library. You might want to do so for rendering graphics, and you'd be pretty right. Here, we're not teaching you a better way, we're showing you the raw stuff, both for your culture, understanding, and for when you'll need to push the libraries to their boundaries. Understand the gears so you can master the tools.
 
 ## f) the Web part of it
-In this workshop, we chose WebGL instead of OpenGL for numerous reasons. Among others was to allow you to easily share your results. While JSBin is super nice for fast prototyping, you might want to host your code somewhere more classic. There are numerous free static server provider available online (like [neocities](neocities.org)), you might want to check that after the workshop.
+In this workshop, we chose WebGL instead of OpenGL for numerous reasons. Among others was to allow you to easily share your results. While JSBin is super nice for fast prototyping, you might want to host your code somewhere more classic. There are numerous free static server provider available online (like [neocities](http://neocities.org)), you might want to check that after the workshop.
 
 
 
