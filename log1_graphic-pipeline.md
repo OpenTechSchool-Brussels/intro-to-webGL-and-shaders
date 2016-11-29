@@ -7,7 +7,7 @@ num: 1
 
 ## Pipeline Overview
 
-In modern 3D computer graphics, every object appearing on screen is usually based on triangle geometry. 
+In modern 3D computer graphics, each object appearing on screen is usually based on triangle geometry. 
 
 Even a complex scene like this one : 
 
@@ -23,7 +23,7 @@ The points composing a triangle are called "vertices" (plural form of "vertex").
 
 <img src="./assets/Dolphin_triangle_mesh.png" alt="A 3D mesh">
 
-So how to move from a barbone 3D mesh to a beatiful texturerd post-processed scene ? 
+So how to move from a barebone 3D mesh to a beatiful texturerd post-processed scene ? 
 
 Let's talk about the GRAPHIC PIPELINE. 
 
@@ -31,7 +31,7 @@ Every frame of an OpenGL application is rendered following these steps :
 
 <img src="./assets/webGLPipeline.jpg" alt="Rendering Pipeline">
 
-Vertices are contained in a buffer on the GPU. At this stage it's only a set of information per 3D point (position, color etc ...). 
+Vertices are contained in a buffer on the GPU. At this stage it's only a set of informations per 3D point (position, color, etc ...). 
 
 These vertices are modified in the programmable vertex shader. The operations performed in the vertex shader usually include rotation, scale, and translation on the positions. This allows to "place" the points of the mesh in a 3D world. 
 
