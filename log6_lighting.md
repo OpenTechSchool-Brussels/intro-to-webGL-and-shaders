@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "There shall be light"
-num: 6
+num: 5
 
 ---
 
