@@ -5,6 +5,30 @@ num: 2
 
 ---
 
+## What again is a shader?
+
+## Your first shader
+
+* Touching the HTML and putting your shader coded there
+* func_2bis to test them
+* Little modifications to play with
+
+## Compiling your shaders
+
+* not using func_2bis anymore
+
+## Modification on your shader (based with the mouse ? introduction of other parametres)
+
+* Bigger modifications ?
+
+## On a completely different note...
+* initialisation of the setup
+
+
+
+------------------------
+
+
 
 ## a) basic concepts of shaders
 
