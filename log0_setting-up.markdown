@@ -23,7 +23,7 @@ So, in case you haven't followed, we'll be drawing stuff on the web, hence using
 Many different ways to do so. Our weapon of choice will be JSbin. It is an online editor (HTML, JavaScript, CSS. All we need!) with this hot reloading feature. When you will start writing some code, you will see a specific URL popping up in your address bar, such as : `https://jsbin.com/kadovifuha/edit?html,css,output` be sure to write down the weird name just after jsbin.com, it will be a unique identifier to get back later to your code.
 
 
-<img classe="ctr" src="./assets/log0_jsbin.jpg" alt="Full Rendering">
+<img class="ctr" src="./assets/log0_jsbin.jpg" alt="Full Rendering">
 
 A few helping points to get you started (each are linked with a red marker of the corresponding number)
 
