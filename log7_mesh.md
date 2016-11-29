@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "3D Mesh and all sort of variety"
-num: 7
+num: 
 
 ---
 
