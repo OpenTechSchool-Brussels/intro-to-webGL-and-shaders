@@ -6,18 +6,15 @@ num: 1
 ---
 
 ## Pipeline Overview
-
-In modern 3D computer graphics, each object appearing on screen is usually based on triangle geometry. 
-
-Even a complex scene like the one below is in fact based on a set of triangles augmented with shading and post processing effects.
+While a human is able to do one complexe task easily at one glance (locating people in a picture), the machine can only do very simple task but it does it very fast. This shows in the way graphics are rendered on screen, up to the geometric level. The scene below appears to the eye as composed of many complexe objects. In modern 3D computer graphics, each of these object is usually divided in triangle shapes, the sum of it forming the object's geometry. Add to that a bit of shading and post-processing, and you get the scene as you see it.
 
 <img class="ctr" src="./assets/log1_scene.jpg" alt="Full Rendering">
 
-Why triangles ? Because they are easy to process by the GPU, because they are flexible enough and can approximate a wide range of 3D surfaces. A triangle is a simple universal surface element. 
+Why using triangles? Because they are the simplest possible surface. 3 points define a surface (triangle) while two would only define a line (segment). Add one more and at best you have a quadrilater, at worse you have some weird volumical shape that is hard to interpret. So, if you want to use a surface to define an enclosed volume, triangles are the best building blocks. No wonder it's the linga franca in graphic processing!
 
-The points composing a triangle are called "vertices" (plural form of "vertex"). The set of vertices, edges, and faces that compose a 3D object is called a 3D mesh. 
+So, your geometry is based on triangles. On what is based your triangles? Well, on *dots* in space. Those *dots* have a more formal name: **vertex** (plural: **vetices**). All geometry you'll encounter is based on a set of vertices, usually read as a set of triangles. You can go simple stuff (a square -two triangles-, a cube -twelve triangles-...) and more complexe and eye appealing forms. 
 
-<img src="./assets/Dolphin_triangle_mesh.png" alt="A 3D mesh">
+<img class="ctr" src="./assets/Dolphin_triangle_mesh.png" alt="A 3D mesh">
 
 So how to move from a barebone 3D mesh to a beatiful texturerd post-processed scene ? 
 
