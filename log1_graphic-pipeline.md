@@ -16,7 +16,7 @@ var main=function() { // Don't try to run this code!
   func_2_****();   
   func_3_****();
 
-  // You play with and animate it
+  // Drawing your stuff
   func_4_****();
  
 };
@@ -43,22 +43,26 @@ So, now we have our triangle. How do we go from a barebone 3D mesh to a fancy te
 1. First, the **Vertex Shader** will alter the vertices themselves (the positions in space) through translation, rotation, scaling and other shenanigans. This allows for instance to place your mesh at a specific position;
 2. Then the **shape assembly** will decide how to read this list of vertices. Usually (not always) they will be read as series of triangle surfaces as we wrote earlier. They could other wise been seen as dots or line for instance. We'll play with that in another log;
 3. Then it's time for the **rasterization**: up until now, we had coordinates in 3D. But news flash, your screen is 2D and discrete: pixel based. The rasterization is this projection from the 3D space to your screen. It transforms shapes in set of **fragments**, temporary pixels that still have to pass several test to earn the right to be displayed;
-4. Another shader: the **Fragment Shader** will run for each fragment defined at the previous setp, and will define the final color of the fragment, depending on the texture, fragment position or any other parameters you would feed it.
+4. Another shader: the **Fragment Shader** will run for each fragment defined at the previous step, and will define the final color of the fragment, depending on the texture, fragment position or any other parameters you would feed it.
 5. Last, series of test are being done to discard fragments that wouldn't be seen in the end (hidden by others for instance) in parallel of blending whenever you happen to have fragments that will mix together (for instance with transparency). The survivors of these tests and processes are finally called pixels. We finally got them !
 
+Two steps are of particular interests. Spoiler alert, it's the shaders. What makes them so interesting? You can program it. It's not anymore accessing stuff and ordering your graphic card, now it's about uploading programs directly on your GPU for them to be executed over each vertex and each fragments. This is what we'll do in function two: `func_2_createShaders();`.
+
+If you can define the shaders only once, as well as your geometry, all those steps needs to be called continuously, for each new frame displayed on your computer. This never ending drawing will be done in function four: `func_4_draw();`.
 
 
+## OpenGL/WebGL state machine
+
+In order to use WebGL, we first need to initialize its context. This is actually what does the first function: `func_1_initialisation("your_canvas");`(Yay, we got them all!). Initializing the context means to put in a certain state the system. One of the various ways to use WebGL is to modify its state. That's why we say that OpenGL/WebGL is a **state machine**. Having a hard time following? Imagine you're having felt pens of different colors. Whatever you'll draw will be drawn in the color of the felt pen you're handing. If you're changing felt pen, you're changing your state (in the sens that you'll be changing the color of what you'll draw *from now on*). There are multiple states in WebGL, some related with colors, other with geometric operation, and so much more you'll discover along the way. The sum of all those states forms the openGL/webGL context.
+
+(//// Commentaire: parler du Bind ici? On peut pas déplacer le state machine ailleurs?)
 
 
-## OpenGL state machine
+## Another look at our rendering code
 
-* state machine
-* openGL contexte
-* expliquer principe du bind
+Now we know both the name of each function, and what they actually do. Let's write that down again and .. behold! The same triangle. Fantastic, glorious. Haven't we told you at the top of this page that this was mainly theoretical? Mwahahaha... Next log will be more hands on, pinky promise!
 
-## First look at our render library
-Map each step of the rendering pipeline to a function of the library
-
+For those that want to see all in one:
 
 ~~~ JavaScript
 var main=function() {
@@ -68,7 +72,7 @@ var main=function() {
   func_2_createShaders();    
   func_3_createTriangle();
 
-  // You play with and animate it
+  // Drawing your stuff
   func_4_draw();
   
 };
