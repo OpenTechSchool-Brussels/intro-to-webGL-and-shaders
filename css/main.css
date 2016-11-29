@@ -224,3 +224,9 @@ pre a:only-of-type::before {
 .authorName{
   font-weight:bold;
 }
+
+img.ctr {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
