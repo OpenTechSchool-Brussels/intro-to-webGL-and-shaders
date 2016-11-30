@@ -24,7 +24,7 @@ Let's do things in order and begin with the vertex shader. You have many ways an
 ~~~
 
 
-Now if you continue using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll use `func_2bis_createShadersWithVertexShaderFromHTML()`. I'd advise you to copy past that so you don't make spelling mistakes... The point of it is that you know have control over the shader. Let's write a basic one to have back your triangle on screen.
+Now if you continue using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll use `func_2bis_createShadersWithVertexShaderFromHTML()`. I'd advise you to copy past that so you don't make spelling mistakes... The point of it is that you now have control over the shader. Let's write a basic one to have back your triangle on screen.
 
 Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now. The main difference is that whereas JavaScript defines all variables with *var*, GLSL makes you specify in its definition the type of the variable (scalar, vectors, arrays...).
 
