@@ -55,9 +55,6 @@ If you can define the shaders only once, as well as your geometry, all those ste
 
 In order to use WebGL, we first need to initialize its context. This is actually what does the first function: `func_1_initialisation("your_canvas");`(Yay, we got them all!). Initializing the context means to put in a certain state the system. One of the various ways to use WebGL is to modify its state. That's why we say that OpenGL/WebGL is a **state machine**. Having a hard time following? Imagine you're having felt pens of different colors. Whatever you'll draw will be drawn in the color of the felt pen you're handing. If you're changing felt pen, you're changing your state (in the sens that you'll be changing the color of what you'll draw *from now on*). There are multiple states in WebGL, some related with colors, other with geometric operation, and so much more you'll discover along the way. The sum of all those states forms the openGL/webGL context.
 
-(//// Commentaire: parler du Bind ici? On peut pas déplacer le state machine ailleurs?)
-
-
 ## Another look at our rendering code
 
 Now we know both the name of each function, and what they actually do. Let's write that down again and .. behold! The same triangle. Fantastic, glorious. Haven't we told you at the top of this page that this was mainly theoretical? Mwahahaha... Next log will be more hands on, pinky promise!
