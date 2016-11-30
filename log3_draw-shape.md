@@ -122,3 +122,8 @@ Don't forget to call this function and comment the old one
 draw();
 
 ~~~
+
+
+## d) Not so related: WebGL Init
+* Deal with the last piece of the library, and ditch the import in the header! Yay, you're free!
+
