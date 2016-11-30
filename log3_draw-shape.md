@@ -7,6 +7,7 @@ num: 3
 
 
 * Talk about binding in this page
+* Talk about coordinates system (vertice, evocate texture, pixels)
 
 
 ## a) Create your own shape
