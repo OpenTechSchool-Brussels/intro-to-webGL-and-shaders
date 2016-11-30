@@ -5,6 +5,12 @@ num: 2
 
 ---
 
+* Talk about coordinates system (pixel, texture, vertice)
+* About another one I forgot
+* about the code in the HTML file actuall (correct elsewhere too)
+* shade in the header too
+
+
 ## What again is a shader?
 
 A shader is program that will be executed on your graphic card. It working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, depending on the kind of shader, it'll be executed at a specific moment in the graphic pipeline as you've read about in the previous log. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
