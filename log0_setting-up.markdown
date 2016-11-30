@@ -66,23 +66,9 @@ If you know a bit HTML, nothing will be of a surprise here. If you don't ... you
 </html>
 ~~~
 
-Right now you're not doing much, but you're doing it. We mentionned that you're importing a library; it is home-made, tailored to your needs, and meant to be use as local shortcuts in order for you to focus on specific parts of the code until you can have it all.
+Right now you're not doing much, but you're doing it. The library you have imported was made to allow you to quickly draw a triangle, and only that. The first aim of the workshop will be to get rid of the library steps by steps. First we'll get a description of those steps, then we'll code them one by one, granting us more expressiveness along the way.
 
-
-
-
-While our first step will be to use it to draw a triangle, our first aim will be to get rid of it.
-
-So, how do we use it? First, you need to create the `main()` function mentioned earlier. Then you will call the highest level function of the library : `func_doAll()` which ... does it all. The code below does just that. You will need to write it not in your HTML frame but in the JavaScript frame. Unless mentioned otherwise, it'll be always the case from now on.
-
-~~~ JavaScript
-var main=function() {
-  func_doAll(); 
-};
-~~~
-
-Simple right ? If everything went right, you should see a little triangle. And a confirmation that WebGL is working on your web browser. Give your self a tap on the back, a bit more reading, and we're settled for the real stuff.
-
+So, right now, let's just call the top level function defined in our library: `func_doAll()` which ... does it all. The code below does just that. Just write that in your main function, and you should see a little triangle appear in the output frame. As an added bonus, this is a confirmation that WebGL is working on your web browser. Give your self a tap on the back, a bit more reading, and we're settled for the real stuff.
 
 ## d) CPU / GPU
 CPU stands for Central Processing Unit, the default stuff that thinks when you give an order, a task, execute some code... GPU stands for Graphical Processing Unit, the twin of the CPU, mostly used for rendering graphics (but not only. Curious he?). Each processing units behave in a different way, our job here will be to learn the specificities of the GPU.
