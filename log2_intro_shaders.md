@@ -233,7 +233,3 @@ The fragment shader can modify the colors of the current pixel. Let's display a 
 </script>
 
 ~~~
-
-
-## d) Not so related: WebGL Init
-* Deal with the last piece of the library, and ditch the import in the header! Yay, you're free!
