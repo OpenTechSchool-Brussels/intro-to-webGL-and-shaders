@@ -22,7 +22,7 @@ For legacy reason better left unexplained, instead of using direclty the current
 
 Choosing which texture to use is a good thing. But how to map that texture on a mesh that can be litterally anything ( a triangle, a sphere, a dolphin ...) ? With a tool you already know : the VBO. Exactly like we added a color VBO, we will define a new Texture Coordinate VBO. For each vertex we will define a corresponding position in the texture :
 
-<img src="./assets/webGLTextureMappingDiagram.png" alt="Textures on the GPU">
+<img src="./assets/webGLTextureMappingDiagram.png" alt="Textures on the GPU" width="300">
 
 
 
