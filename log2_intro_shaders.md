@@ -7,11 +7,52 @@ num: 2
 
 ## What again is a shader?
 
-## Your first shader
+A shader is program that will be executed on your graphic card. It working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, depending on the kind of shader, it'll be executed at a specific moment in the graphic pipeline as you've read about in the previous log. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
 
-* Touching the HTML and putting your shader coded there
-* func_2bis to test them
+In order for things to flow through the pipelines, you must provide both shaders. This is was done implicitly in the second function `func_2_createShaders()`. Now in order to regain some more control, we're going to get rid bits by bits of this function and write our own shaders.
+
+
+## The vertex shader
+Let's do things in order and begin with the vertex shader. You have many ways and places to write the shader, the easiest we found was to put it back in the HTML, between some script tags. We will add a specific id (*vshader* in our case) in order to refer easily to it, and specify its type. The code below should be put between the body tag in your HTML code (not the JavaScript one).
+
+~~~ html
+<script id="vshader" type="x-shader/x-vertex">
+
+// Your shader code will be here
+
+</script>
+~~~
+
+
+Now if you continue using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll use `func_2bis_createShadersWithVertexShaderFromHTML()`. I'd advise you to copy past that so you don't make spelling mistakes... The point of it is that you know have control over the shader. Let's write a basic one to have back your triangle on screen.
+
+Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now. The main difference is that whereas JavaScript defines all variables with *var*, GLSL makes you specify in its definition the type of the variable (scalar, vectors, arrays...).
+
+
+~~~ html
+<script id="vshader" type="x-shader/x-vertex">
+attribute vec3 position; 
+
+void main(void) 
+{ 
+    gl_Position=vec4(position,1.0);
+}
+</script>
+~~~
+
+
 * Little modifications to play with
+
+
+
+
+
+## The fragment shader
+ var func_2ter_createBothShadersFromHTML = function() {
+
+
+
+
 
 ## Compiling your shaders
 
@@ -23,6 +64,12 @@ num: 2
 
 ## On a completely different note...
 * initialisation of the setup
+
+
+
+
+
+
 
 
 
