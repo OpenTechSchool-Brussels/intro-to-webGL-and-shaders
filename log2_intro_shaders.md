@@ -28,6 +28,10 @@ Now if you continue using `func_2_createShaders()`, you won't be referring to th
 
 Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now. The main difference is that whereas JavaScript defines all variables with *var*, GLSL makes you specify in its definition the type of the variable (scalar, vectors, arrays...).
 
+A side note. While graphics on computer isn't new, shaders still are somehow. This means that there is not a very stable ecosystem and a few version of GLSL are in the wild. While they don't differ too much, you should always be aware of what version you're using and if it fits the machine you're testing on.
+
+
+
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -42,7 +46,6 @@ void main(void)
 
 
 * Little modifications to play with
-
 
 
 
