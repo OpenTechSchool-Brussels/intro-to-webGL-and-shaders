@@ -64,7 +64,7 @@ void main(void)
 * Little modifications to play with
 
 
-The main purpose of the vertex shader is to modify the position of the vertices. So if you add constant to the position input, you should see the triangle move to the top-right of the screen. 
+The main purpose of the vertex shader is to modify the position of the vertices. So if you add constant to the position input, you should see the triangle move to the top-right of the screen. SIMPLE TRANSLATION AND BEGINING ROT ?
 
 ~~~ html
 <script id="firstVshader" type="x-shader/x-vertex">
@@ -202,9 +202,5 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 Variables in shaders are accessed with indirect index numbers called "location". To enable an attribute, we first get its location and then call enableVertexAttribArray on it. 
 
 The application now use your shader program instead of the library one. So let's play with it !
-
-
-
-## Modification on your shader RANDOM (or else)
 
 
