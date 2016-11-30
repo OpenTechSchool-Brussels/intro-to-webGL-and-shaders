@@ -36,7 +36,7 @@ So, your geometry is based on triangles. On what is based your triangles? Well, 
 
 ## Pipeline Overview
 
-So, now we have our triangle. How do we go from a barebone 3D mesh to a fancy textured post-processed scene? What happens next happens on the GPU itself. The set of vertices (and possibility other associated data, such as colors, normals...) we defined as our mesh is then saved directly on the GPU, ready to be processed through series of steps we call the **graphic pipeline**. Every frame you see on screen is rendered through this pipeline.
+How do we go from a barebone 3D mesh to a fancy textured post-processed scene? What happens next happens on the GPU itself. The set of vertices (and possibility other associated data, such as colors, normals...) we defined as our mesh is then saved directly on the GPU, ready to be processed through series of steps we call the **graphic pipeline**. Every frame you see on screen is rendered through this pipeline.
 
 <img class="ctr" src="./assets/log1_graphicPipeline.jpg" alt="Rendering Pipeline">
 
