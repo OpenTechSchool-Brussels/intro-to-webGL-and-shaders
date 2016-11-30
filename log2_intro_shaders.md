@@ -5,6 +5,9 @@ num: 2
 
 ---
 
+* write about coordinates (position and colors)
+* check for spelling mistakes
+
 ## What again is a shader?
 
 A shader is program that will be executed on your graphic card. It working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, depending on the kind of shader, it'll be executed at a specific moment in the graphic pipeline as you've read about in the previous log. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
@@ -18,36 +21,18 @@ Let's do things in order and begin with the vertex shader. You have many ways an
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
 
-// Your shader code will be here
+// Your vertex shader code will be here
 
 </script>
 ~~~
 
-
 Now if you keep on using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll need to replace this function with `func_2bis_createShadersWithVertexShaderFromHTML()` in your JavaScript code. Now have control over the shader. Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now.
 
+On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote (when you were not too lazy) `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parametre...). 
 
-The main difference is that whereas JavaScript defines all variables with *var*, GLSL makes you specify in its definition the type of the variable (scalar, vectors, arrays...).
+You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Their proprieties are accessed as expected (`.x`, `.y`, `.z`, `.w` for geometric vectors, `.r`, `.g`, `.b`, `.a` for color vectors). Type qualifier wise, your variable can be either an input (`attribute`), a parametre (`uniform`) or meant to be shared from vertex to fragment shader (`varying`).
 
-
-TYPE AND TYPE QUALIFER
-Native types are limited to
-
-* float : 32 floating point variables
-* vec2,vec3,vec4 : vectors of floating point. The component of a vector can be acessed with the suffixes
- * .x, .y, .z, .w for geometric variables
- * .r, .g, .b, .a for color variables
-
-
-
-The input of the vertex shader is called "attribute". The value of the attribute is attached to the vertex currently processed. It can be a position, a color, or anything else, as we will see.
-
-
-
-This shader get the vertex position as input attribute. The output of the vertex shader is the variable gl_Position. It represents the position of the current vertex after beeing transformed by the shader. Here the output is simply the position vector completed by a 4th component. 
-
-
------
+In our vertex shader case, the shader needs to get the vertex position as input attribute. The output of the vertex shader will the variable gl_Position that represents the position of the current vertex after beeing transformed by the shader. Here the output is simply the position vector completed by a 4th component.
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -60,11 +45,8 @@ void main(void)
 </script>
 ~~~
 
+This is nice, but here you're just passing along the information you just receveived. Let's define and operate a translation in order to move a bit the triange.
 
-* Little modifications to play with
-
-
-The main purpose of the vertex shader is to modify the position of the vertices. So if you add constant to the position input, you should see the triangle move to the top-right of the screen. SIMPLE TRANSLATION AND BEGINING ROT ?
 
 ~~~ html
 <script id="firstVshader" type="x-shader/x-vertex">
@@ -73,55 +55,43 @@ The main purpose of the vertex shader is to modify the position of the vertices.
     void main(void) 
     { 
         // modification of the position
-        vec3 modifiedPosition;
-        modifiedPosition.x = position.x+0.3;
-        modifiedPosition.y = position.y+0.2;
-        modifiedPosition.z = position.z;
+        vec3 moveBy;
+        moveBy.x = 0.3;
+        moveBy.y = 0.2;
+        moveBy.z = 0.0;
 
-        gl_Position = vec4(modifiedPosition,1.0);
+        gl_Position = vec4(position + moveBy,1.0);
     }
 </script>
-
 ~~~
 
-
-
-
 ## The fragment shader
- var func_2ter_createBothShadersFromHTML = function() {
+
+Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `func_2ter_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. We'll just maximise all its proprieties (red, blue, green, alpha / tranparency) to keep our triangle white.
 
 ~~~
 <script id="fshader" type="x-shader/x-fragment">
 
 void main(void) {
-    gl_FragColor = vec4(1.0);
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }
 </script>
 ~~~
 
-Like the vertex shader, the fragment shader has a special variable, gl_FragColor, used as output. gl_FragColor is a vec4 variable representing R,G,B,A color of the current pixel. 
+Ta-dah. 
 
-In this case, the output will be a white pixel (vec4(1.0) is a shortcut notation for vec4(1.0,1.0,1.0,1.0)). 
+So, the fragment shader defines the colors of the current pixel. Any idea how to display a light blue pixel? you just need to change the value of the vector you're feeding `gl_FragColor`. Fiddle a bit with it, and if you're too lazy, you can just try with `vec4(0.3, 0.6, 0.9, 1.0)`.
 
-As a reminder, this code is executed for every pixels. Be careful when you write complex function in the fragment shader. The rendering performance quickly decrease when heavy operation are calculated thousands times per frame. 
-
-
-
-
-The fragment shader can modify the colors of the current pixel. Let's display a light blue pixels : 
+All is good and well, but life should not be so dull. Want something more? Well, you'll see many ways to have more varying colors, but let's use a little hack. You've alread met `gl_FragColor` and `gl_Position`. These are built in variables, meant to be used as output. You have many other built in variables (specific to each shaders). One of them is `gl_FragCoord`, which describe the position of the fragment on screen. Try to think of a way to use that vector in order to have different colors output. Below is a proposed exploration.
 
 ~~~ html
-<script id="firstFshader" type="x-shader/x-fragment">
-    
+<script id="firstFshader" type="x-shader/x-fragment">    
     void main(void) {
-        // output blue color
-        gl_FragColor = vec4(0.3,0.6,0.9,1.0);
+        gl_FragColor = vec4(gl_FragCoord.x / 1000, 0.0 , 1 - gl_FragCoord.y / 1000, 1.0);
     }
 </script>
 
-~~~
-
-
+Noice.
 
 
 ## Compiling your shaders
@@ -200,7 +170,3 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 ~~~
 
 Variables in shaders are accessed with indirect index numbers called "location". To enable an attribute, we first get its location and then call enableVertexAttribArray on it. 
-
-The application now use your shader program instead of the library one. So let's play with it !
-
-
