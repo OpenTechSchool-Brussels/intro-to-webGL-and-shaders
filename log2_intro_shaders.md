@@ -90,6 +90,7 @@ All is good and well, but life should not be so dull. Want something more? Well,
         gl_FragColor = vec4(gl_FragCoord.x / 1000, 0.0 , 1 - gl_FragCoord.y / 1000, 1.0);
     }
 </script>
+~~~
 
 Noice.
 
