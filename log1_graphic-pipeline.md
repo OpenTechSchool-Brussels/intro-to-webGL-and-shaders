@@ -6,7 +6,9 @@ num: 1
 ---
 
 ## Another level of complexity
-Ok, the *please do all* function was nice and all, but the higher level the function, the less control you have over it. Let's dig deeper. For that, we'll deviser our main function in 4. The name of which will become clear along the chapter.
+Ok, the *please do all* function was nice and all, but the higher level the function, the less control you have over it. Let's dig deeper. For that, we'll devide our main function in 4 parts. The first three will be done once and for all, some kind of initialisation. The last one will be a function regularly called, each time you need to render a frame on screen. Not exactly a loop, it's just that each time the screen needs a new frame, we need to be assured that this function will be called. This is `requestAnimationFrame();`'s job.
+
+Bellow is the structure of your updated main function. But as you see, you don't have the name of the functions. That's cause you don't know yet what they need to do! You'll get to learn that through this log, and get back your sweet sweet triangle.
 
 ~~~ JavaScript
 var main=function() { // Don't try to run this code!
@@ -16,9 +18,15 @@ var main=function() { // Don't try to run this code!
   func_2_****();   
   func_3_****();
 
-  // Drawing your stuff
-  func_4_****();
- 
+  // Setting up your drawing "loop"
+  var draw = function() { 
+    func_4_****();
+    requestAnimationFrame(draw);
+  }
+  
+  // Launching the drawing "loop"
+  draw();
+  
 };
 ~~~
 
@@ -63,14 +71,20 @@ For those that want to see all in one:
 
 ~~~ JavaScript
 var main=function() {
-    
+
   // You set up everything
   func_1_initialisation("your_canvas");
   func_2_createShaders();    
   func_3_createTriangle();
 
-  // Drawing your stuff
-  func_4_draw();
+  // Setting up your drawing "loop"
+  var draw = function() { 
+    func_4_draw();
+    requestAnimationFrame(draw);
+  }
+  
+  // Launching the drawing "loop"
+  draw();
   
 };
 ~~~
