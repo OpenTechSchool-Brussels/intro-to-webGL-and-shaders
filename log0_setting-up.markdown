@@ -37,7 +37,7 @@ A few helping points to get you started (each are linked with a red marker of th
 
 Enough talk, let's rock. First, we'll create our web page in HTML and make it access our JavaScript file. That'll be more or less all that our HTML will be doing, everything else will be done in JavaScript.
 
-If you know a bit HTML, nothing will be of a surprise here. If you don't ... you might want to check it out elsewhere later because it's out of scope of this workshop :p In short, we create a HTML document, in the header we load two scripts (a library, and your code on the JavaScript frame), then we just style a bit the body, create a canvas where we'll be drawing and call a function called `main()` when the body will have finished loading.
+If you know a bit HTML, nothing will be of a surprise here. If you don't ... you might want to check it out elsewhere later because it's out of scope of this workshop :p In short, we create a HTML document. In the header we first import a library and create a place with the JavasScript code you'll be typing yourself, for now only a function called `main`. Then we just style a bit the body, create a canvas where we'll be drawing and ask to call the previously defined `main()` function when the body will have finished loading.
 
 
 ~~~ HTML
@@ -45,10 +45,17 @@ If you know a bit HTML, nothing will be of a surprise here. If you don't ... you
 <html>
 
   <head>  
+    <!-- The imported library -->
     <script type="text/javascript" src=
     "https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/lib.js">
     </script>
-    <script type="text/javascript" src="script.js"></script>
+    
+    <!-- Where your code will be -->
+    <script type="text/javascript">
+    var main=function() { // Defines the function you'll call when body finish loading
+
+    };
+    </script>
   </head>
 
 
@@ -59,7 +66,12 @@ If you know a bit HTML, nothing will be of a surprise here. If you don't ... you
 </html>
 ~~~
 
-So, we are importing two JavaScript code. The later is the one you'll be coding. The first is a home made, overkill, super specific, library. While our first step will be to use it to draw a triangle, our first aim will be to get rid of it.
+Right now you're not doing much, but you're doing it. We mentionned that you're importing a library; it is home-made, tailored to your needs, and meant to be use as local shortcuts in order for you to focus on specific parts of the code until you can have it all.
+
+
+
+
+While our first step will be to use it to draw a triangle, our first aim will be to get rid of it.
 
 So, how do we use it? First, you need to create the `main()` function mentioned earlier. Then you will call the highest level function of the library : `func_doAll()` which ... does it all. The code below does just that. You will need to write it not in your HTML frame but in the JavaScript frame. Unless mentioned otherwise, it'll be always the case from now on.
 
@@ -76,7 +88,7 @@ Simple right ? If everything went right, you should see a little triangle. And a
 CPU stands for Central Processing Unit, the default stuff that thinks when you give an order, a task, execute some code... GPU stands for Graphical Processing Unit, the twin of the CPU, mostly used for rendering graphics (but not only. Curious he?). Each processing units behave in a different way, our job here will be to learn the specificities of the GPU.
 
 
-## e) Library
+## e) On the usage of libraries
 You never code alone. You stand on the shoulders of giant, and reuse their code, would you know it or not. Sometimes, it's more obvious than others, like when you use a library. You might want to do so for rendering graphics, and you'd be pretty right. Here, we're not teaching you a better way, we're showing you the raw stuff, both for your culture, understanding, and for when you'll need to push the libraries to their boundaries. Understand the gears so you can master the tools.
 
 ## f) the Web part of it
