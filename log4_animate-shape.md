@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Animate your first shape"
+title:  "Animate your shape"
 num: 4
 
 ---
