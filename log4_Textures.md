@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Textures"
-num: 
+num: 10
 
 ---
 
