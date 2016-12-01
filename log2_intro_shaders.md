@@ -10,7 +10,7 @@ num: 2
 
 ## What again is a shader?
 
-A shader is program that will be executed on your graphic card. It working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, depending on the kind of shader, it'll be executed at a specific moment in the graphic pipeline as you've read about in the previous log. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
+A shader is program that will be executed on your graphic card. Working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
 
 In order for things to flow through the pipelines, you must provide both shaders. This is was done implicitly in the second function `func_2_createShaders()`. Now in order to regain some more control, we're going to get rid bits by bits of this function and write our own shaders.
 
@@ -28,9 +28,11 @@ Let's do things in order and begin with the vertex shader. You have many ways an
 
 Now if you keep on using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll need to replace this function with `func_2bis_createShadersWithVertexShaderFromHTML()` in your JavaScript code. Now have control over the shader. Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now.
 
-On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote (when you were not too lazy) `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parameter...). 
+On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parameter...). 
 
-You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Their proprieties are accessed as expected (`.x`, `.y`, `.z`, `.w` for geometric vectors, `.r`, `.g`, `.b`, `.a` for color vectors). Type qualifier wise, your variable can be either an input (`attribute`), a parameter (`uniform`) or meant to be shared from vertex to fragment shader (`varying`).
+You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). 
+
+The input of the vertex shader is called **attribute**. The value of the attribute is attached to the vertex currently processed. It can be a position, a color, or anything else, as we will see.
 
 In our vertex shader case, the shader needs to get the vertex position as input attribute. The output of the vertex shader will the variable gl_Position that represents the position of the current vertex after beeing transformed by the shader. Here the output is simply the position vector completed by a 4th component.
 
