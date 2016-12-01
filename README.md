@@ -8,3 +8,4 @@ Always wanted to know more about the GPU pipe line, shader & webGL but too afrai
 * log about 3D mesh
 * log about lighting
 * Speak more about translation, rotation, projection, matrices and stuff
+* advanced shaders
