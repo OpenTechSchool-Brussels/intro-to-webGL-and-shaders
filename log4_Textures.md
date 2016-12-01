@@ -10,13 +10,13 @@ num: 4
 
 Ok it's time to drop our solid color quad and replace it by something potentially more exiting : textures. 
 
-Textures are basically a chunk of GPU memory usually containing image data. As we learned earlier, data transfer between CPU memory and GPU memory is really expansive performance-wise. That's why, as the VBO, textures are typically uploaded once to the GPU and read directly from the fragment shader every frame. Textures are often the resources using most of the space in the GPU memory, so high resolution images must be used with parsimony.
+Textures are basically a chunk of GPU memory usually containing image data. As we learned earlier, data transfer between CPU memory and GPU memory is really expansive performance-wise. That's why, like the VBO, textures are typically uploaded once to the GPU and read directly from the fragment shader every frame. Textures are often the resources using most of the space in the GPU memory, so high resolution images must be used with parsimony.
 
 Here is a diagram showing how texture memory is accessed from the shaders :
 
 <img src="./assets/webGLTextureDiagram.jpg" alt="Textures on the GPU">
 
-For legacy reason better left unexplained, instead of using direclty the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So using a texture in a shader is done it 2 steps : 
+For legacy reason better left unexplained, instead of using direclty the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
 * Associate a texture to a Texture Unit
 * Tell the shader which Texture Unit it will use
 
@@ -77,7 +77,7 @@ Here is the fragment shader :
 
 ~~~
 
-The fragment shader access the texture via a *sampler2D* which is the index representing the texture unit we want to use. It's a uniform, so it can be set in our javascript code. The function texture2D(...) is where the magic happens : you get the color of the texture corresponding to your sampler2D, at the coordinate you received from the varying. 
+The fragment shader access the texture via a *sampler2D* which is the index representing the texture unit we want to use. It's a uniform, so it can be set later in our javascript code. The function texture2D(...) is where the magic happens : you get the color of the texture corresponding to your sampler2D, at the coordinate you received from the varying. 
 
 Now let's go back to our javascript code. The first thing to do when you defined a new attribute ? Enable it ! Add these lines just after the activation of the two other attribute, in the main function. 
 
@@ -88,7 +88,7 @@ GL.enableVertexAttribArray(normalAttributeLocation); // -> enable the new textur
 
 ~~~
 
-Second thing to do is actually to load a texture on the GPU. Let's write a generic function that receive an image url, open it, and create a texture on the GPU. You can place this code under the draw function :  
+Second thing to do is actually to load a texture on the GPU. Let's write a generic function that receives an image url, opens it, and creates a texture on the GPU. You can place this code under the draw function :  
 
 ~~~ JavaScript
 function loadTexture(imageURL)
@@ -129,16 +129,18 @@ Like every other buffer creation (you should now get used to!)
 * we bind the new empty object
 * we upload the data to it with the GL.texImage2D function
 
-One additional thing is the configuration of the texture : as the pixel diplayed on your screen won't match exactly the pixels of the texture, it's mandatory to define what interpolation to use between pixels. The mode GL.LINEAR will return the weighted average of the 4 pixels surrounding the given coordinates. That's perfect for us! This parameter must be set when the displayed image is bigger than the original image (TEXTURE_MAG_FILTER), and smaller than the original image (TEXTURE_MIN_FILTER).
+One additional thing is the configuration of the texture : as the pixel diplayed on your screen won't match exactly the pixels of the texture, it's mandatory to define what interpolation to use between pixels. The mode GL.LINEAR will return the weighted average of the 4 pixels surrounding the given coordinates. That's perfect for us! This parameter must be set when the displayed image is bigger than the original image (TEXTURE_MAG_FILTER), and when the displayed image is smaller than the original image (TEXTURE_MIN_FILTER).
 
 Don't forget to actually call that new function from your main function : 
 
 ~~~ JavaScript
+
 // load the texture on the GPU
 window.textureID = loadTexture("https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/texture.jpg");
+
 ~~~
 
-Always in the main function code, we can now send the texture coordinates in a brand new VBO : 
+Always in the main function code, we can now send the texture coordinates to a brand new VBO : 
 
 ~~~ JavaScript
 // define the texture coordinates
@@ -192,5 +194,5 @@ GL.uniform1i(textureSamplerLocation, 0);
 ~~~
 
 
-At this point, finally you should see a texture appearing on your quad
+At this point, finally you should see a texture appearing on your quad.
 
