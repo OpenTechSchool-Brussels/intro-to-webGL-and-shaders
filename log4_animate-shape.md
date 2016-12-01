@@ -35,7 +35,7 @@ GL.uniform1f(redColorUniformLocation,redColorLevel);
 ~~~
 
 As usual, we first get the location of the variable in the shader with the function getUniformLocation. 
-We update it then with the function uniform1f. 
+We update it then with the function *uniform1f*. 
 
 You should obtain a beautiful pink square. 
 This color change can be automated. Let's use the current time to change the color periodically. 

@@ -28,9 +28,9 @@ Let's do things in order and begin with the vertex shader. You have many ways an
 
 Now if you keep on using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll need to replace this function with `func_2bis_createShadersWithVertexShaderFromHTML()` in your JavaScript code. Now have control over the shader. Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now.
 
-On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote (when you were not too lazy) `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parametre...). 
+On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote (when you were not too lazy) `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parameter...). 
 
-You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Their proprieties are accessed as expected (`.x`, `.y`, `.z`, `.w` for geometric vectors, `.r`, `.g`, `.b`, `.a` for color vectors). Type qualifier wise, your variable can be either an input (`attribute`), a parametre (`uniform`) or meant to be shared from vertex to fragment shader (`varying`).
+You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Their proprieties are accessed as expected (`.x`, `.y`, `.z`, `.w` for geometric vectors, `.r`, `.g`, `.b`, `.a` for color vectors). Type qualifier wise, your variable can be either an input (`attribute`), a parameter (`uniform`) or meant to be shared from vertex to fragment shader (`varying`).
 
 In our vertex shader case, the shader needs to get the vertex position as input attribute. The output of the vertex shader will the variable gl_Position that represents the position of the current vertex after beeing transformed by the shader. Here the output is simply the position vector completed by a 4th component.
 
@@ -45,7 +45,7 @@ void main(void)
 </script>
 ~~~
 
-This is nice, but here you're just passing along the information you just receveived. Let's define and operate a translation in order to move a bit the triange.
+This is nice, but here you're just passing along the information you just received. Let's define and operate a translation in order to move a bit the triange.
 
 
 ~~~ html
@@ -67,7 +67,7 @@ This is nice, but here you're just passing along the information you just receve
 
 ## The fragment shader
 
-Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `func_2ter_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. We'll just maximise all its proprieties (red, blue, green, alpha / tranparency) to keep our triangle white.
+Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `func_2ter_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. We'll just maximize all its proprieties (red, blue, green, alpha / transparency) to keep our triangle white.
 
 ~~~
 <script id="fshader" type="x-shader/x-fragment">
@@ -129,7 +129,7 @@ function compileShader(source, type, typeString)
 
 This function returns an OpenGL id to a shader object if the compilation succeeds. Otherwise an error message will be printed in the console. 
 
-Now we can get the text of the shaders written previsousely, with the function getElementById() and send them our new compileShader function. Replace the call to function func_2_createShaders() by this :
+Now we can get the text of the shaders written previously, with the function getElementById() and send them our new compileShader function. Replace the call to function func_2_createShaders() by this :
 
 ~~~ JavaScript
 

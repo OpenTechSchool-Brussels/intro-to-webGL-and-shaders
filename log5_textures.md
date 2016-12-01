@@ -8,7 +8,7 @@ num: 5
 
 ## a) How texture works
 
-Ok it's time to drop our solid color quad and replace it by something potentially more exiting : textures. 
+Ok, it's time to drop our solid color quad and replace it by something potentially more exiting : textures. 
 
 Textures are basically a chunk of GPU memory usually containing image data. As we learned earlier, data transfer between CPU memory and GPU memory is really expansive performance-wise. That's why, like the VBO, textures are typically uploaded once to the GPU and read directly from the fragment shader every frame. Textures are often the resources using most of the space in the GPU memory, so high resolution images must be used with parsimony.
 
@@ -16,7 +16,7 @@ Here is a diagram showing how texture memory is accessed from the shaders :
 
 <img src="./assets/webGLTextureDiagram.jpg" alt="Textures on the GPU">
 
-For legacy reason better left unexplained, instead of using direclty the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
+For legacy reason better left unexplained, instead of using directly the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
 
 * Associate a texture to a Texture Unit
 * Tell the shader which Texture Unit it will use
@@ -130,7 +130,7 @@ Like every other buffer creation (you should now get used to!)
 * we bind the new empty object
 * we upload the data to it with the GL.texImage2D function
 
-One additional thing is the configuration of the texture : as the pixel diplayed on your screen won't match exactly the pixels of the texture, it's mandatory to define what interpolation to use between pixels. The mode GL.LINEAR will return the weighted average of the 4 pixels surrounding the given coordinates. That's perfect for us! This parameter must be set when the displayed image is bigger than the original image (TEXTURE_MAG_FILTER), and when the displayed image is smaller than the original image (TEXTURE_MIN_FILTER).
+One additional thing is the configuration of the texture : as the pixel displayed on your screen won't match exactly the pixels of the texture, it's mandatory to define what interpolation to use between pixels. The mode GL.LINEAR will return the weighted average of the 4 pixels surrounding the given coordinates. That's perfect for us! This parameter must be set when the displayed image is bigger than the original image (TEXTURE_MAG_FILTER), and when the displayed image is smaller than the original image (TEXTURE_MIN_FILTER).
 
 Don't forget to actually call that new function from your main function : 
 
@@ -195,5 +195,5 @@ GL.uniform1i(textureSamplerLocation, 0);
 ~~~
 
 
-At this point, finally you should see a texture appearing on your quad.
+At this point, finally, you should see a texture appearing on your quad. YES!
 
