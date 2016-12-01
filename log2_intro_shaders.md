@@ -171,3 +171,5 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 ~~~
 
 Variables in shaders are accessed with indirect index numbers called "location". To enable an attribute, we first get its location and then call enableVertexAttribArray on it. 
+
+## Time and Randomness
