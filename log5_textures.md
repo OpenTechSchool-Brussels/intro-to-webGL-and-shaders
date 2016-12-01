@@ -17,6 +17,7 @@ Here is a diagram showing how texture memory is accessed from the shaders :
 <img src="./assets/webGLTextureDiagram.jpg" alt="Textures on the GPU">
 
 For legacy reason better left unexplained, instead of using direclty the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
+
 * Associate a texture to a Texture Unit
 * Tell the shader which Texture Unit it will use
 
