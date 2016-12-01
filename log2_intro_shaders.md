@@ -51,7 +51,7 @@ This is nice, but here you're just passing along the information you just receiv
 
 
 ~~~ html
-<script id="firstVshader" type="x-shader/x-vertex">
+<script id="vshader" type="x-shader/x-vertex">
     attribute vec3 position; 
 
     void main(void) 
@@ -75,6 +75,7 @@ Well, it's time now to apply all we learned to the fragment shader. Different ai
 <script id="fshader" type="x-shader/x-fragment">
 
 void main(void) {
+    // output with format (Red, Green, Blue, Alpha)
     gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }
 </script>
@@ -87,7 +88,7 @@ So, the fragment shader defines the colors of the current pixel. Any idea how to
 All is good and well, but life should not be so dull. Want something more? Well, you'll see many ways to have more varying colors, but let's use a little hack. You've alread met `gl_FragColor` and `gl_Position`. These are built in variables, meant to be used as output. You have many other built in variables (specific to each shaders). One of them is `gl_FragCoord`, which describe the position of the fragment on screen. Try to think of a way to use that vector in order to have different colors output. Below is a proposed exploration.
 
 ~~~ html
-<script id="firstFshader" type="x-shader/x-fragment">    
+<script id="fshader" type="x-shader/x-fragment">    
     void main(void) {
         gl_FragColor = vec4(gl_FragCoord.x / 1000, 0.0 , 1 - gl_FragCoord.y / 1000, 1.0);
     }
@@ -173,5 +174,6 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 ~~~
 
 Variables in shaders are accessed with indirect index numbers called "location". To enable an attribute, we first get its location and then call enableVertexAttribArray on it. 
+Aaaand we get our triangle back on the output view ! 
 
 ## Time and Randomness
