@@ -271,9 +271,9 @@
   var func_doAll = function(canvasId) {
     // You set up everything
     func_1_initialisation(canvasId);
-    func_2_createShader();  
+    func_2_createShaders();  
     func_3_createTriangle();
 
     // You play with and animate it
-    func_4_animate();
+    func_4_draw();
   }
