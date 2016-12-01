@@ -16,7 +16,7 @@ Now the question is : how to send vertex positions to the vertex shader ? Well, 
 
 During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
 
-<img src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="600">
+<img src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="800">
 
 Let see how to connect these different pieces together. Comment the function that we will replace with our own code:
 
