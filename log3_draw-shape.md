@@ -26,13 +26,13 @@ Let see how to connect these different pieces together. Comment the function tha
 
 The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. The vertex coordinates system go from -1 to 1 as shown in this figure : 
 
-<img src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="600">
+<img src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="400">
 
-Let's start by writing manually the position of one humble triangle :
+Let's start by writing manually the position of one humble triangle, always in the main() javascript function :
 
 ~~~ JavaScript
 
-// define vertices of our first triangle
+// define vertex positions of our first triangle
 var vertexPositionArray=[
     -0.5,-0.5,0, //bottom left
     0.5,-0.5,0, //bottom right 
@@ -43,9 +43,9 @@ var vertexPositionArray=[
 window.numberOfVertices = 3;
 ~~~
 
-As a reminder, vertex coordinates go from -1 to 1, the origin (0,0) being in the center. window.numberOfVertices is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
+Nothing special here, exept that "window.numberOfVertices" : this is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
 
-We now create a VBO on the GPU with the function createBuffer, and send our position array to it:
+We now create a VBO on the GPU with the function GL.createBuffer, and send our position array to it:
 
 ~~~ JavaScript
 
@@ -61,11 +61,15 @@ GL.bufferData(GL.ARRAY_BUFFER,
             GL.STATIC_DRAW);
 ~~~	
 
-The parameter GL.STATIC_DRAW is a hint to OpenGL to indicate that we won't change the data contained in the VBO. 
+Every object created on the GPU is accessed in 2 steps from our javascript code : 
+* We select an object we want to modify with the function GL.bindBuffer(...)
+* We modify the selected object
 
-The vertices of the triangle are now loaded in the VBO and used by the vertex shader every time the scene is rendered. 
+That's a mechanism used everywhere in OpenGL so get used to it!
 
-As a test, you can modify the data you send in the VBO. Add as many triangle you want. Here is a quad formed by 2 triangles :
+The parameter GL.STATIC_DRAW is a hint to OpenGL that indicates that we won't change the data contained in the VBO, it's a static mesh. 
+
+The vertices of the triangle are now loaded in the VBO and used by the vertex shader every time the scene is rendered. As a test, you can modify the data you send in the VBO. Add as many triangles you want. Here is a quad formed by 2 triangles :
 
 ~~~ JavaScript
 // define vertices of a quad
