@@ -37,19 +37,19 @@ While a human is able to do one complex task easily at one glance (locating peop
 
 Why using triangles? Because they are the simplest possible surface. 3 points define a surface (triangle) while two would only define a line (segment). Add one more and at best you have a quadrilateral, at worse you have some weird volumetric shape that is hard to interpret. So, if you want to use a surface to define an enclosed volume, triangles are the best building blocks. No wonder it's the lingua franca in graphic processing!
 
-So, your geometry is based on triangles. On what is based your triangles? Well, on *dots* in space. Those *dots* have a more formal name: **vertex** (plural: **vertices**). All geometry you'll encounter is based on a set of vertices, usually read as a set of triangles. You can go simple stuff (a square -two triangles-, a cube -twelve triangles-...) and more complex and eye-appealing forms. This drawing part is what we'll do in function 3: `func_3_createTriangle();`. It'll draw one triangle. Up to you to add more in the next logs to create a complexe mesh!
+So, your geometry is based on triangles. What are your triangles based on? Well, on *dots* in space. Those *dots* have a more formal name: **vertex** (plural: **vertices**). All geometry you'll encounter is based on a set of vertices, usually read as a set of triangles. You can go simple stuff (a square -two triangles-, a cube -twelve triangles-...) and more complex and eye-appealing forms. This drawing part is what we'll do in function 3: `func_3_createTriangle();`. It'll draw one triangle. Up to you to add more in the next logs to create a complexe mesh!
 
 <img class="ctr" src="./assets/Dolphin_triangle_mesh.png" alt="A 3D mesh">
 
 
 ## Pipeline Overview
 
-How do we go from a barebone 3D mesh to a fancy textured post-processed scene? What happens next happens on the GPU itself. The set of vertices (and possibility other associated data, such as colors, normals...) we defined as our mesh is then saved directly on the GPU, ready to be processed through series of steps we call the **graphic pipeline**. Every frame you see on screen is rendered through this pipeline.
+How do we go from a barebone 3D mesh to a fancy textured post-processed scene displayed on your screen ? The magic happens on the graphic card, transforming vertices into final pixel colors. This process is called the graphic pipeline. This pipeline contains a series of steps through which every frame will be processed. 
 
 <img class="ctr" src="./assets/log1_graphicPipeline.jpg" alt="Rendering Pipeline">
 
 1. First, the **Vertex Shader** will alter the vertices themselves (the positions in space) through translation, rotation, scaling and other shenanigans. This allows for instance to place your mesh at a specific position;
-2. Then the **shape assembly** will decide how to read this list of vertices. Usually (not always) they will be read as series of triangle surfaces as we wrote earlier. They could other wise been seen as dots or line for instance. We'll play with that in another log;
+2. Then the **shape assembly** will decide how to read this list of vertices. Usually (not always) they will be read as series of triangle surfaces as we wrote earlier. They could otherwise been seen as dots or line for instance. We'll play with that in another log;
 3. Then it's time for the **rasterization**: up until now, we had coordinates in 3D. But news flash, your screen is 2D and discrete: pixel based. The rasterization is this projection from the 3D space to your screen. It transforms shapes in set of **fragments**, temporary pixels that still have to pass several test to earn the right to be displayed;
 4. Another shader: the **Fragment Shader** will run for each fragment defined at the previous step, and will define the final color of the fragment, depending on the texture, fragment position or any other parameters you would feed it.
 5. Last, series of test are being done to discard fragments that wouldn't be seen in the end (hidden by others for instance) in parallel of blending whenever you happen to have fragments that will mix together (for instance with transparency). The survivors of these tests and processes are finally called pixels. We finally got them !
@@ -73,7 +73,7 @@ For those that want to see all in one:
 var main=function() {
 
   // You set up everything
-  func_1_initialisation("your_canvas");
+  func_1_initialisation("my_canvas");
   func_2_createShaders();    
   func_3_createTriangle();
 
