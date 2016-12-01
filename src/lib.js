@@ -266,8 +266,6 @@
     */
     GL.drawArrays(GL.TRIANGLES, 0, window.numberOfVertices);
 
-
-    window.requestAnimationFrame(func_4_draw);
   };
 
   var func_doAll = function() {
