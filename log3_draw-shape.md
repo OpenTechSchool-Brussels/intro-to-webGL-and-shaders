@@ -24,7 +24,11 @@ Let see how to connect these different pieces together. Comment the function tha
 //func_3_createTriangle();
 ~~~
 
-The first thing to do is to define the vertex positions (the data) we want to send to the vertex shader. Before loading crazy models containing thousands of vertices, let's start by writing manually the position of one humble triangle :
+The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. The vertex coordinates system go from -1 to 1 as shown in this figure : 
+
+<img src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="600">
+
+Let's start by writing manually the position of one humble triangle :
 
 ~~~ JavaScript
 
@@ -39,7 +43,7 @@ var vertexPositionArray=[
 window.numberOfVertices = 3;
 ~~~
 
-As a reminder, coordinates go from -1 to 1. window.numberOfVertices is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
+As a reminder, vertex coordinates go from -1 to 1, the origin (0,0) being in the center. window.numberOfVertices is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
 
 We now create a VBO on the GPU with the function createBuffer, and send our position array to it:
 
