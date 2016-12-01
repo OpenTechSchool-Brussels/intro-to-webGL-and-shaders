@@ -10,11 +10,21 @@ num: 5
 
 Ok it's time to drop our solid color quad and replace it by something potentially more exiting : textures. 
 
-A texture is are memory buffer on the GPU allocated to store an image.  
+Textures are basically a chunk of GPU memory usually containing image data. As we learned earlier, data transfer between CPU memory and GPU memory is really expansive performance-wise. That's why, like the VBO, textures are typically uploaded once to the GPU and read directly from the fragment shader every frame. Textures are often the resources using most of the space in the GPU memory, so high resolution images must be used with parsimony.
 
+Here is a diagram showing how texture memory is accessed from the shaders :
 
 <img src="./assets/webGLTextureDiagram.jpg" alt="Textures on the GPU">
 
+For legacy reason better left unexplained, instead of using direclty the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
+* Associate a texture to a Texture Unit
+* Tell the shader which Texture Unit it will use
+
+Choosing which texture to use is a good thing. But how to map that texture on a mesh that can be literally anything ( a triangle, a sphere, a dolphin ...) ? With a tool you already know : the VBO. Exactly like we added a color VBO, we will define a new Texture Coordinate VBO. For each vertex we will define a corresponding position in the texture :
+
+<img src="./assets/webGLTextureMappingDiagram.png" alt="Textures on the GPU" width="500">
+
+Here is the vertex shader reading that new Texture Coordinates as an input attribute :
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -42,6 +52,11 @@ A texture is are memory buffer on the GPU allocated to store an image.
 
 ~~~
 
+As you can see, the Texture Coordinate is passed as a varying to the fragment shader. And just like the color varying, it will be magically interpolated in the fragment shader. As a result, the fragment in the middle of the two vertices of the bottom in the previous diagram will receive a texture coordinate equal to (0.5,0). Which is exactly what we want !
+
+
+Here is the fragment shader : 
+
 ~~~ html
 <script id="textureFshader" type="x-shader/x-fragment">
     
@@ -62,18 +77,18 @@ A texture is are memory buffer on the GPU allocated to store an image.
 
 ~~~
 
-(enable the attribute we added in the vertex shader)
+The fragment shader access the texture via a *sampler2D* which is the index representing the texture unit we want to use. It's a uniform, so it can be set later in our javascript code. The function texture2D(...) is where the magic happens : you get the color of the texture corresponding to your sampler2D, at the coordinate you received from the varying. 
+
+Now let's go back to our javascript code. The first thing to do when you defined a new attribute ? Enable it ! Add these lines just after the activation of the two other attribute, in the main function. 
 
 ~~~ JavaScript
 
-// enable the attributes
-GL.enableVertexAttribArray(colorAttributeLocation);
-GL.enableVertexAttribArray(positionAttributeLocation);
-GL.enableVertexAttribArray(texCoordAttributeLocation); // -> enable the new texture coord attribute here
+var normalAttributeLocation = GL.getAttribLocation(shaderProgramID, "normal");
+GL.enableVertexAttribArray(normalAttributeLocation); // -> enable the new texture coord attribute here
 
 ~~~
 
-(load the texture in the GPU memory)
+Second thing to do is actually to load a texture on the GPU. Let's write a generic function that receives an image url, opens it, and creates a texture on the GPU. You can place this code under the draw function :  
 
 ~~~ JavaScript
 function loadTexture(imageURL)
@@ -84,6 +99,7 @@ function loadTexture(imageURL)
     // Asynchronously load an image
     var image = new Image();
 
+    // allows the image to be loaded from a cross site
     image.crossOrigin = "";
     image.src = imageURL;
     
@@ -106,12 +122,27 @@ function loadTexture(imageURL)
 }
 ~~~
 
-(create a new VBO with texture coordinates)
+As you can see the javascript image loading is done asynchronously. So we need to define a function listener that will be called when the loading is over. 
+
+Like every other buffer creation (you should now get used to!)
+* we create an empty texture object with GL.createTexture()
+* we bind the new empty object
+* we upload the data to it with the GL.texImage2D function
+
+One additional thing is the configuration of the texture : as the pixel diplayed on your screen won't match exactly the pixels of the texture, it's mandatory to define what interpolation to use between pixels. The mode GL.LINEAR will return the weighted average of the 4 pixels surrounding the given coordinates. That's perfect for us! This parameter must be set when the displayed image is bigger than the original image (TEXTURE_MAG_FILTER), and when the displayed image is smaller than the original image (TEXTURE_MIN_FILTER).
+
+Don't forget to actually call that new function from your main function : 
 
 ~~~ JavaScript
-// load the texture on the GPU
-window.textureID = loadTexture("texture.jpg");
 
+// load the texture on the GPU
+window.textureID = loadTexture("https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/texture.jpg");
+
+~~~
+
+Always in the main function code, we can now send the texture coordinates to a brand new VBO : 
+
+~~~ JavaScript
 // define the texture coordinates
 var textureCoordinateArray=[
     0,0, //bottom left
@@ -135,7 +166,9 @@ GL.bufferData(GL.ARRAY_BUFFER,
             GL.STATIC_DRAW);
 ~~~
 
-(in the draw loop : glue between the vbo texture coord, and the attribute texture coord in the shader)
+We define for each vertex, in the same order than the two other VBO's (position and color) the corresponding texture coordinate. As you can see texture coordinates use the coordinate system [0:1] with the origin centered on the a bottom left. 
+
+In the draw function, let's glue our new Texture Coordinate VBO with our input attribute we defined earlier in the vertex shader. You shouldn't be surprised, it works exactly like the two other VBOS's : 
 
 ~~~ JavaScript
 numberOfComponents = 2;
@@ -145,7 +178,7 @@ var positionAttibuteLocation = GL.getAttribLocation(shaderProgramID, "texureCoor
 GL.vertexAttribPointer(positionAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
 ~~~
 
-(in the draw loop : tell the GPU to link our texture to TEXTURE_0)
+Always in the draw loop, we tell openGL that our texture must be linked to the texture unit TEXTURE_0
 
 ~~~ JavaScript
 // assign our texture object to texture unit TEXTURE_0 
@@ -153,11 +186,13 @@ GL.activeTexture(GL.TEXTURE0);
 GL.bindTexture(GL.TEXTURE_2D, textureID);
 ~~~
 
+Finally set our sampler uniform to TEXTURE_0 :
+
+~~~ JavaScript
+var textureSamplerLocation = GL.getUniformLocation(shaderProgramID, "texture");
+GL.uniform1i(textureSamplerLocation, 0);
+~~~
 
 
-## d) Using a second textures as tool
-* generate a second texture
-* set a second texture uniform and set the right texture unit (not needed previously because by default texuteUnit = 0)
-* use the second texture as displacement map (?)
+At this point, finally you should see a texture appearing on your quad.
 
-ref: https://open.gl/textures
