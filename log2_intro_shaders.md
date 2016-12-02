@@ -138,7 +138,7 @@ GL.linkProgram(shaderProgramId);
 
 ~~~
 
-The last thing we need to do is to enable the input attribute : 
+Last but not least, we said in the vertex shader that we needed each vertex position as an input. While we'll see later in the code where we define that variable, we need already here to make it accessible. Variables in shaders are accessed with indirect index numbers called "location", so to make them accessible we just need to get its location and then enable the attribute.
 
 ~~~ JavaScript
 //get position attribute location in the shader
@@ -149,7 +149,6 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 
 ~~~
 
-Variables in shaders are accessed with indirect index numbers called "location". To enable an attribute, we first get its location and then call enableVertexAttribArray on it. 
-Aaaand we get our triangle back on the output view ! 
+Now the only thing left to do is to delete the line where we called the `func2_....` function, and ... nothing changed. Which is good news: got rid of one of the four functions!
 
 ## Time and Randomness
