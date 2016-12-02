@@ -34,7 +34,7 @@ You'll learn about different type and type qualifier along the way but here is a
 
 The input of the vertex shader is called **attribute**. The value of the attribute is attached to the vertex currently processed. It can be a position, a color, or anything else, as we will see.
 
-In our vertex shader case, the shader needs to get the vertex position as input attribute. The output of the vertex shader will the variable gl_Position that represents the position of the current vertex after beeing transformed by the shader. Here the output is simply the position vector completed by a 4th component.
+In our vertex shader case, the shader needs to get the vertex position as input attribute. The output of the vertex shader will the variable gl_Position that represents the position of the current vertex after being transformed by the shader. Here the output is simply the position vector completed by a 4th component.
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -47,7 +47,7 @@ void main(void)
 </script>
 ~~~
 
-This is nice, but here you're just passing along the information you just received. Let's define and operate a translation in order to move a bit the triange.
+This is nice, but here you're just passing along the information you just received. Let's define and operate a translation in order to move a bit the triangle.
 
 
 ~~~ html
@@ -85,7 +85,7 @@ Ta-dah.
 
 So, the fragment shader defines the colors of the current pixel. Any idea how to display a light blue pixel? you just need to change the value of the vector you're feeding `gl_FragColor`. Fiddle a bit with it, and if you're too lazy, you can just try with `vec4(0.3, 0.6, 0.9, 1.0)`.
 
-All is good and well, but life should not be so dull. Want something more? Well, you'll see many ways to have more varying colors, but let's use a little hack. You've alread met `gl_FragColor` and `gl_Position`. These are built in variables, meant to be used as output. You have many other built in variables (specific to each shaders). One of them is `gl_FragCoord`, which describe the position of the fragment on screen. Try to think of a way to use that vector in order to have different colors output. Below is a proposed exploration.
+All is good and well, but life should not be so dull. Want something more? Well, you'll see many ways to have more varying colors, but let's use a little hack. You've already met `gl_FragColor` and `gl_Position`. These are built in variables, meant to be used as output. You have many other built in variables (specific to each shaders). One of them is `gl_FragCoord`, which describe the position of the fragment on screen. Try to think of a way to use that vector in order to have different colors output. Below is a proposed exploration.
 
 ~~~ html
 <script id="fshader" type="x-shader/x-fragment">    
@@ -105,7 +105,7 @@ Noice.
 
 Shaders must be compiled and linked in a shader program, an executable binary code stored on the GPU memory. The GLSL compiler is built in the OpenGL library and can be called in webGL/javascript code. 
 
-We first write a generic function that we will use to compile our vertex shader and our fragment shader separetely. Add that function below the javascript main() function. 
+We first write a generic function that we will use to compile our vertex shader and our fragment shader separately. Add that function below the javascript main() function. 
 
 ~~~ JavaScript
 
