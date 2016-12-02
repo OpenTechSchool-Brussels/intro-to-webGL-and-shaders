@@ -150,5 +150,3 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 ~~~
 
 Now the only thing left to do is to delete the line where we called the `func2_....` function, and ... nothing changed. Which is good news: got rid of one of the four functions!
-
-## Time and Randomness
