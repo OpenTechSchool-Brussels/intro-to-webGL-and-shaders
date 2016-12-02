@@ -5,9 +5,6 @@ num: 2
 
 ---
 
-* write about coordinates (position and colors)
-* check for spelling mistakes
-
 ## What again is a shader?
 
 A shader is program that will be executed on your graphic card. Working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
@@ -67,9 +64,12 @@ This is nice, but here you're just passing along the information you just receiv
 </script>
 ~~~
 
+At first, you might think that `0.3` is a pretty small value for a translation. At a second glance, you might wonder ... `0.2` what? O.2 meters? 0.2 miles? 0.2 pixel? For each value to make sense, you need to understand how they relate to their grid: the coordinate systems. In our case, we map our screen in [-1, 1]. This means that if we don't play with depth (z=0), then (-1,-1) will be our bottom left corner  of the screen, and (1,1) the top right corner.
+
+
 ## The fragment shader
 
-Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `func_2ter_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. We'll just maximize all its proprieties (red, blue, green, alpha / transparency) to keep our triangle white.
+Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `func_2ter_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. It is a vector of 4 dimensions (red, blue, green, alpha / transparency) with values between 0 and 1. In order to get keep our white triangle, we'll maximise each value.
 
 ~~~
 <script id="fshader" type="x-shader/x-fragment">
