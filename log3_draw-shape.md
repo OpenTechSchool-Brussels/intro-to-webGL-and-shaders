@@ -132,23 +132,25 @@ draw();
 
 
 ## On a completly unrelated note: WebGL Init
-* Deal with the last piece of the library, and ditch the import in the header! Yay, you're free!
+Errr, what can we say, this part is a bore... But hey, be merry, it's the last function you need to delete before we can set your code free from our library!
+
+So, what does it implies to initialise our webGL context? First, we need to have acess to our canvas HTML tag and measure it. Then we try to get a WebGL context from it, and then set the clear color to black. Which code wise means:
 
 ~~~ JavaScript
-// Canvas
-window.CANVAS=document.getElementById(canvasId);
+
+// Getting the Canvas
+CANVAS = document.getElementById(canvasId);
 CANVAS.width=window.innerWidth;
 CANVAS.height=window.innerHeight;
 
-// WebGl Context
+// Initialising the WebGL Context
 try {
-	window.GL = CANVAS.getContext("webgl");
+	GL = CANVAS.getContext("webgl");
 } catch (e) {
-	alert("You are not webgl compatible :(") ;
+	alert("Your setup is not webgl compatible :(") ;
 	return false;
 }
     
 GL.clearColor(0.0, 0.0, 0.0, 0.0);
 
 ~~~
-
