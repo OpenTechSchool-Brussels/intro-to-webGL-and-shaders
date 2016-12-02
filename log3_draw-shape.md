@@ -12,7 +12,7 @@ num: 3
 
 ## a) Create your own shape
 
-Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early versions of OpenGL worked. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the Vertex Buffer Object (VBO) has been added in modern OpenGL versions. VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
+Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early versions of OpenGL worked. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the **Vertex Buffer Object** (VBO) has been added in modern OpenGL versions. VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
 
 During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
 
