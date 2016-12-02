@@ -95,10 +95,13 @@ All is good and well, but life should not be so dull. Want something more? Well,
 </script>
 ~~~
 
-Noice.
+Now, all is good and fun but ... we're still dealing with that annoying second function, and its name is getting way out of hand. Let's just get rid of it, okay? For that, we need to understand what it does. We already know a little bit. It takes both shaders we have coded and make the GPU use them in the graphic pipeline. Let's see how it does that.
 
 
 ## Compiling your shaders
+
+Now, all is good and fun but ... we're still dealing with that annoying second function, and its name is getting way out of hand. Let's just get rid of it, okay? For that, we need to understand what it does. We already know a little bit. It takes the shader code we're 
+
 
 * not using func_2bis anymore
 
