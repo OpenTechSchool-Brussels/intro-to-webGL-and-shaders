@@ -5,6 +5,7 @@ Always wanted to know more about the GPU pipe line, shader & webGL but too afrai
 
 
 ## Todo
+* Highlight du code, meme dans un paragraphe (genre fond noir, et possiblement coloration syntaxique)
 * log about 3D mesh
 * log about lighting
 * Speak more about translation, rotation, projection, matrices and stuff
