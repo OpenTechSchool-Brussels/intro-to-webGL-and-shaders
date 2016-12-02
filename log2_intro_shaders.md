@@ -106,63 +106,37 @@ Now, all is good and fun but ... we're still dealing with that annoying second f
 
 For shaders to be used by the GPU, we first need to access the text defined in the HTML, then we compile that code and then linked both in a shader program (an executable binary code stored on the GPU memory). Lucky us, we can do all that from JavaScript.
 
-Since the compilation part will be repeated for both shader, let's create a function for that batch of code. The comments linked with the code should make it self explanatory, but in any case let's not dwell for too long on this part.
+
+Since the compilation part will be repeated for both shader, let's create a function for that batch of code. It will get as input your shader code, its type, and a debug text to help you along the way. The comments linked with the code should make it self explanatory, but in any case let's not dwell for too long on this part.
+
+
+If your shader is legit, this functions will return a WebGL ID linked with a shader object. Now we need to get our shader code from the HTML tags in order to feed that function. A bit of DOM, a bit of magic, and here we are.
 
 ~~~ JavaScript
 
-function compileShader(source, type, typeString) 
-{
-    //creates an empty shader object
-    var shaderID = GL.createShader(type);
+var vShaderString = document.getElementById("vshader").text
+var vShaderId = compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
 
-    // sets the source code in shader
-    GL.shaderSource(shaderID, source);
-
-    // compile the shader object
-    GL.compileShader(shaderID);
-
-    // Check for error and output them if present
-    if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
-    {
-        console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
-        return false;
-    }
-    return shaderID;
-};
+var fShaderString = document.getElementById("fshader").text
+var fShaderId = compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
 
 ~~~
 
-This function returns an OpenGL id to a shader object if the compilation succeeds. Otherwise an error message will be printed in the console. 
-
-Now we can get the text of the shaders written previously, with the function getElementById() and send them our new compileShader function. Replace the call to function func_2_createShaders() by this :
-
-~~~ JavaScript
-
-var vshaderString = document.getElementById("vshader").text
-var shaderVertexID = compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
-
-var fshaderString = document.getElementById("fshader").text
-var shaderFragmentID = compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
-
-~~~
-
-We get two shader objects (represented by shaderVertexID and shaderFragmentID) that we must combine in a program object : 
+We now have two shader objects, one for the vertex shader (vShaderId) and one for the fragment shader (fShaderId). We must combine them together in a shader program so we can send it to the GPU.
 
 ~~~ JavaScript
 
 //creates an empty program object
-window.shaderProgramID=GL.createProgram();
+shaderProgramId = GL.createProgram();
 
 //attach shaders to the program
-GL.attachShader(shaderProgramID, shaderVertexID);
-GL.attachShader(shaderProgramID, shaderFragmentID);
+GL.attachShader(shaderProgramId, vShaderId);
+GL.attachShader(shaderProgramId, fShaderId);
 
 //link the program
-GL.linkProgram(shaderProgramID);
+GL.linkProgram(shaderProgramId);
 
 ~~~
-
-The GL.createProgram function creates an empty program object that we fill with our two shader objects. 
 
 The last thing we need to do is to enable the input attribute : 
 
