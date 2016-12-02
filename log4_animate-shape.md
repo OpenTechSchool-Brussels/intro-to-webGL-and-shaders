@@ -5,7 +5,9 @@ num: 4
 
 ---
 
-## c) Animating your shape
+*  Time and Randomness
+
+## Animating your shape
 
 Now it would be interesting to change the position and the colors from our javascript code. 
 Uniforms are variables of which value is constant for every vertex or fragment. 
@@ -189,7 +191,7 @@ And now you should obtain a beautiful multicolor quad. Why ? We only defined col
 That's a fundamental concept to understand. The fragment shader takes data produced by the vertex shader and interpolate them for each fragment.
 
 
-## e) Controling this mess
+## Controling this mess
 
 * Using the mouse position (x and y) as a control for other stuff
 
@@ -206,5 +208,5 @@ function showCoords(event) {
 </script>
 ~~~
 
-## d) Let's do a cube!
+## Let's do a cube!
 * triangles to cube. Simple. Nice. Good for your health
