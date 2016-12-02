@@ -10,21 +10,17 @@ num: 3
 * Talk about coordinates system (vertice, evocate texture, pixels)
 
 
+This is madness... You know how to handle your vertex, but you haven't send them yet... Let's take care of that!
+
 ## a) Create your own shape
 
-Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early versions of OpenGL worked. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the **Vertex Buffer Object** (VBO) has been added in modern OpenGL versions. VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
+Before sending the vertex to your shader, you need first to decide what they will be. Our job here is to define a set of vertex, amounting to the shape we want to describe. While we define this set in the CPU, we need it to reside in the GPU, for it to become the first step of the graphic pipeline. For that, we'll use a **Vertex Buffer Object** (VBO). A VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitly destroyed or modified by the application. 
 
-During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
+During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute. (Ohhh now we understand where the positions are coming from in the vertex shader).
 
 <img class="ctr" src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="800">
 
-Let see how to connect these different pieces together. Comment the function that we will replace with our own code:
-
-~~~ JavaScript
-//func_3_createTriangle();
-~~~
-
-The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. The vertex coordinates system go from -1 to 1 as shown in this figure : 
+Before anything else, delete `func_3_createTriangle();`, this time there won't be any in between functions! Now let's write our own code. First, we'll have to define our gemetry, represented by the set of vertice named **data** in the diagram above. For that, we'll define a set of vertex, only holding their position for now. If you remember from last log, such position should be in the [-1, 1] range (when you don't play with depth).
 
 <img class="ctr" src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="400">
 
