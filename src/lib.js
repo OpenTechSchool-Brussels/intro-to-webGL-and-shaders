@@ -1,6 +1,6 @@
  
   // 1) Initialisation
-  var func_1_initialisation = function(canvasId) {
+  var func_1_initGL = function(canvasId) {
 
     // Canvas
     window.CANVAS=document.getElementById(canvasId);
