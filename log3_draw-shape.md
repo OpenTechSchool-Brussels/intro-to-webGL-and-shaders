@@ -70,7 +70,7 @@ The vertices of the triangle are now loaded in the VBO and will be used by the v
 ## Ok, but why stop there?
 Hell, now let's give free rein to your imagination. I mean, you can draw anything you want. Yep, it can be a tad tedious (so, how do I draw a sphere based on triangles?) but then again, you got the full power of a programming language behind you... Use random values in order to generate shapes, use a loop to create multiple of those shapes, you're free.
 
-In our case, we'll be much more humble and draw the next best thing to a triangle: a square. It'll be usefull for upcoming tasks.
+In our case, we'll be much more humble and draw the next best thing to a triangle: a square. It'll be useful for upcoming tasks.
 
 ~~~ JavaScript
 // define vertices of a quad
@@ -93,7 +93,7 @@ numberOfVertices = 6;
 
 ## The rendering loop
 
-We know already a bit of it. First, we have our `draw` function that will be repeatedly called, and inside, the library function. Let's delete the later, and fill directly `draw` with all the goodies! You'll see in this section a lot of "yes but no", functions with a heavy load of parametre. What you need first is to make it work. Then bit by bits, you can both play and understand the parametrs. Some of them (while all described) are out of scope of this workshop.
+We know already a bit of it. First, we have our `draw` function that will be repeatedly called, and inside, the library function. Let's delete the later, and fill directly `draw` with all the goodies! You'll see in this section a lot of "yes but no", functions with a heavy load of parametr. What you need first is to make it work. Then bit by bits, you can both play and understand the parametres. Some of them (while all described) are out of scope of this workshop.
 
 Let's get rid of most stuff before focusing on two specific functions:
 
@@ -139,7 +139,7 @@ As said in previous log, we mostly use triangles to create our geometry, but we 
 ## On a completly unrelated note: WebGL Init
 Errr, what can we say, this part is a bore... But hey, be merry, it's the last function you need to delete before we can set your code free from our library!
 
-So, what does it implies to initialise our webGL context? First, we need to have acess to our canvas HTML tag and measure it. Then we try to get a WebGL context from it, and then set the clear color to black. Which code wise means:
+So, what does it implies to initialize our webGL context? First, we need to have access to our canvas HTML tag and measure it. Then we try to get a WebGL context from it, and then set the clear color to black. Which code wise means:
 
 ~~~ JavaScript
 
