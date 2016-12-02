@@ -10,22 +10,22 @@ num: 5
 
 Ok, it's time to drop our solid color quad and replace it by something potentially more exiting : textures. 
 
-Textures are basically a chunk of GPU memory usually containing image data. As we learned earlier, data transfer between CPU memory and GPU memory is really expansive performance-wise. That's why, like the VBO, textures are typically uploaded once to the GPU and read directly from the fragment shader every frame. Textures are often the resources using most of the space in the GPU memory, so high resolution images must be used with parsimony.
+Textures are basically a chunk of GPU memory usually containing image data. As we learned earlier, data transfer between CPU memory and GPU memory is really expansive performance-wise. That's why, like the VBO's, textures are typically uploaded once to the GPU and read directly from the fragment shader every frame. Textures are often the resources using most of the space in the GPU memory, so high resolution images must be used with parsimony.
 
 Here is a diagram showing how texture memory is accessed from the shaders :
 
 <img src="./assets/webGLTextureDiagram.jpg" alt="Textures on the GPU">
 
-For legacy reason better left unexplained, instead of using directly the current texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
+Two textures objects are represented on the top right of the diagram. For legacy reason better left unexplained, instead of using directly a reference to those texture, shaders use an intermediate index called Texture Unit, representing a texture slot. So, using a texture in a shader is done in 2 steps : 
 
 * Associate a texture to a Texture Unit
 * Tell the shader which Texture Unit it will use
 
-Choosing which texture to use is a good thing. But how to map that texture on a mesh that can be literally anything ( a triangle, a sphere, a dolphin ...) ? With a tool you already know : the VBO. Exactly like we added a color VBO, we will define a new Texture Coordinate VBO. For each vertex we will define a corresponding position in the texture :
+Choosing the texture we want to display is a good thing. But how to map that texture on a mesh that can be literally anything ( a triangle, a sphere, a dolphin ...) ? With a tool you already know : the VBO. Exactly like we added a color information VBO earlier, we will define a new Texture Coordinate VBO. For each vertex we will define a corresponding position in the texture :
 
 <img src="./assets/webGLTextureMappingDiagram.png" alt="Textures on the GPU" width="500">
 
-Here is the vertex shader reading that new Texture Coordinates as an input attribute :
+As you can see each vertex is associated with a position in the texture.  Here is the vertex shader reading that new Texture Coordinates as an input attribute :
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -78,7 +78,7 @@ Here is the fragment shader :
 
 ~~~
 
-The fragment shader access the texture via a *sampler2D* which is the index representing the texture unit we want to use. It's a uniform, so it can be set later in our javascript code. The function texture2D(...) is where the magic happens : you get the color of the texture corresponding to your sampler2D, at the coordinate you received from the varying. 
+The fragment shader access the texture via a *sampler2D*, which is the index representing the texture unit we want to use. It's a uniform, so it can be set later in our javascript code. The function texture2D(...) is where the magic happens : you get the color of the texture at the coordinate you received from the varying. 
 
 Now let's go back to our javascript code. The first thing to do when you defined a new attribute ? Enable it ! Add these lines just after the activation of the two other attribute, in the main function. 
 
@@ -89,7 +89,7 @@ GL.enableVertexAttribArray(normalAttributeLocation); // -> enable the new textur
 
 ~~~
 
-Second thing to do is actually to load a texture on the GPU. Let's write a generic function that receives an image url, opens it, and creates a texture on the GPU. You can place this code under the draw function :  
+Second thing to do is to load a texture on the GPU. Let's write a generic javascript function that receives an image url, opens it, and creates a texture on the GPU. You can place this code under the draw function :  
 
 ~~~ JavaScript
 function loadTexture(imageURL)
@@ -104,6 +104,7 @@ function loadTexture(imageURL)
     image.crossOrigin = "";
     image.src = imageURL;
     
+    // when the image will be loaded .... call this code
     image.addEventListener('load', function() 
     {
         // bind to the new texture object
@@ -137,7 +138,7 @@ Don't forget to actually call that new function from your main function :
 ~~~ JavaScript
 
 // load the texture on the GPU
-window.textureID = loadTexture("https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/texture.jpg");
+textureID = loadTexture("https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/texture.jpg");
 
 ~~~
 
