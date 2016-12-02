@@ -27,9 +27,9 @@ Now if you keep on using `func_2_createShaders()`, you won't be referring to the
 
 On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parameter...). 
 
-You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Type qualifier wise, you have inputs (`attribute`). They can be anything: a position, a color, or any other variable you would want to use in your shader.
+You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have (among others) scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Type qualifier wise, we'll for now only learn how to define inputs (called `attribute`). This is very important since we already need that. In order to work as expected, our vertex shader requires each vertex's position as input.
 
-For our vertex shader, we want the vertex's position as input attribute (we get it by attaching it to the shader, explained in an upcoming log). The output of the vertex shader will be the variable gl_Position that represents the position of the current vertex after being transformed by the shader. Here the output is simply the position vector completed by a 4th component.
+At the other end, we have outputs. In our vertex shader one outputs is the variable `gl_Position` that represents the position of the current vertex after being transformed by the shader. Here the output is simply the position vector completed by a 4th component.
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
@@ -104,15 +104,9 @@ Now, all is good and fun but ... we're still dealing with that annoying second f
 
 ## Compiling your shaders
 
-Now, all is good and fun but ... we're still dealing with that annoying second function, and its name is getting way out of hand. Let's just get rid of it, okay? For that, we need to understand what it does. We already know a little bit. It takes the shader code we're 
+For shaders to be used by the GPU, we first need to access the text defined in the HTML, then we compile that code and then linked both in a shader program (an executable binary code stored on the GPU memory). Lucky us, we can do all that from JavaScript.
 
-
-* not using func_2bis anymore
-
-
-Shaders must be compiled and linked in a shader program, an executable binary code stored on the GPU memory. The GLSL compiler is built in the OpenGL library and can be called in webGL/javascript code. 
-
-We first write a generic function that we will use to compile our vertex shader and our fragment shader separately. Add that function below the javascript main() function. 
+Since the compilation part will be repeated for both shader, let's create a function for that batch of code. The comments linked with the code should make it self explanatory, but in any case let's not dwell for too long on this part.
 
 ~~~ JavaScript
 
