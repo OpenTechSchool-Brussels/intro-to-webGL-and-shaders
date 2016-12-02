@@ -136,3 +136,21 @@ draw();
 ## d) Not so related: WebGL Init
 * Deal with the last piece of the library, and ditch the import in the header! Yay, you're free!
 
+~~~ JavaScript
+// Canvas
+window.CANVAS=document.getElementById(canvasId);
+CANVAS.width=window.innerWidth;
+CANVAS.height=window.innerHeight;
+
+// WebGl Context
+try {
+	window.GL = CANVAS.getContext("webgl");
+} catch (e) {
+	alert("You are not webgl compatible :(") ;
+	return false;
+}
+    
+GL.clearColor(0.0, 0.0, 0.0, 0.0);
+
+~~~
+
