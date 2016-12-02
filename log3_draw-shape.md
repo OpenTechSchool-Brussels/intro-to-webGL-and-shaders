@@ -6,10 +6,6 @@ num: 3
 ---
 
 
-* Talk about binding in this page
-* Talk about coordinates system (vertice, evocate texture, pixels)
-
-
 This is madness... You know how to handle your vertex, but you haven't send them yet... Let's take care of that!
 
 ## a) Create your own shape
