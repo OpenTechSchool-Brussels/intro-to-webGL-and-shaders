@@ -12,21 +12,23 @@ num: 3
 
 ## a) Create your own shape
 
-Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early versions of OpenGL worked. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the **Vertex Buffer Object** (VBO) has been added in modern OpenGL versions. VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
+Now the question is : how to send vertex positions to the vertex shader ? Well, a simple approach would be to send vertices once every frame to the GPU. That's how early versions of OpenGL worked. But was not very efficient as it costs a lot of data transfer between the CPU memory and the GPU memory. That's why the **Vertex Buffer Object** (VBO) has been added in modern OpenGL versions. VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertices to the GPU just once. The vertices will stay there until the VBO is explicitely destroyed by the application. 
 
 During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
 
 <img class="ctr" src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="800">
 
-Let see how to connect these different pieces together. Comment the function that we will replace with our own code:
+Let see how to connect these different pieces together. Comment the function that will be replaced by our own custom code:
 
 ~~~ JavaScript
 //func_3_createTriangle();
 ~~~
 
-The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. The vertex coordinates system go from -1 to 1 as shown in this figure : 
+The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. Each position has 3 coordinates : X, Y, Z. The X and Y coordinates go from -1 to 1 as shown in this figure : 
 
 <img class="ctr" src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="400">
+
+As you can see, vertices with position outside de rectangle -1, 1, wont appear in your OpenGl view. The Z axis point to you, a vertex with negative Z coordinate will be placed "behind" your screen. 
 
 Let's start by writing manually the position of one humble triangle, always in the main() javascript function :
 
