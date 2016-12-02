@@ -27,11 +27,9 @@ Now if you keep on using `func_2_createShaders()`, you won't be referring to the
 
 On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parameter...). 
 
-You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). 
+You'll learn about different type and type qualifier along the way but here is a bit of a head start. Type wise, you have scalars (`float`) and vectors of different dimensions (`vec2`, `vec3`, `vec4`). Type qualifier wise, you have inputs (`attribute`). They can be anything: a position, a color, or any other variable you would want to use in your shader.
 
-The input of the vertex shader is called **attribute**. The value of the attribute is attached to the vertex currently processed. It can be a position, a color, or anything else, as we will see.
-
-In our vertex shader case, the shader needs to get the vertex position as input attribute. The output of the vertex shader will the variable gl_Position that represents the position of the current vertex after being transformed by the shader. Here the output is simply the position vector completed by a 4th component.
+For our vertex shader, we want the vertex's position as input attribute (we get it by attaching it to the shader, explained in an upcoming log). The output of the vertex shader will be the variable gl_Position that represents the position of the current vertex after being transformed by the shader. Here the output is simply the position vector completed by a 4th component.
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
