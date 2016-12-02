@@ -16,7 +16,7 @@ Now the question is : how to send vertex positions to the vertex shader ? Well, 
 
 During a frame rendering, the vertex shader reads directly the VBO, vertex per vertex, and use it as input attribute.
 
-<img src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="800">
+<img class="ctr" src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="800">
 
 Let see how to connect these different pieces together. Comment the function that we will replace with our own code:
 
@@ -26,7 +26,7 @@ Let see how to connect these different pieces together. Comment the function tha
 
 The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. The vertex coordinates system go from -1 to 1 as shown in this figure : 
 
-<img src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="400">
+<img class="ctr" src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="400">
 
 Let's start by writing manually the position of one humble triangle, always in the main() javascript function :
 
@@ -92,10 +92,7 @@ window.numberOfVertices = 6;
 
 ## b) The rendering loop
 * Animate function and its inner working
-
 * fonction animate (glDraw) avec variation du type de Draw (GL_TRIANGLES, GL_LINE_LOOP , etc)
-
-
 
 ~~~ Javascript
 
