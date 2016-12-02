@@ -20,7 +20,7 @@ While OpenGL/WebGL is a whoooole world to discover, with bumps and heavy rides, 
 
 So, in case you haven't followed, we'll be drawing stuff on the web, hence using a web browser, JavaScript and WebGL. The linguist will have found out by themselves that JavaScript is a scripting language. It means it doesn't need to be compiled and translated in machine code. This allows for many thing, and among other: hot reloading. This means that you can write your code, and see in (pseudo) real time the modification. A blessing for students and teachers alike.
 
-Many different ways to do so. Our weapon of choice will be JSbin ([https://jsbin.com]). It is an online editor (HTML, JavaScript, CSS. All we need!) with this hot reloading feature. When you will start writing some code, you will see a specific URL popping up in your address bar, such as : `https://jsbin.com/kadovifuha/edit?html,css,output` . Be sure to write down the weird name just after jsbin.com, it will be a unique identifier to get back later to your code.
+Many different ways to do so. Our weapon of choice will be JSbin (<https://jsbin.com/?html,output>). It is an online editor (HTML, JavaScript, CSS. All we need!) with this hot reloading feature. When you will start writing some code, you will see a specific URL popping up in your address bar, such as : `https://jsbin.com/kadovifuha/edit?html,css,output` . Be sure to write down the weird name just after jsbin.com, it will be a unique identifier to get back later to your code.
 
 
 <img class="ctr" src="./assets/log0_jsbin.jpg" alt="Full Rendering">
@@ -29,7 +29,7 @@ A few helping points to get you started (each are linked with a red marker of th
 
 1. The big header is a bit of a bother. Click on that cross to make it smaller;
 2. Line numbering is easier for communicating about code. Double click on HTML and make them appear;
-3. You see three frames, HTML, Javascript, and Output. The little buttons at the right of the red 3 allows you to juggle between those and other frames. We will only use the HTML frame for our code. Output will be where we'll render, and Console might give interesting debugging messages.
+3. You see two frames: HTML, and Output. The little buttons at the right of the red 3 allows you to juggle between those and other frames. We will only use the HTML frame for our code. Output will be where we'll render, and Console might give interesting debugging messages.
 4. Your code is updated live. If you don't want, you can just check out of "Auto-run JS"  and if you want to see your result full screen, just click on the arrow pointing to the upper right.
  
 
