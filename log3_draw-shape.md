@@ -8,7 +8,7 @@ num: 3
 
 This is madness... You know how to handle your vertex, but you haven't send them yet... Let's take care of that!
 
-## a) Create your own shape
+## Create your own shape
 
 Before sending the vertex to your shader, you need first to decide what they will be. Our job here is to define a set of vertex, amounting to the shape we want to describe. While we define this set in the CPU, we need it to reside in the GPU, for it to become the first step of the graphic pipeline. For that, we'll use a **Vertex Buffer Object** (VBO). A VBO is a buffer, residing in the GPU memory, and containing vertex informations. That means that you need to upload the vertex informations to the GPU just once. The vertices will stay there until the VBO is explicitly destroyed or modified by the application. 
 
@@ -91,7 +91,7 @@ numberOfVertices = 6;
 ~~~
 
 
-## b) The rendering loop
+## The rendering loop
 * Animate function and its inner working
 * fonction animate (glDraw) avec variation du type de Draw (GL_TRIANGLES, GL_LINE_LOOP , etc)
 
@@ -131,7 +131,7 @@ draw();
 ~~~
 
 
-## d) Not so related: WebGL Init
+## On a completly unrelated note: WebGL Init
 * Deal with the last piece of the library, and ditch the import in the header! Yay, you're free!
 
 ~~~ JavaScript
