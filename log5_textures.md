@@ -126,7 +126,8 @@ function loadTexture(imageURL)
 
 As you can see the javascript image loading is done asynchronously. So we need to define a function listener that will be called when the loading is over. 
 
-Like every other buffer creation (you should now get used to!)
+Like every other buffer creation (you should now get used to!), we follow the usual steps:
+ 
 * we create an empty texture object with GL.createTexture()
 * we bind the new empty object
 * we upload the data to it with the GL.texImage2D function
