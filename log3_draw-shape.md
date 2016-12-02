@@ -116,7 +116,8 @@ GL.clear(GL.COLOR_BUFFER_BIT);
 
 Now the harder stuffs arise. First we need to access our VBO. Any idea how? Yep, we need to bind it. Then, you remember we needed to feed our vertex shader some vertices information right? That's what we're at last doing. `getAttribLocation` will tel us where to point, and `vertexAttribPointer` will do the link. In order to do so, we need to specify first the location (the one we just got), how many component we have per vertices (3: x, y, z), how they are read (they are floating values), and ... three other stuff (normalized, stride, offset) that won't matter much for now. Just follow along!
 
-* animate (glDraw) avec variation du type de Draw (GL_TRIANGLES, GL_LINE_LOOP , etc)
+Last function (before the `requestAnimationFrame` we already know) is the one that actually does the drawing: `drawArrays`. We need to feed it first how we will read our shape (here as `TRIANGLES`), the starting point of our array in data (here 0) and last, the number of vertice that we already defined above. And how that translate in code? Here you go, be sure to add that second part in your `draw` function.
+
 
 ~~~ Javascript
 
@@ -132,6 +133,7 @@ Now the harder stuffs arise. First we need to access our VBO. Any idea how? Yep,
 };
 ~~~
 
+As said in previous log, we mostly use triangles to create our geometry, but we can actually display our vertices as something else. Try to replace `GL.TRIANGLES` with `GL_LINE_LOOP` or `GL_DOTS` for instance.
 
 
 ## On a completly unrelated note: WebGL Init
