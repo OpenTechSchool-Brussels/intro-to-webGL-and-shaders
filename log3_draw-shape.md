@@ -67,10 +67,10 @@ GL.bufferData(GL.ARRAY_BUFFER,
 The vertices of the triangle are now loaded in the VBO and will be used by the vertex shader every time the scene is rendered.
 
 
-## Other Shapes
+## Ok, but why stop there?
+Hell, now let's give free rein to your imagination. I mean, you can draw anything you want. Yep, it can be a tad tedious (so, how do I draw a sphere based on triangles?) but then again, you got the full power of a programming language behind you... Use random values in order to generate shapes, use a loop to create multiple of those shapes, you're free.
 
-
-As a test, you can modify the data you send in the VBO. Add as many triangles you want. Here is a quad formed by 2 triangles :
+In our case, we'll be much more humble and draw the next best thing to a triangle: a square. It'll be usefull for upcoming tasks.
 
 ~~~ JavaScript
 // define vertices of a quad
@@ -86,8 +86,8 @@ var vertexPositionArray=[
     -0.5,-0.5,0, // bottom left
 ];
 
-// this variable will be used later, during the draw call
-window.numberOfVertices = 6;
+// Since we have 2 triangles, we have now 6 vertices
+numberOfVertices = 6;
 ~~~
 
 
