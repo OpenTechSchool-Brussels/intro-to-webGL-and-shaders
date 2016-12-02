@@ -121,6 +121,7 @@ function compileShader(source, type, typeString)
     // compile the shader object
     GL.compileShader(shaderID);
 
+    // Check for error and output them if present
     if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
     {
         console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
