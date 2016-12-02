@@ -49,15 +49,14 @@ This is nice, but here you're just passing along the information you just receiv
 <script id="vshader" type="x-shader/x-vertex">
     attribute vec3 position; 
 
-    void main(void) 
-    { 
-        // modification of the position
+    void main(void) { 
+        // The definition of the translation
         vec3 moveBy;
         moveBy.x = 0.3;
         moveBy.y = 0.2;
         moveBy.z = 0.0;
 
-        gl_Position = vec4(position + moveBy,1.0);
+        gl_Position = vec4(position + moveBy, 1.0);
     }
 </script>
 ~~~
@@ -83,12 +82,19 @@ Ta-dah.
 
 So, the fragment shader defines the colors of the current pixel. Any idea how to display a light blue pixel? you just need to change the value of the vector you're feeding `gl_FragColor`. Fiddle a bit with it, and if you're too lazy, you can just try with `vec4(0.3, 0.6, 0.9, 1.0)`.
 
-All is good and well, but life should not be so dull. Want something more? Well, you'll see many ways to have more varying colors, but let's use a little hack. You've already met `gl_FragColor` and `gl_Position`. These are built in variables, meant to be used as output. You have many other built in variables (specific to each shaders). One of them is `gl_FragCoord`, which describe the position of the fragment on screen. Try to think of a way to use that vector in order to have different colors output. Below is a proposed exploration.
+All is good and well, but life should not be so dull. Want something more? Well, you'll see many ways to have more varying colors, but let's use a little hack. You've already met `gl_FragColor` and `gl_Position`. These are built in variables, meant to be used as output. You have many other built in variables (specific to each shaders). One of them is `gl_FragCoord`, which describe the position of the fragment. It's a bit more complex than that but for now we'll use it as a shortcut to mess with colors.
 
 ~~~ html
 <script id="fshader" type="x-shader/x-fragment">    
     void main(void) {
-        gl_FragColor = vec4(gl_FragCoord.x / 1000, 0.0 , 1 - gl_FragCoord.y / 1000, 1.0);
+        // The definition of our color
+        vec4 myColor;
+        myColor.r = gl_FragCoord.x / 1000.0;
+        myColor.g = 0.0;
+        myColor.b = 1 - gl_FragCoord.y / 1000.0;
+        myColor.a = 1.0;
+        
+        gl_FragColor = myColor;
     }
 </script>
 ~~~
