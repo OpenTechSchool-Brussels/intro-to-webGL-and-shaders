@@ -40,28 +40,31 @@ In order to use WebGL, we first need to initialize its context. Initializing the
 ## Another level of complexity
 Ok, the *please do all* function was nice and all, but the higher level the function, the less control you have over it. Let's dig deeper. For that, we'll divide our main function in 4 parts that will mirror each of the processes we outlined in this log up until now. First you will have the initialization of the WebGL context, then we'll create the shaders and create a geometry (a simple triangle in our case).
 
-These three steps can be done once for all, but the drawing needs to be done for each new frame. For that to happen, we first define a function, `draw`, that we'll call whenever a new frame is needed (through the usage of `requestAnimationFrame`).
+These three steps can be done once for all, in the `setup` function. On the other hand, the drawing needs to be repetitively done, for each new frame. In other words, each time we need a new frame, we need to call a drawing function. Let's already define such a function (outside of `setup`) and call it `draw`. At the end of it, we use `requestAnimationFrame` to make sure it'll be called anew for the next frame. Then we call it once in the `setup` function to launch the loop.
 
 Luckily, you don't have to write allll that code yet, we have sub functions that will handle that for you as you can see below. The first aim of the following logs will be to understand those functions and replace them by your own code.
 
 
 ~~~ JavaScript
-var main=function() {
+
+// Your setting up. Called once, at the beginning
+var setup=function() {
 
   // You set up everything
   func_1_initialisation("my_canvas");
   func_2_createShaders();    
   func_3_createTriangle();
-
-  // Setting up your drawing "loop"
-  var draw = function() { 
-    func_4_draw();
-    requestAnimationFrame(draw);
-  }
   
-  // Launching the drawing "loop"
+  // Launching the first drawing
   draw();
   
 };
+
+// Your drawing function, called repetitively for each new frame
+var draw = function() { 
+  func_4_draw();
+  requestAnimationFrame(draw);
+}
+
 ~~~
 
