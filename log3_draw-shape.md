@@ -44,9 +44,15 @@ var vertexPositionArray = [
 numberOfVertices = 3;
 ~~~
 
-Nothing special here, exept that "window.numberOfVertices" : this is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
+Armed with our array of vertices, we have now all we need to create our VBO on the GPU. Three steps awaits us to do so:
 
-We now create a VBO on the GPU with the function GL.createBuffer, and send our position array to it:
+* first we'll need to create a webGL buffer and register its id;
+* then we'll need to **bind** the buffer (discussed below);
+* last, we'll send the data through the `bufferData` GL function and specify with GL.STATIC_DRAW that the we won't change the data contained in the VBO, it will be a static mesh.
+
+So, binding... Binding is a key operation in webGL (done through the GL function` bindBuffer()`) . It's a way to make accessible one object in particular in order to modify it. When the variable is on the CPU, you can access it directly. Not so easy when it's supposed to be on the GPU, hence the binding. Here, we bind our newly created buffer, as a GL.ARRAY_BUFFER since we'll feed it an array. That's a mechanism used everywhere in OpenGL/WebGL so get used to it!
+
+So, how do these three steps translate in code?
 
 ~~~ JavaScript
 
@@ -62,15 +68,13 @@ GL.bufferData(GL.ARRAY_BUFFER,
             GL.STATIC_DRAW);
 ~~~	
 
-Every object created on the GPU is accessed in 2 steps from our javascript code : 
-* We select an object we want to modify with the function GL.bindBuffer(...)
-* We modify the selected object
+The vertices of the triangle are now loaded in the VBO and will be used by the vertex shader every time the scene is rendered.
 
-That's a mechanism used everywhere in OpenGL so get used to it!
 
-The parameter GL.STATIC_DRAW is a hint to OpenGL that indicates that we won't change the data contained in the VBO, it's a static mesh. 
+## Other Shapes
 
-The vertices of the triangle are now loaded in the VBO and used by the vertex shader every time the scene is rendered. As a test, you can modify the data you send in the VBO. Add as many triangles you want. Here is a quad formed by 2 triangles :
+
+As a test, you can modify the data you send in the VBO. Add as many triangles you want. Here is a quad formed by 2 triangles :
 
 ~~~ JavaScript
 // define vertices of a quad
