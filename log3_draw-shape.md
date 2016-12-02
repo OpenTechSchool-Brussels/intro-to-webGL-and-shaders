@@ -22,24 +22,26 @@ During a frame rendering, the vertex shader reads directly the VBO, vertex per v
 
 Before anything else, delete `func_3_createTriangle();`, this time there won't be any in between functions! Now let's write our own code. First, we'll have to define our geometry, represented by the set of vertice named **data** in the diagram above. For that, we'll define a set of vertex, only holding their position for now. If you remember from last log, such position should be in the [-1, 1] range (when you don't play with depth).
 
-The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. Each position has 3 coordinates : X, Y, Z. The X and Y coordinates go from -1 to 1 as shown in this figure : 
+The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. Each position has 3 coordinates : X, Y, Z. The X and Y coordinates go from -1 to 1 as shown below.
+
 <img class="ctr" src="./assets/webGLcoordinate.png" alt="Vertex Coordinates" width="400">
 
-As you can see, vertices with position outside de rectangle -1, 1, wont appear in your OpenGl view. The Z axis point to you, a vertex with negative Z coordinate will be placed "behind" your screen. 
+Vertices with position outside of the -[1, 1] rectangle won't appear in your webGL view. The Z axis point toward you: a vertex with negative Z coordinate will be placed *behind* your screen. 
 
-Let's start by writing manually the position of one humble triangle, always in the main() javascript function :
+Let's now write each vertex of one humble triangle (in the `setup()` function, where the deleted function was).
 
 ~~~ JavaScript
 
 // define vertex positions of our first triangle
-var vertexPositionArray=[
-    -0.5,-0.5,0, //bottom left
-    0.5,-0.5,0, //bottom right 
-    0.5,0.5,0,  //top right
+var vertexPositionArray = [
+    -0.5, -0.5, 0, //bottom left
+     0.5, -0.5, 0, //bottom right 
+     0.5,  0.5, 0  //top right
 ];
 
-// this variable will be used later, during the draw call
-window.numberOfVertices = 3;
+// While one could easily compute the number of vertice in our shape,
+// let's hardcode it here for easier later usage.
+numberOfVertices = 3;
 ~~~
 
 Nothing special here, exept that "window.numberOfVertices" : this is a global variable used in later stage, just before the final draw call, we'll discuss that later. 
