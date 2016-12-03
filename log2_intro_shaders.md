@@ -33,7 +33,7 @@ At the other end, we have outputs. In our vertex shader one outputs is the varia
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
-attribute vec3 position; 
+attribute mediump vec3 position; 
 
 void main(void) 
 { 
@@ -46,7 +46,7 @@ This is nice, but here you're just passing along the information you just receiv
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
-    attribute vec3 position; 
+    attribute mediump vec3 position; 
 
     void main(void) { 
         // The definition of the translation
@@ -87,7 +87,7 @@ All is good and well, but life should not be so dull. Want something more? Well,
 <script id="fshader" type="x-shader/x-fragment">    
     void main(void) {
         // The definition of our color
-        lowp vec4 myColor;
+        vec4 lowp myColor;
         myColor.r = gl_FragCoord.x / 1000.0;
         myColor.g = 0.0;
         myColor.b = 1.0 - gl_FragCoord.y / 1000.0;
