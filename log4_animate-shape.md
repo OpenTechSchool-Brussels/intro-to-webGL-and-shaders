@@ -17,7 +17,7 @@ Let's control the red color component with a uniform. In our fragment shader, we
 <script id="fshader" type="x-shader/x-fragment">
     
     // here we declare our uniform
-    uniform float u_redColor;
+    uniform lowp float u_redColor;
 
     void main(void) {
         // output color controlled by a uniform
