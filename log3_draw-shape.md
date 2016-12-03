@@ -105,7 +105,7 @@ Code wise, this will be the first part of our new `draw` function (don't suppres
 
 ~~~ Javascript
 // use the shader we defined earlier
-GL.useProgram(shaderProgramId);
+GL.useProgram(shaderProgramID);
 
 // define the size of the view
 GL.viewport(0.0, 0.0, CANVAS.width, CANVAS.height);
