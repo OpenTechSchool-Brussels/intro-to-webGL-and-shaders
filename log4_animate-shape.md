@@ -160,7 +160,7 @@ var vertexColorArray=[
 ];
 
 // create an empty buffer object
-window.vertexBufferColorID= GL.createBuffer ();
+vertexBufferColorID= GL.createBuffer ();
 
 // bind to the new buffer object
 GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
