@@ -14,7 +14,7 @@ Uniforms are variables of which value is constant for every vertex or fragment.
 Let's control the red color component with a uniform. In our fragment shader, we will have
 
 ~~~ html
-<script id="firstFshader" type="x-shader/x-fragment">
+<script id="fshader" type="x-shader/x-fragment">
     
     // here we declare our uniform
     uniform float u_redColor;
@@ -56,7 +56,7 @@ A colored square is cool. But you know what's even cooler ? A rotating color squ
 We will modify the square position using a matrix uniform in the vertex shader. 
 
 ~~~ html
-<script id="firstVshader" type="x-shader/x-vertex">
+<script id="vshader" type="x-shader/x-vertex">
 
     attribute vec3 position; 
     uniform mat4 u_transformMatrix;
@@ -118,7 +118,7 @@ Here is the fragment shader :
 
 ~~~ html
 
-<script id="shader" type="x-shader/x-fragment">
+<script id="fshader" type="x-shader/x-fragment">
 
     precision mediump float;
 
