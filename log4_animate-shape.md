@@ -15,7 +15,7 @@ Let's control the red color component with a uniform. In our fragment shader, we
 <script id="fshader" type="x-shader/x-fragment">
     
     // here we declare our uniform
-    lowp uniform float u_redColor;
+    uniform lowp float u_redColor;
 
     void main(void) {
         gl_FragColor = vec4(u_redColor,0.6,0.9,1.0);
@@ -71,7 +71,6 @@ function showCoords(event) {
     mouseY = event.clientY;
 //    console.log("X coords: " + x + ", Y coords: " + y); // for debugging
 }
-</script>
 ~~~
 
 Then, it's just a matter of using `mouseX` & `mouseY` any way you see fit. Enjoy!
@@ -85,7 +84,7 @@ First, let's define the uniform matrix in our shader. This matrix will be a geom
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
 
-    attribute vec3 position; 
+    attribute lowp vec3 position; 
     uniform mat4 u_transformMatrix;
 
     void main(void) 
@@ -119,18 +118,17 @@ Until now, (despite a little past shortcut), our colors are uniform which should
 
 This information will be shared through the vertices, so accessed by the vertex shader. This means we need a new `attribute` variable (we'll call it `color`). This won't be used here, but needs to be passed to the fragment shader. While one might think that a `uniform` type qualifier would do, here the value is different depending on the vertex and needs to be interpolated between them. To specify that behavior, we need to use the `varying` type qualifier on another variable (here called `V_Color`) and affect to it the received color value.
 
-
 Here is what it looks like.
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
 
-    attribute vec3 position;
-    attribute vec3 color;
+    attribute mediump vec3 position;
+    attribute lowp vec3 color;
 
     uniform mat4 u_transformMatrix;
 
-    varying vec3 v_Color;
+    varying lowp vec3 v_Color;
 
     void main(void) {
         // forward the color to the fragment shader
