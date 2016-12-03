@@ -9,7 +9,7 @@ num: 2
 
 A shader is program that will be executed on your graphic card. Working on the GPU instead of the CPU implies a few change in behavior. First, you'll need to upload your compiled code on the GPU. Second, your program won't be executed *once* as when on your CPU, but multiple times, in parallel. For instance, your vertex shader will be executed in parallel for each vertex, and your fragment shader for each fragment. This hardware-based parallelization is what makes the GPU particularly fit to process & render graphics.
 
-In order for things to flow through the pipelines, you must provide both shaders. This is was done implicitly in the second function `func_2_createShaders()`. Now in order to regain some more control, we're going to get rid bits by bits of this function and write our own shaders.
+In order for things to flow through the pipelines, you must provide both shaders. This is was done implicitly in the second function `OTSHelper_createShaders()`. Now in order to regain some more control, we're going to get rid bits by bits of this function and write our own shaders.
 
 
 ## The vertex shader
@@ -23,7 +23,7 @@ Let's do things in order and begin with the vertex shader. You have many ways an
 </script>
 ~~~
 
-Now if you keep on using `func_2_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll need to replace this function with `func_2bis_createShadersWithVertexShaderFromHTML()` in your JavaScript code. Now have control over the shader. Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now.
+Now if you keep on using `OTSHelper_createShaders()`, you won't be referring to the shader you're about to write. To do so, you'll need to replace this function with `OTSHelper_createShadersWithVertexShaderFromHTML()` in your JavaScript code. Now have control over the shader. Bad news. You're now going to code in a different language. It being the OpenGL Shading Language (little name: GLSL). Good news. It's actually pretty close to what you've been doing until now.
 
 On of the main difference with classic JavaScript is how you handle variables. Before, you just wrote `var` and it was enough. Now you know to specify the type of the variable (how the data should be read: is it a vector, a scalar, an array...) and the type qualifier of the variable (how the data behave: is it an input, an output, a parameter...). 
 
@@ -66,7 +66,7 @@ At first, you might think that `0.3` is a pretty small value for a translation. 
 
 ## The fragment shader
 
-Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `func_2ter_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. It is a vector of 4 dimensions (red, blue, green, alpha / transparency) with values between 0 and 1. In order to get keep our white triangle, we'll maximise each value.
+Well, it's time now to apply all we learned to the fragment shader. Different aim, similar tools. We'll have similar fragment shader code in HTML, so to use it, we need to change (again) the second function. Now it'll be `OTSHelper_createBothShadersFromHTML();`. Speaking about shader code in the HTML, we need to create a similar holding place in the HTML file for this shader. And last, the fragment shader needs to output a color (the one of the pixel), which is represented by the output variable `gl_FragColor`. It is a vector of 4 dimensions (red, blue, green, alpha / transparency) with values between 0 and 1. In order to get keep our white triangle, we'll maximise each value.
 
 ~~~
 <script id="fshader" type="x-shader/x-fragment">
@@ -160,7 +160,7 @@ GL.linkProgram(shaderProgramID);
 
 ~~~
 
-Last but not least, we said in the vertex shader that we needed each vertex position as an input. While we'll see later in the code where we define that variable, we need already here to make it accessible. Variables in shaders are accessed with indirect index numbers called "location", so to make them accessible we just need to get its location and then enable the attribute.
+Last but not least, we said in the vertex shader that we needed each vertex position as an input. While we'll see later in the code where we define that variable, we need already here to make it accessible. Variables in shaders are accessed with indirect index numbers called *location*, so to make them accessible we just need to get its location and then enable the attribute.
 
 ~~~ JavaScript
 //get position attribute location in the shader
@@ -171,4 +171,4 @@ GL.enableVertexAttribArray(positionAttributeLocation);
 
 ~~~
 
-Now the only thing left to do is to delete the line where we called the `func2_....` function, and ... nothing changed. Which is good news: got rid of one of the four functions!
+Now the only thing left to do is to delete the line where we called the `OTSHelper_....` function about shaders, and ... nothing changed. Which is good news: got rid of one of the four functions!

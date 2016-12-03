@@ -16,7 +16,7 @@ During a frame rendering, the vertex shader reads directly the VBO, vertex per v
 
 <img class="ctr" src="./assets/webGLVBODiagram.jpg" alt="VBO diagram" width="800">
 
-Before anything else, delete `func_3_createTriangle();`, this time there won't be any in between functions! Now let's write our own code. First, we'll have to define our geometry, represented by the set of vertice named **data** in the diagram above. For that, we'll define a set of vertex, only holding their position for now. If you remember from last log, such position should be in the [-1, 1] range (when you don't play with depth).
+Before anything else, delete `OTSHelper_createTriangle();`, this time there won't be any in between functions! Now let's write our own code. First, we'll have to define our geometry, represented by the set of vertice named **data** in the diagram above. For that, we'll define a set of vertex, only holding their position for now. If you remember from last log, such position should be in the [-1, 1] range (when you don't play with depth).
 
 The first thing to do is to define the vertex positions (**data** on the previous diagram) we want to send to the vertex shader. Each position has 3 coordinates : X, Y, Z. The X and Y coordinates go from -1 to 1 as shown below.
 
@@ -137,7 +137,7 @@ As said in previous log, we mostly use triangles to create our geometry, but we 
 
 
 ## On a completly unrelated note: WebGL Init
-Errr, what can we say, this part is a bore... But hey, be merry, it's the last function you need to delete before we can set your code free from our library!
+Errr, what can we say, this part is a bore... But hey, be merry, `OTSHelper_initGL("yourcanvas");` is the last function you need to delete before we can set your code free from our library!
 
 So, what does it implies to initialize our webGL context? First, we need to have access to our canvas HTML tag and measure it. Then we try to get a WebGL context from it, and then set the clear color to black. Which code wise means:
 

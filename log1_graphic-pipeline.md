@@ -51,9 +51,9 @@ Luckily, you don't have to write allll that code yet, we have sub functions that
 var setup=function() {
 
   // You set up everything
-  func_1_initialisation("my_canvas");
-  func_2_createShaders();    
-  func_3_createTriangle();
+  OTSHelper_initGL("my_canvas");
+  OTSHelper_createShaders();    
+  OTSHelper_createTriangle();
   
   // Launching the first drawing
   draw();
@@ -62,7 +62,7 @@ var setup=function() {
 
 // Your drawing function, called repetitively for each new frame
 var draw = function() { 
-  func_4_draw();
+  OTSHelper_draw();
   requestAnimationFrame(draw);
 }
 
