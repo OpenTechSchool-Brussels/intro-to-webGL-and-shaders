@@ -49,6 +49,7 @@ If you know a bit HTML, nothing will be of a surprise here. If you don't ... you
     <script type="text/javascript" src=
     "https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/lib.js">
     </script>
+    <script type="text/javascript" src="https://opentechschool-brussels.github.io/intro-to-webGL-and-shaders/src/J3DIMath.js"></script>
     
     <!-- Where your code will be -->
     <script type="text/javascript">
