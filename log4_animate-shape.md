@@ -181,7 +181,7 @@ We still need to link our attribute "color" to this new VBO. Let's do this in th
 ~~~ JavaScript
 GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferColorID);
 var colorAttibuteLocation = GL.getAttribLocation(shaderProgramID, "color")
-GL.vertexAttribPointer(colorAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+GL.vertexAttribPointer(colorAttibuteLocation, 3, GL.FLOAT, false,0,0) ;
 ~~~ 
 
 And now you should obtain a beautiful multicolor quad. Why ? We only defined color for our 6 vertices. And these colors have been interpolated for each pixel drawn in the  triangles defined by these vertices, thanks to the magic "varying" variable. 
