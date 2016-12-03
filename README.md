@@ -12,3 +12,4 @@ Always wanted to know more about the GPU pipe line, shader & webGL but too afrai
 * Speak more about translation, rotation, projection, matrices and stuff
 * advanced shaders
 * Test if it makes sense to offer random values and for loops in the creation of shape in order to have more generative (and fun) results
+* check https://github.com/KhronosGroup/WebGL/blob/master/sdk/demos/webkit/resources/J3DI.js
