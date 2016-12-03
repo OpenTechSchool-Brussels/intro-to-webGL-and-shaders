@@ -115,26 +115,26 @@ If your shader is legit, this functions will return a WebGL ID linked with a sha
 ~~~ JavaScript
 
 var vShaderString = document.getElementById("vshader").text
-var vShaderId = compileShader(vShaderString, GL.VERTEX_SHADER, "VERTEX");
+var vShaderID = compileShader(vShaderString, GL.VERTEX_SHADER, "VERTEX");
 
 var fShaderString = document.getElementById("fshader").text
-var fShaderId = compileShader(fShaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
+var fShaderID = compileShader(fShaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
 
 ~~~
 
-We now have two shader objects, one for the vertex shader (vShaderId) and one for the fragment shader (fShaderId). We must combine them together in a shader program so we can send it to the GPU.
+We now have two shader objects, one for the vertex shader (vShaderID) and one for the fragment shader (fShaderID). We must combine them together in a shader program so we can send it to the GPU.
 
 ~~~ JavaScript
 
 //creates an empty program object
-shaderProgramId = GL.createProgram();
+shaderProgramID = GL.createProgram();
 
 //attach shaders to the program
-GL.attachShader(shaderProgramId, vShaderId);
-GL.attachShader(shaderProgramId, fShaderId);
+GL.attachShader(shaderProgramID, vShaderID);
+GL.attachShader(shaderProgramID, fShaderID);
 
 //link the program
-GL.linkProgram(shaderProgramId);
+GL.linkProgram(shaderProgramID);
 
 ~~~
 
