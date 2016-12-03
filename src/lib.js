@@ -1,6 +1,6 @@
  
   // 1) Initialisation
-  var OTSHelper_initGL = function(canvasId) {
+  var OTSHelper_1_initGL = function(canvasId) {
 
     // Canvas
     window.CANVAS=document.getElementById(canvasId);
@@ -20,7 +20,7 @@
   
     
   // 2) Shaders  
-  var OTSHelper_createShaders = function() {
+  var OTSHelper_2_createShaders = function() {
     var shader_vertex_source="\n\
     attribute vec3 position; //the position of the point\n\
     attribute vec3 color;  //the color of the point\n\
@@ -86,7 +86,7 @@
   
   // 2bis) Shaders but from HTML
   
-  var OTSHelper_createShadersWithVertexShaderFromHTML = function() {
+  var OTSHelper_2bis_createShadersWithVertexShaderFromHTML = function() {
 
    
     var shader_fragment_source="\n\
@@ -143,7 +143,7 @@
     GL.enableVertexAttribArray(positionAttributeLocation);
 }
   
-  var OTSHelper_createBothShadersFromHTML = function() {
+  var OTSHelper_2ter_createBothShadersFromHTML = function() {
 
     var compileShader=function(source, type, typeString) 
     {
@@ -193,7 +193,7 @@
   
   
   // 3) Triangle
-  var OTSHelper_createTriangle = function() {
+  var OTSHelper_3_createTriangle = function() {
 
     // define vertices of our first quad
     var vertexPositionArray=[
@@ -240,7 +240,7 @@
   };
 
   /*========================= DRAWING ========================= */
-  var OTSHelper_draw=function() {
+  var OTSHelper_4_draw=function() {
 
     // use the shader we defined earlier
     GL.useProgram(shaderProgramID);
