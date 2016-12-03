@@ -128,9 +128,9 @@ As you can see the javascript image loading is done asynchronously. So we need t
 
 Like every other buffer creation (you should now get used to!), we follow the usual steps:
 
-** we create an empty texture object with GL.createTexture()
-** we bind the new empty object
-** we upload the data to it with the GL.texImage2D function
+* we create an empty texture object with GL.createTexture()
+* we bind the new empty object
+* we upload the data to it with the GL.texImage2D function
 
 One additional thing is the configuration of the texture : as the pixel displayed on your screen won't match exactly the pixels of the texture, it's mandatory to define what interpolation to use between pixels. The mode GL.LINEAR will return the weighted average of the 4 pixels surrounding the given coordinates. That's perfect for us! This parameter must be set when the displayed image is bigger than the original image (TEXTURE_MAG_FILTER), and when the displayed image is smaller than the original image (TEXTURE_MIN_FILTER).
 

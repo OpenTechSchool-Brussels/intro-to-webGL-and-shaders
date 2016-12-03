@@ -270,7 +270,7 @@
 
   var func_doAll = function(canvasId) {
     // You set up everything
-    func_1_initialisation(canvasId);
+    func_1_initGL(canvasId);
     func_2_createShaders();  
     func_3_createTriangle();
 
