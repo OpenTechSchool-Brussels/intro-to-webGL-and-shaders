@@ -42,16 +42,15 @@ void main(void)
 </script>
 ~~~
 
-This is nice, but here you're just passing along the information you just received. Let's define and operate a translation in order to move a bit the triangle.
-
+This is nice, but here you're just passing along the information you just received. Let's define and operate a translation in order to move a bit the triangle. Through that, we'll discover another kinf of qualifier: precision qualifier. Our code needs to be fast, like waaaay fast for mad graphics. So we need to specify how precise we want to be (not in absolute, but related with the hardware at hand). For that, we use one of the following: `lowp`, `mediump`, `highp`. Simple stuff.
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
-    attribute vec3 position; 
+    mediump attribute vec3 position; 
 
     void main(void) { 
         // The definition of the translation
-        vec3 moveBy;
+        mediump vec3 moveBy;
         moveBy.x = 0.3;
         moveBy.y = 0.2;
         moveBy.z = 0.0;
