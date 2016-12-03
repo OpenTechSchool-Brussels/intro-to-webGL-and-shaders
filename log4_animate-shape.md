@@ -215,7 +215,7 @@ GL.vertexAttribPointer(colorAttibuteLocation, 3, GL.FLOAT, false,0,0) ;
 
 And now you should obtain a beautiful multicolor quad. Why ? We only defined color for our 6 vertices. And these colors have been interpolated for each pixel drawn in the  triangles defined by these vertices, thanks to the magic "varying" variable. 
 
-<img src="./assets/fragmentInterpolation.jpg" alt="Fragment Interpolation">
+<img class="ctr" src="./assets/fragmentInterpolation.jpg" alt="Fragment Interpolation">
 
 That's a fundamental concept to understand. The fragment shader takes data produced by the vertex shader and interpolate them for each fragment.
 
