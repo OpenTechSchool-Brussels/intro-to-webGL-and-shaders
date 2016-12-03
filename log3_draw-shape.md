@@ -93,7 +93,7 @@ numberOfVertices = 6;
 
 ## The rendering loop
 
-We know already a bit of it. First, we have our `draw` function that will be repeatedly called, and inside, the library function. Let's delete the later, and fill directly `draw` with all the goodies! You'll see in this section a lot of "yes but no", functions with a heavy load of parametr. What you need first is to make it work. Then bit by bits, you can both play and understand the parametres. Some of them (while all described) are out of scope of this workshop.
+We know already a bit of it. First, we have our `draw` function that will be repeatedly called, and inside, the library function. Let's delete the latter, and fill directly `draw` with all the goodies! You'll see in this section a lot of "yes but no", functions with a heavy load of parameter. What you need first is to make it work. Then bit by bits, you can both play and understand the parameters. Some of them (while all described) are out of scope of this workshop.
 
 Let's get rid of most stuff before focusing on two specific functions:
 
