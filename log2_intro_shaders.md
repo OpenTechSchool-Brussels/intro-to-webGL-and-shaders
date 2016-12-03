@@ -109,6 +109,28 @@ For shaders to be used by the GPU, we first need to access the text defined in t
 
 Since the compilation part will be repeated for both shader, let's create a function for that batch of code. It will get as input your shader code, its type, and a debug text to help you along the way. The comments linked with the code should make it self explanatory, but in any case let's not dwell for too long on this part.
 
+~~~ JavaScript
+
+function compileShader(source, type, typeString) 
+{
+    //creates an empty shader object
+    var shaderID = GL.createShader(type);
+
+    // sets the source code in shader
+    GL.shaderSource(shaderID, source);
+
+    // compile the shader object
+    GL.compileShader(shaderID);
+
+    if (!GL.getShaderParameter(shaderID, GL.COMPILE_STATUS)) 
+    {
+        console.log("ERROR IN "+typeString+ " SHADER : " + GL.getShaderInfoLog(shaderID));
+        return false;
+    }
+    return shaderID;
+};
+
+~~~
 
 If your shader is legit, this functions will return a WebGL ID linked with a shader object. Now we need to get our shader code from the HTML tags in order to feed that function. A bit of DOM, a bit of magic, and here we are.
 
