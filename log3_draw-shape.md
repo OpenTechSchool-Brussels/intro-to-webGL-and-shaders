@@ -150,7 +150,7 @@ CANVAS.height=window.innerHeight;
 
 // Initialising the WebGL Context
 try {
-	GL = CANVAS.getContext("webgl-experimental");
+	GL = CANVAS.getContext("webgl");
 } catch (e) {
 	alert("Your setup is not webgl compatible :(") ;
 	return false;
