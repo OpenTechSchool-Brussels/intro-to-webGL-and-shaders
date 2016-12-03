@@ -12,7 +12,7 @@ In order to animate your shape, you'll need to use some time value to synchronis
 Let's control the red color component with a uniform. In our fragment shader, we will just need to define a new variable, with the `uniform` type qualifier.
 
 ~~~ html
-<script id="firstFshader" type="x-shader/x-fragment">
+<script id="fshader" type="x-shader/x-fragment">
     
     // here we declare our uniform
     lowp uniform float u_redColor;
@@ -83,7 +83,7 @@ A colored square is cool. But you know what's even cooler ? A rotating color squ
 We will modify the square position using a matrix uniform in the vertex shader. 
 
 ~~~ html
-<script id="firstVshader" type="x-shader/x-vertex">
+<script id="vshader" type="x-shader/x-vertex">
 
     attribute vec3 position; 
     uniform mat4 u_transformMatrix;
@@ -148,7 +148,7 @@ Here is the fragment shader :
 
 ~~~ html
 
-<script id="shader" type="x-shader/x-fragment">
+<script id="fshader" type="x-shader/x-fragment">
 
     precision mediump float;
 
