@@ -115,10 +115,10 @@ If your shader is legit, this functions will return a WebGL ID linked with a sha
 ~~~ JavaScript
 
 var vShaderString = document.getElementById("vshader").text
-var vShaderId = compileShader(vshaderString, GL.VERTEX_SHADER, "VERTEX");
+var vShaderId = compileShader(vShaderString, GL.VERTEX_SHADER, "VERTEX");
 
 var fShaderString = document.getElementById("fshader").text
-var fShaderId = compileShader(fshaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
+var fShaderId = compileShader(fShaderString, GL.FRAGMENT_SHADER, "FRAGMENT");
 
 ~~~
 
