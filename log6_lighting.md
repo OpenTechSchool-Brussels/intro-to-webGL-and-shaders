@@ -8,7 +8,9 @@ num: 6
 Let's add a simple light calculation based on an additional attribute : the normals.
 
 Vertex Shader : 
+
 ~~~ html
+
 <script id="vshader" type="x-shader/x-vertex">
 
 attribute vec3 position;
@@ -40,9 +42,11 @@ void main(void)
     v_lightLevel = abs(dot(transformedNormal, normalize(lightPosition))); 
 }
 </script>
+
 ~~~
 
 Fragment Shader : 
+
 ~~~ html
 
 <script id="fshader" type="x-shader/x-fragment">
@@ -68,6 +72,7 @@ Fragment Shader :
 ~~~
 
 Enable the new attributes in the setup() function
+
 ~~~ JavaScript
 var normalAttributeLocation = GL.getAttribLocation(shaderProgramID, "normal");
 GL.enableVertexAttribArray(normalAttributeLocation); // -> enable the new texture coord attribute here
