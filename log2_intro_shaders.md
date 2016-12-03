@@ -46,7 +46,7 @@ This is nice, but here you're just passing along the information you just receiv
 
 ~~~ html
 <script id="vshader" type="x-shader/x-vertex">
-    mediump attribute vec3 position; 
+    attribute vec3 position; 
 
     void main(void) { 
         // The definition of the translation
