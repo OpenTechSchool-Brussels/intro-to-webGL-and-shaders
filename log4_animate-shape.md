@@ -5,58 +5,85 @@ num: 4
 
 ---
 
-*  Time and Randomness
+## On getting some control over those damn shaders
 
-## Animating your shape
+In order to animate your shape, you'll need to use some time value to synchronise too. Unfortunately, we don't have that in shaders thelmselves, so how can we still do that? Well, you remeber we shared some position value to our shader right? Time to send other kind of stuff. For that, we will use uniforms, they are variables of which value is constant for every vertex or fragment but defined in your JavaScript code (so on your CPU). Let's use that to change the position and the colors of our shape. 
 
-Now it would be interesting to change the position and the colors from our javascript code. 
-Uniforms are variables of which value is constant for every vertex or fragment. 
-Let's control the red color component with a uniform. In our fragment shader, we will have
+Let's control the red color component with a uniform. In our fragment shader, we will just need to define a new variable, with the `uniform` type qualifier.
 
 ~~~ html
-<script id="fshader" type="x-shader/x-fragment">
+<script id="firstFshader" type="x-shader/x-fragment">
     
     // here we declare our uniform
-    uniform lowp float u_redColor;
+    lowp uniform float u_redColor;
 
     void main(void) {
-        // output color controlled by a uniform
         gl_FragColor = vec4(u_redColor,0.6,0.9,1.0);
     }
 </script>
 
 ~~~
 
-Setting the value of a uniform is almost straightforward (at least in OpenGL standard!). Add in your draw() function : 
+So, now we're trying to use a variable we haven't sent already. Let's resolve that issue. Setting the value of a uniform in your JavaScript is almost straightforward (at least in OpenGL standard!), and bear many ressemblances with how we handle our past `attribute` variable.
+
+
+As can be read below, we first get the location of the variable in the shader with the function `getUniformLocation`. We then update it then with the function `uniform1f`. 
 
 ~~~ html
-// update uniforms
 var redColorLevel = 1.0;
 var redColorUniformLocation = GL.getUniformLocation(shaderProgramID, "u_redColor");
 GL.uniform1f(redColorUniformLocation,redColorLevel);
 ~~~
 
-As usual, we first get the location of the variable in the shader with the function getUniformLocation. 
-We update it then with the function *uniform1f*. 
+You should obtain a beautiful pink shape.
 
-You should obtain a beautiful pink square. 
-This color change can be automated. Let's use the current time to change the color periodically. 
+
+## Bit of animation, and how to control this mess
+
+You're controling the color, true, but it's not dynamic. Not yet. For that, we hav two options: either animate it, or let you control it. Lucky you, we'll see both.
+
+First, let's animate it. For that we'll use the current time to change the color. `Date.now()` gives us then umber of milliseconds since ... a long time ago (since when? well, the UNIX epoch, it being 1/1/1970). But what matters for us is that it'll grow as time pass, making it a nice counter to use. Then a bit of trigonnometry (don't flee!) and we're all set.
+
 
 ~~~ html
-var timeSecond = new Date().getTime() / 1000;
+var timeSecond = Date.now() / 1000;
 
-var redColorLevel = (Math.sin(timeSecond)+1)*0.5; // -> change periodically with time
+var redColorLevel = (Math.sin(timeSecond)+1)*0.5;
 var redColorUniformLocation = GL.getUniformLocation(shaderProgramID, "u_redColor");
 GL.uniform1f(redColorUniformLocation,redColorLevel);
 ~~~
 
-The square now changes slowly its color from pink to blue periodically. 
+The square now changes slowly its color from pink to blue periodically. Amazing.
+
+What you say? We told you about controling it too? Pretty demanding aren't you? But we love to deliver, so here you go. The basic here is just to get a controller, link it to a JavaScript value, send it as a uniform, and you're done. If you know a bit of JavaScript, go crazy. If not, below is a code that allows you to get your mouse position. Up to you to then link that with your `uniform` variable!
+
+First you need to modify your body tag by adding a new callback on a function whenver the mouse move. Let's call that function `showCoords`.
+
+~~~ HTML
+<body style='margin:0px' onload='setup()' onmousemove="showCoords(event)">
+~~~
+
+Then we need to define that function, putting it at the root of our JavaScript code. This function get the mouse position from the event that triggered it (and print it if you uncomment the line).
+
+~~~ HTML
+function showCoords(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+//    console.log("X coords: " + x + ", Y coords: " + y); // for debugging
+}
+</script>
+~~~
+
+Then, it's just a matter of using `mouseX` & `mouseY` any ways you see fit. Enjoy!
+
+
+## Make it move!
 
 A colored square is cool. But you know what's even cooler ? A rotating color square !
 We will modify the square position using a matrix uniform in the vertex shader. 
 
 ~~~ html
-<script id="vshader" type="x-shader/x-vertex">
+<script id="firstVshader" type="x-shader/x-vertex">
 
     attribute vec3 position; 
     uniform mat4 u_transformMatrix;
@@ -85,7 +112,10 @@ GL.uniformMatrix4fv(transformMatrixLocation,false,transformMatrix.getAsFloat32Ar
 We use the library J3DIMath here to get a matrix containing rotation around 3 axes (x,y,z). 
 The uniform is then updated using the OpenGL function uniformMatrix4fv.
 
-## d) Send additional vertex informations : colors
+
+
+
+## Send additional vertex informations : colors
 
 For the moment, the color of the triangle is hardcoded and is the same for every pixels. What if we want one color per vertex ? Let's create another VBO that will contain the colors. 
 
@@ -118,7 +148,7 @@ Here is the fragment shader :
 
 ~~~ html
 
-<script id="fshader" type="x-shader/x-fragment">
+<script id="shader" type="x-shader/x-fragment">
 
     precision mediump float;
 
@@ -190,23 +220,5 @@ And now you should obtain a beautiful multicolor quad. Why ? We only defined col
 
 That's a fundamental concept to understand. The fragment shader takes data produced by the vertex shader and interpolate them for each fragment.
 
-
-## Controling this mess
-
-* Using the mouse position (x and y) as a control for other stuff
-
-Based on:
-
-~~~ HTML
-<div onmousemove="showCoords(event)"></div>
-<script>
-function showCoords(event) {
-    var x = event.clientX;
-    var y = event.clientY;
-    console.log("X coords: " + x + ", Y coords: " + y);
-}
-</script>
-~~~
-
 ## Let's do a cube!
-* triangles to cube. Simple. Nice. Good for your health
+Triangles to cube. Simple. Nice. Good for your health. 'nuff said.
