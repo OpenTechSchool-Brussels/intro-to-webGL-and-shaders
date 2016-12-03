@@ -108,8 +108,11 @@ GL.bufferData(GL.ARRAY_BUFFER,
 
 
 In the draw color add the link between attribute and vbo : 
-~~~ Javascript
+
+~~~ JavaScript
+
 GL.bindBuffer(GL.ARRAY_BUFFER, vertexBufferNormalID);
 var normalAttibuteLocation = GL.getAttribLocation(shaderProgramID, "normal")
 GL.vertexAttribPointer(normalAttibuteLocation, numberOfComponents, GL.FLOAT, false,0,0) ;
+
 ~~~
