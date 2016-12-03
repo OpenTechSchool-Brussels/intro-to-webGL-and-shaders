@@ -144,7 +144,7 @@ So, what does it implies to initialize our webGL context? First, we need to have
 ~~~ JavaScript
 
 // Getting the Canvas
-CANVAS = document.getElementById(canvasId);
+CANVAS = document.getElementById("my_canvas");
 CANVAS.width=window.innerWidth;
 CANVAS.height=window.innerHeight;
 
