@@ -27,7 +27,7 @@ Let's control the red color component with a uniform. In our fragment shader, we
 
 ~~~
 
-Setting the value of a uniform is almost straightforward (at least in OpenGL standard!)
+Setting the value of a uniform is almost straightforward (at least in OpenGL standard!). Add in your draw() function : 
 
 ~~~ html
 // update uniforms
